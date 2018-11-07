@@ -1,0 +1,3 @@
+Juan Lopez Lopez 100 4.15 100000
+Antonio Ruperez Ruperez 77 5.67 40000
+Luis Gomez Gomez 44 8.99 66000
