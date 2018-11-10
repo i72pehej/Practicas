@@ -18,7 +18,7 @@ using namespace std;
 
 TEST(Jugador, ConstructorParametrosDefecto) {
   Jugador j("33XX", "1");
-  
+
   EXPECT_EQ("33XX", j.getDNI());
   EXPECT_EQ("1", j.getCodigo());
   EXPECT_EQ("", j.getNombre());
@@ -32,7 +32,7 @@ TEST(Jugador, ConstructorParametrosDefecto) {
 
 TEST(Jugador, ConstructorParametros) {
   Jugador j("44XX", "2", "Carlos", "Gutierrez",30, "C/ Mesa 1", "Aguilar", "Sevilla", "España");
-  
+
   EXPECT_EQ("44XX", j.getDNI());
   EXPECT_EQ("2", j.getCodigo());
   EXPECT_EQ("Carlos", j.getNombre());
@@ -63,7 +63,7 @@ TEST(Jugador, setCodigoygetCodigo) {
 TEST(Jugador, setApuestasygetApuestasVacio) {
   Jugador j("33XX", "1");
   list<Apuesta> l;
-  l= j.getApuestas();
+  l = j.getApuestas();
   EXPECT_TRUE(l.empty());
 }
 TEST(Jugador, setApuestasygetApuestas) {
@@ -97,4 +97,3 @@ TEST(Jugador, setApuestasygetApuestas) {
   EXPECT_EQ("bajo", (*i).valor);
   EXPECT_EQ(45, (*i).cantidad);
 }
-

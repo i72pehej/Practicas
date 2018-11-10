@@ -1,11 +1,12 @@
-// jugador.h
-// The code of class jugador.
+//jugador.h
+//The code of class Jugador.
 
 #ifndef JUGADOR_H
 #define  JUGADOR_H
 
 #include <string>
 #include <list>
+#include <iostream>
 #include "persona.h"
 
 class Apuestas {
@@ -24,7 +25,7 @@ public:
   inline Jugador(std::string dni, std::string codigoJugador, std::string nombre = "", std::string apellidos = "", int edad = 0, std::string direccion = "", std::string localidad = "", std::string provincia = "", std::string pais = "") : Persona(dni, nombre, apellidos, edad, direccion, localidad, provincia, pais) {codigoJugador_ = codigoJugador; dinero_ = 1000;}
   inline void setCodigo(std::string codigoJugador) {codigoJugador_ = codigoJugador;};
   inline void setDinero(int dinero) {dinero_ = dinero;};
-  void setApuestas() {apuestas_.clear(); };
+  void setApuestas();
 
   inline int getDinero() const {return (dinero_);};
   inline std::string getCodigo() const {return (codigoJugador_);};

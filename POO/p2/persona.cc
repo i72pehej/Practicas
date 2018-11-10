@@ -1,5 +1,5 @@
 //Persona.cc
-// Methods of type Persona.
+//Methods of class Persona.
 
 #include <iostream>
 #include <string>
