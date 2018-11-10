@@ -11,8 +11,9 @@ class Persona{
     std::string DNI_, nombre_, apellidos_, direccion_, localidad_, provincia_, pais_;
     int edad_;
   public:
-    Persona(std::string dni, std::string nombre, std::string apellidos, int edad, std::string direccion, std::string localidad, std::string provincia, std::string pais);  // Constructor de la clase Persona.
-    Persona(std::string dni);
+    Persona(std::string dni, std::string nombre, std::string apellidos, int edad, std::string direccion,
+      std::string localidad, std::string provincia, std::string pais);  // Constructor de la clase Persona con todos los parámetros.
+    Persona(std::string dni); // Constructor de la clase Persona con DNI como parámetro.
     inline void setDNI(std::string dni) {DNI_ = dni;};  // Asigna valor a DNI.
     inline void setNombre(std::string nombre) {nombre_ = nombre;}; // Asigna valor a nombre.
     inline void setApellidos(std::string apellidos) {apellidos_ = apellidos;};  // Asigna valor a apellidos.

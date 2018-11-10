@@ -5,7 +5,9 @@
 #include <list>
 #include "jugador.h"
 
-void setApuestas();
+void setApuestas(std::string nomFichero){
+  string nomFichero = j.getDNI() + ".txt";
+}
 
 
 
