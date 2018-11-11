@@ -66,6 +66,7 @@ TEST(Jugador, setApuestasygetApuestasVacio) {
   l = j.getApuestas();
   EXPECT_TRUE(l.empty());
 }
+
 TEST(Jugador, setApuestasygetApuestas) {
   Jugador j("33XX", "1");
   string nomfich=j.getDNI()+".txt";

@@ -7,6 +7,7 @@
 #include <string>
 #include <list>
 #include <iostream>
+#include <fstream>
 #include "persona.h"
 
 class Apuestas {
@@ -32,7 +33,7 @@ public:
 
   inline int getDinero() const {return (dinero_);}; // Devuelve el dinero introducido.
   inline std::string getCodigo() const {return (codigoJugador_);};  // Devuelve el código del jugador.
-  inline std::list <Apuestas> getApuestas() const {return (apuestas_);};  // Devuelve las apuestas 
+  inline std::list <Apuestas> getApuestas() const {return (apuestas_);};  // Devuelve las apuestas leídas.
 };
 
 #endif

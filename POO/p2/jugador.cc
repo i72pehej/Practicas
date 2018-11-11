@@ -1,12 +1,18 @@
 //jugador.cc
 //Methods of class Jugador.
 
-#include <string>
-#include <list>
 #include "jugador.h"
 
-void setApuestas(std::string nomFichero){
-  string nomFichero = j.getDNI() + ".txt";
+void Jugador::setApuestas(){
+  getApuestas().clear();
+
+  std::string nomFichero = getDNI() + ".txt";
+
+  std::ifstream fichero(nomFichero);
+
+
+
+  fichero.close();
 }
 
 
