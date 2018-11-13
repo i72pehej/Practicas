@@ -6,13 +6,25 @@
 void Jugador::setApuestas(){
   getApuestas().clear();
 
-  std::string apuestaFichero;
-  std::string nomFichero = getDNI() + ".txt";
-  std::ifstream fichero(nomFichero);
+  std::string tipoFichero, cantidadFichero, valorFichero;
+  Apuestas a;
 
-while (std::getline(fichero, apuestaFichero)) {
-  apuestas_.push_back(apuestaFichero);
-}
+  std::string nomFichero = getDNI() + ".txt";
+  std::ifstream fichero;
+  fichero.open(nomFichero.c_str()); //Usamos la función .c_str() para crear el nombre del fichero de forma correcta con '\n'
+
+  while (!fichero.eof()) {
+    std::getline(fichero, tipoFichero, ',');
+    // Hacer CASTING de string a int.
+    a.setTipoApuesta(tipoFichero);
+    std::getline(fichero, valorFichero, ',');
+    a.setValorApuesta(valorFichero));
+    std::getline(fichero, cantidadFichero, '\n');
+    // Hacer CASTING de string a int.
+    a.setCantidadApuesta(cantidadFichero);
+
+    apuestas_.push_back(a);
+  }
 
 /*
   while (std::getline(fichero, apuestaFichero, '\n')) { // Bucle while para leer los elementos del fichero.

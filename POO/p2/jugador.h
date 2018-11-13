@@ -12,9 +12,13 @@
 
 class Apuestas {
 private:
-  int tipoApuesta;
-  std::string valorApuesta;
-  int cantidadApuesta;
+  int tipoApuesta_;
+  std::string valorApuesta_;
+  int cantidadApuesta_;
+public:
+  inline void setTipoApuesta(int t) {tipoApuesta_ = t;};
+  inline void setValorApuesta(std::string v) {valorApuesta_ = v;};
+  inline void setCantidadApuesta(int c) {cantidadApuesta_ = c;};
 };
 
 class Jugador : public Persona {
