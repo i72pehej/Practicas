@@ -1,89 +1,80 @@
 #include <pthread.h>
 #include <stdio.h>
 #include <unistd.h>
-#include <stdbool.h>  // Aplicar libreria para bool
 #include <stdlib.h>
 
 double counter = 0;
 
-#define ITER	30
+//Corrección con Semáforos.
+pthread_mutex_t semaforo;
+
+#define ITER	10
 #define NHILOS	4
 
 int main()
 {
-    pthread_t hilos[NHILOS];  //ID de cada hilo.
+    pthread_t hilos[NHILOS];
     int status, i, v[NHILOS];
     extern double counter;
     void *adder(void *);
     double *r_value;
-/*
-    for (size_t x = 0; x < NHILOS; x++) {
-      Eligiendo[x] = false;
-      Numero[x] = 0;
-    }
-*/
+
+    if(pthread_mutex_init(&semaforo, NULL) != 0){
+      printf("\nERROR. No se pudo crear el semáforo correctamente.\n");
+      return 1;
+    }else{printf("\nEl semáforo se ha creado correctamente.\n");}
+
     // Create NHILOS threads
     for (i = 0; i < NHILOS; i++) {
-      v[i] = i;
-	    if ((status = pthread_create(&hilos[i], NULL, adder, (void *) &v[i])))
-      exit(status);
+	     v[i] = i;
+	     if ((status = pthread_create(&hilos[i], NULL, adder, (void *) &v[i])))
+	     exit(status);
     }
 
     // Wait threads
     for (i = 0; i < NHILOS; i++) {
-	     pthread_join(hilos[i], (void **) &r_value); // Recibe el ID del hilo y el retorno de to_return.
+	     pthread_join(hilos[i], (void **) &r_value);
 	     printf("Value returned by %lu thread: %lf\n", hilos[i], *r_value);
     }
 
+    //Destrucción del Semáforo.
+    if (pthread_mutex_destroy(&semaforo) != 0) {
+      printf("\nERROR. No se pudo destruir el semáforo.\n");
+      return 1;
+    }
+    else{printf("\nEl semáforo se ha destruido. Memoria liberada.\n");}
+
     // Final result
-    fprintf(stdout, "Final result: %f\n", counter);
+    fprintf(stdout, "\nResultado final: %f\n", counter);
 
     return 0;
 }
 
-int maximo(int *v){
-  int max = 0;
-  for (size_t i = 0; i < NHILOS; i++) {
-    if (max < v[i]) {
-      max = v[i];
-    }
-  }
-  return max;
-}
-
-void *adder(void *p){ // Recibe el último parámetro de phtread_create = número que le asignamos a cada hilo.
+void *adder(void *p)
+{
     double l, *to_return;
-    extern double counter;  // Todos los hilos pueden acceder a este parámetro.
-    int *id;
+    extern double counter;
+    int *id, i;
 
     id = (int *) p;
 
-    //Corrección de Lamport.
-    extern bool Eligiendo[NHILOS];
-    extern int Numero[NHILOS];
+    //Bloqueo de semáforo para que  únicamnete un hilo entre en SC.
+    if(pthread_mutex_lock(&semaforo) != 0){printf("\nERROR. No se pudo bloquear el semáforo.\n");}
+    else{printf("\nEl semáforo se ha bloqueado.\n\n");}
 
-    for (size_t j = 0; j < NHILOS; j++) {
-      Eligiendo[*id] = true;
-      Numero[*id] = 1 + maximo(Numero);
-      Eligiendo[*id] = false;
-
-      for (size_t k = 0; k < NHILOS; k++) {
-        while (Eligiendo[k]) {}
-        while ((Numero[k] != 0) && ((Numero[k] < Numero[*id]) || ((Numero[k] == Numero[*id]) && (k < *id)))) {}
-      }
-
-      for (size_t i = 0; i < ITER; i++) {
-        //SECCION CRITICA - vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
-        l = counter;  // Para ampliar la Sección Crítica (no tiene más importancia).
-	      fprintf(stdout, "Hilo %d: %f\n", *id, counter);
-        l++;
-	      counter = l;
-        //SECCION CRITICA - ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-      }
+    for (i = 0; i < ITER; i++) {
+	     l = counter;
+	     fprintf(stdout, "Hilo %d: %f\n", *id, counter);
+	     l++;
+	     counter = l;
     }
 
-    to_return = malloc(sizeof(double)); // Al terminar la función se libera la memoria y elimina los parámetros,
-                                        // por lo que perderíamos sus valores al llegar a phtread_join.
+    //Desbloqueo del semáforo al terminar la SC.
+    if (pthread_mutex_unlock(&semaforo) != 0) {printf("\nERROR. No se pudo desbloquear el semáforo.\n");}
+    else{printf("\nEl semáforo se ha desbloqueado.\n\n");}
+
+    to_return = malloc(sizeof(double));
+
     *to_return = counter;
 
     pthread_exit((void *) to_return);
