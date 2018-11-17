@@ -14,8 +14,8 @@ pthread_mutex_t semaforo;
 
 int main()
 {
-    pthread_t hilos[NHILOS];
-    int status, i, v[NHILOS];
+    pthread_t hilo_P, hilo_C;
+    int status, i, idProductor = 1, idConsumidor = 2;
     extern double counter;
     void *adder(void *);
     double *r_value;
@@ -28,12 +28,13 @@ int main()
       return 1;
     }else{printf("\nEl semáforo se ha creado correctamente.\n");}
 
-    // Create NHILOS threads
-    for (i = 0; i < NHILOS; i++) {
-	     v[i] = i;
-	     if ((status = pthread_create(&hilos[i], NULL, adder, (void *) &v[i])))
-	     exit(status);
-    }
+    //Creación de un hilo productor.
+	  if ((status = pthread_create(&hilo_P, NULL, productor, (void *) &idProductor)))
+    exit(status);
+
+    //Creación de un hilo consumidor.
+    if ((status = pthread_create(&hilo_C, NULL, consumidor, (void *) &idConsumidor)))
+    exit(status);
 
     // Wait threads
     for (i = 0; i < NHILOS; i++) {
@@ -62,6 +63,7 @@ void *productor(void *p)
 
     id = (int *) p;
 
+    //Genera números aleatorios entre 0 y 1000.
     rand() % 1000;
 
     //Bloqueo de semáforo para que  únicamnete un hilo entre en SC.
@@ -94,7 +96,7 @@ void *consumidor(void *p)
 
     id = (int *) p;
 
-    rand() % 1000;
+    //Guarda número aleatorios en un buffer.
 
     //Bloqueo de semáforo para que  únicamnete un hilo entre en SC.
     if(pthread_mutex_lock(&semaforo) != 0){printf("\nERROR. No se pudo bloquear el semáforo.\n");}
