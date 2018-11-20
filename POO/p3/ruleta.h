@@ -14,13 +14,25 @@ class Ruleta{
     list <Jugador> jugadores_;
     Crupier crupier_;
   public:
-    Ruleta();
+    Ruleta(); //Constructor de la clase Ruleta.
 
-    setBanca();
-    setBola();
+    inline void setBanca(int banca) {banca_ = banca;};  //Asigna el valor introducido a la banca.
+    inline void setBola(int bola) {bola_ = bola;}; //Asigna el valor introducido a la bola.
+    inline void setCrupier(Crupier c) {crupier_ = c;};  //Asigna el valor introducido a crupier.
 
-    getBanca();
-    getBola();
+    inline int getBanca() const {return banca_;};  //Devuelve el valor de la banca.
+    inline int getBola() const {return bola_;};  //Devuelve el valor de la bola.
+    inline Crupier getCrupier() const {return crupier_;};  //Devuelve la información de crupier.
+    inline Jugador getJugadores() const {return jugadores_;};  //Devuelve la información de los jugadores.
+
+    bool addJugador(Jugador j); //Recibe un jugador como parámetro y añade el jugador al final de la lista de jugadores y crea un fichero tipo texto de apuestas vacío.
+    int deleteJugador(std::string dni); //Borra de la lista de jugadores el jugador con el DNI introducido.
+    int deleteJugador(Jugador j); //Borra de la lista de jugadores el jugador con mismo DNI que el del jugador recibido.
+    void escribeJugadores();  //Escribe los datos de la lista de jugadores en un fichero texto denominado "jugadores.txt", borrando todo su contenido anterior.
+    void leeJugadores();  //Lee los datos de los jugadores del fichero "jugadores.txt" y los mete en la lista de jugadores, borrándola antes de añadir los jugadores.
+
+    void giraRuleta();  //Simula el giro de la ruleta y la obtención de un número aleatorio entre 0 y 36.
+    void getPremios();  //Recorre la lista de jugadores y carga sus apuestas de los ficheros correspondientes, y actualiza el dinero de cada jugador y banca con lo ganado o perdido en cada apuesta.
 
 };
 
