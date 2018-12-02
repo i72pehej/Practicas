@@ -4,7 +4,6 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
-#include <vector>
 #include "dados_V2.h"
 
 int main(int argc, char const *argv[]) {

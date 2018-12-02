@@ -67,6 +67,9 @@ TEST(Jugador, setApuestasygetApuestasVacio) {
   EXPECT_TRUE(l.empty());
 }
 
+// Éste último test no logra pasarlo debido a que las variables llamadas
+// se encuentran en la parte privada de la clase, y no son accesibles directamente.
+
 TEST(Jugador, setApuestasygetApuestas) {
   Jugador j("33XX", "1");
   string nomfich=j.getDNI()+".txt";
@@ -82,19 +85,19 @@ TEST(Jugador, setApuestasygetApuestas) {
   EXPECT_EQ(4, l.size());
   list<Apuesta>::iterator i;
   i=l.begin();
-  EXPECT_EQ(1, (*i).tipo);
-  EXPECT_EQ("10", (*i).valor);
-  EXPECT_EQ(15, (*i).cantidad);
+  EXPECT_EQ(1, (*i).getTipoApuesta());
+  EXPECT_EQ("10", (*i).getValorApuesta());
+  EXPECT_EQ(15, (*i).getCantidadApuesta());
   i++;
-  EXPECT_EQ(2, (*i).tipo);
-  EXPECT_EQ("rojo", (*i).valor);
-  EXPECT_EQ(25, (*i).cantidad);
+  EXPECT_EQ(2, (*i).getTipoApuesta());
+  EXPECT_EQ("rojo", (*i).getValorApuesta());
+  EXPECT_EQ(25, (*i).getCantidadApuesta());
   i++;
-  EXPECT_EQ(3, (*i).tipo);
-  EXPECT_EQ("par", (*i).valor);
-  EXPECT_EQ(35, (*i).cantidad);
+  EXPECT_EQ(3, (*i).getTipoApuesta());
+  EXPECT_EQ("par", (*i).getValorApuesta());
+  EXPECT_EQ(35, (*i).getCantidadApuesta());
   i++;
-  EXPECT_EQ(4, (*i).tipo);
-  EXPECT_EQ("bajo", (*i).valor);
-  EXPECT_EQ(45, (*i).cantidad);
+  EXPECT_EQ(4, (*i).getTipoApuesta());
+  EXPECT_EQ("bajo", (*i).getValorApuesta());
+  EXPECT_EQ(45, (*i).getCantidadApuesta());
 }
