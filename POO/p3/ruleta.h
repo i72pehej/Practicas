@@ -4,26 +4,28 @@
 #ifndef RULETA_H
 #define RULETA_H
 
-#include <list>
+#include <ctime>
+
+#include "persona.h"
 #include "crupier.h"
 #include "jugador.h"
 
 class Ruleta{
   private:
     int banca_, bola_;
-    list <Jugador> jugadores_;
+    std::list <Jugador> jugadores_;
     Crupier crupier_;
   public:
     Ruleta(); //Constructor de la clase Ruleta.
 
-    inline void setBanca(int banca) {banca_ = banca;};  //Asigna el valor introducido a la banca.
+    bool setBanca(int banca);  //Asigna el valor introducido a la banca.
     inline void setBola(int bola) {bola_ = bola;}; //Asigna el valor introducido a la bola.
     inline void setCrupier(Crupier c) {crupier_ = c;};  //Asigna el valor introducido a crupier.
 
     inline int getBanca() const {return banca_;};  //Devuelve el valor de la banca.
     inline int getBola() const {return bola_;};  //Devuelve el valor de la bola.
     inline Crupier getCrupier() const {return crupier_;};  //Devuelve la información de crupier.
-    inline Jugador getJugadores() const {return jugadores_;};  //Devuelve la información de los jugadores.
+    inline std::list <Jugador> getJugadores() const {return jugadores_;};  //Devuelve la información de los jugadores.
 
     bool addJugador(Jugador j); //Recibe un jugador como parámetro y añade el jugador al final de la lista de jugadores y crea un fichero tipo texto de apuestas vacío.
     int deleteJugador(std::string dni); //Borra de la lista de jugadores el jugador con el DNI introducido.
