@@ -113,8 +113,6 @@ void *consumidor(void *c)
 
     id = (int *) c;
 
-    //Guarda número aleatorios en un buffer.
-
     //Bloqueo de semáforo para que  únicamnete un hilo entre en SC.
     if(pthread_mutex_lock(&semaforo_C) != 0){printf("\nERROR. No se pudo bloquear el semáforo consumidor.\n");}
     else{printf("\nEl semáforo consumidor se ha bloqueado.\n\n");}
