@@ -36,3 +36,11 @@ bool Ruleta::addJugador(Jugador j){
   ficheroNuevo.close();
   return true;
 }
+
+int deleteJugador(std::string dni){
+
+}
+
+int deleteJugador(Jugador j){
+  return deleteJugador(j.getDNI());
+}
