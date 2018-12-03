@@ -19,7 +19,7 @@ class Ruleta{
     Ruleta(); //Constructor de la clase Ruleta.
 
     bool setBanca(int banca);  //Asigna el valor introducido a la banca.
-    inline void setBola(int bola) {bola_ = bola;}; //Asigna el valor introducido a la bola.
+    bool setBola(int bola); //Asigna el valor introducido a la bola.
     inline void setCrupier(Crupier c) {crupier_ = c;};  //Asigna el valor introducido a crupier.
 
     inline int getBanca() const {return banca_;};  //Devuelve el valor de la banca.
