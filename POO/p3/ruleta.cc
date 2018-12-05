@@ -37,10 +37,39 @@ bool Ruleta::addJugador(Jugador j){
   return true;
 }
 
-int deleteJugador(std::string dni){
+int Ruleta::deleteJugador(std::string dni){
+  for (std::list <Jugador>::iterator i = jugadores_.begin(); i != jugadores_.end(); i++) {
+    if (i -> getDNI() == dni) {
+      jugadores_.erase(i);
+      return 1;
+    }
+  }
 
+  if (jugadores_.empty()) {
+    return -1;
+  }
+
+  return -2;
 }
 
-int deleteJugador(Jugador j){
+int Ruleta::deleteJugador(Jugador j){
   return deleteJugador(j.getDNI());
+}
+
+void Ruleta::escribeJugadores(){
+  std::ofstream ficheroNuevo ("jugadores.txt"); //Crea + Abre fichero en modo escritura.
+
+  for (std::list <Jugador>::iterator i = jugadores_.begin(); i != jugadores_.end(); i++) {
+    ficheroNuevo << i -> getDNI() + ",";
+    ficheroNuevo << i -> getCodigo() + ",";
+    ficheroNuevo << i -> getNombre() + ",";
+    ficheroNuevo << i -> getApellidos() + ",";
+    ficheroNuevo << i -> getDireccion() + ",";
+    ficheroNuevo << i -> getLocalidad() + ",";
+    ficheroNuevo << i -> getProvincia() + ",";
+    ficheroNuevo << i -> getPais() + ",";
+    ficheroNuevo << i -> getDinero() << std::endl;
+  }
+
+  ficheroNuevo.close();
 }
