@@ -35,7 +35,6 @@ class Ruleta{
 
     void giraRuleta();  //Simula el giro de la ruleta y la obtención de un número aleatorio entre 0 y 36.
     void getPremios();  //Recorre la lista de jugadores y carga sus apuestas de los ficheros correspondientes, y actualiza el dinero de cada jugador y banca con lo ganado o perdido en cada apuesta.
-
 };
 
 #endif

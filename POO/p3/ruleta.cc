@@ -73,3 +73,55 @@ void Ruleta::escribeJugadores(){
 
   ficheroNuevo.close();
 }
+
+void Ruleta::leeJugadores(){
+  std::ifstream ficheroJugadores("jugadores.txt");
+  jugadores_.clear();
+
+  std::string cadAux; //Cadena auxuliar para introducir los datos leidos del fichero y después añadirlos a una variable jugadorAux.
+  Jugador jugadorAux("dniAux", "codAux"); //Variable para introducir cada dato de cadAux y después añadir a la lista de jugadores.
+
+  while (!ficheroJugadores.eof()) {
+    getline(ficheroJugadores, cadAux, ',');
+    jugadorAux.setDNI(cadAux);
+
+    getline(ficheroJugadores, cadAux, ',');
+    jugadorAux.setCodigo(cadAux);
+
+    getline(ficheroJugadores, cadAux, ',');
+    jugadorAux.setNombre(cadAux);
+
+    getline(ficheroJugadores, cadAux, ',');
+    jugadorAux.setApellidos(cadAux);
+/*
+    getline(ficheroJugadores, cadAux, ',');
+    jugadorAux.setEdad(atoi(cadAux.c_str());
+*/
+    getline(ficheroJugadores, cadAux, ',');
+    jugadorAux.setDireccion(cadAux);
+
+    getline(ficheroJugadores, cadAux, ',');
+    jugadorAux.setLocalidad(cadAux);
+
+    getline(ficheroJugadores, cadAux, ',');
+    jugadorAux.setProvincia(cadAux);
+
+    getline(ficheroJugadores, cadAux, ',');
+    jugadorAux.setPais(cadAux);
+
+    getline(ficheroJugadores, cadAux, '\n');
+    jugadorAux.setDinero(atoi(cadAux.c_str()));
+
+    jugadores_.push_back(jugadorAux);
+  }
+
+  ficheroJugadores.close();
+}
+
+void Ruleta::giraRuleta(){
+
+}
+
+void Ruleta::getPremios(){
+
+}
