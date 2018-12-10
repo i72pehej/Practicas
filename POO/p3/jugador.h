@@ -38,7 +38,7 @@ class Jugador : public Persona {
 private:
   int dinero_;
   std::string codigoJugador_;
-  std::list<Apuesta> apuestas_;
+  std::list <Apuesta> apuestas_;
 public:
   inline Jugador(std::string dni, std::string codigoJugador, std::string nombre = "",
     std::string apellidos = "", int edad = 0, std::string direccion = "", std::string localidad = "",
