@@ -9,7 +9,8 @@ class Profesor{
     bool esCoordinador;
 //    bbdd;
   public:
-    bool getCoordinador();  //Devuelve el nombre del coordinador que lo ha creado.
+    Profesor(std::string usuario);  //Constructor de la clase Profesor.
+    inline bool getCoordinador() const {return (esCoordinador)};  //Devuelve si el profesor es coordinador o no.
     bool identificar(std::string usuario, std::string contraseña);  //Devuelve si el usuario introducido existe.
     bool mostrarAlumnos(int opcion = 0, bool ascendente);  //Devuelve la lista de alumnos completa.
     bool guardarCopia(std::string fichero = "default");  //Guarda en un fichero binario la lista de alumnos.
@@ -19,5 +20,6 @@ class Profesor{
 class Coordinador : Profesor{
   private:
   public:
+    Coordinador(std::string usuario);  //Constructor de la calse Coordinador.
     bool anadirProfesor(std::string usuario, std::string contraseña);  //Añade un profesor ayudante.
 };

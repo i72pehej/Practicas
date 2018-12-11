@@ -1,7 +1,7 @@
 //GuardarCargarIdentificarAñadir.cpp
 //Métodos de las funciones.
 
-#include "GuardarCargarIdentificarAñadir.h"
+#include "GuardarCargarIdentificarAñadir.hpp"
 
 bool identificar(std::string usuario, std::string contraseña){
 
