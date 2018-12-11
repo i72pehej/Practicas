@@ -15,6 +15,6 @@ bool cargarCopia(std::fichero = "default"){
 
 }
 
-bool anadirProfesor(std::string usuario, std::string contraseña){
+bool addProfesor(std::string usuario, std::string contraseña){
 
 }

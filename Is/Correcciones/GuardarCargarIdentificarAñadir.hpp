@@ -21,5 +21,5 @@ class Coordinador : Profesor{
   private:
   public:
     Coordinador(std::string usuario);  //Constructor de la calse Coordinador.
-    bool anadirProfesor(std::string usuario, std::string contraseña);  //Añade un profesor ayudante.
+    bool addProfesor(std::string usuario, std::string contraseña);  //Añade un profesor ayudante.
 };
