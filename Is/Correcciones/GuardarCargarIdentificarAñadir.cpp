@@ -35,5 +35,6 @@ bool Profesor::cargarCopia(std::string fichero){
 }
 
 bool Coordinador::addProfesor(std::string usuario, std::string password){
-
+  std::ifstream credenciales("credenciales.bin", std::ios::binary);
+//Hcer un push_back() en el fichero para añadir el profesor con la ','.
 }
