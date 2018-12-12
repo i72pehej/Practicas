@@ -23,11 +23,3 @@ class Coordinador : Profesor{
     Coordinador(std::string usuario);  //Constructor de la calse Coordinador.
     bool addProfesor(std::string usuario, std::string password);  //Añade un profesor ayudante.
 };
-
-class datosProfesor{
-  private:
-    std::string usuarioFichero, passwordFichero;
-  public:
-    inline void getUsuarioFichero() {return(usuarioFichero);};
-    inline void getPasswordFichero() {return(passwordFichero);};
-};
