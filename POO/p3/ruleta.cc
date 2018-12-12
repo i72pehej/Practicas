@@ -149,28 +149,24 @@ void Ruleta::getPremios(){
         break;
 
         case 2:  //Apuesta rojo o negro.
-        if(getBola() == 0){  //Si sale el cero lo pierdes todo lo que hayas apostado
+        if(getBola() == 0){  //Si sale cero se pierde lo apostado.
+          iJugador.setDinero(iJugador.getDinero() - apuestas_.getCantidadApuesta());
+          setBanca(getBanca() + apuestas_.getCantidadApuesta());
+        }
+        else{ //Si se acierta el color se gana el 1:1 de lo que se apuesta.
+          if((apuestas_.getValorApuesta() == "rojo" && ((getBola() % 2 + ((getBola() / 10) % 2)) % 2) == 0) || (apuestas_.getValorApuesta() == "negro" && ((getBola() % 2 + ((getBola() / 10) % 2)) % 2) == 1 )){  //Si el número de la  bola corresponde con el color de la apuesta.
+            iJugador.setDinero(iJugador.getDinero() + apuestas_.getCantidadApuesta());
+            setBanca(getBanca() - apuestas_.getCantidadApuesta());
+          }
+          else{ //Si no se acierta el color, se pierde lo apostado.
+            iJugador.setDinero(iJugador.getDinero() - apuestas_.getCantidadApuesta());
+            setBanca(getBanca() + apuestas_.getCantidadApuesta());
+          }
+        }
+        break;
 
-    			j.setDinero(j.getDinero()-a.cantidad);
-    			setBanca(getBanca()+a.cantidad);
-    		}
-    			else{ //pero si no sale y aciertas color ganas 2.0 de lo que apuestes
-    				if((a.valor=="negro" && ((getBola()%2 + ((getBola()/10)%2))%2)==1 )||(a.valor=="rojo"  && ((getBola()%2 + ((getBola()/10)%2))%2)==0)){
-
-    					j.setDinero(j.getDinero()+a.cantidad);
-    					setBanca(getBanca()-a.cantidad);
-    				}
-
-    				else{ //y si no aciertas color pierdes lo apostado
-
-    					j.setDinero(j.getDinero()-a.cantidad);
-    					setBanca(getBanca()+a.cantidad);
-    				}
-    			}
-    		break;
-
-    		case 3:	if(getBola()==0){//si la bola sale cero pierdes lo apostado
-
+        case 3:  //Apuesta par o impar.
+        if(getBola()==0){//si la bola sale cero pierdes lo apostado
     			j.setDinero(j.getDinero()-a.cantidad);
     			setBanca(getBanca()+a.cantidad);
     		}
