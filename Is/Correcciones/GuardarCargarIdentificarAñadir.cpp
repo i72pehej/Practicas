@@ -15,6 +15,7 @@ bool Profesor::identificar(std::string usuario, std::string password){
       return true;
     }
   }
+  credenciales.close();
   return false;
 }
 
@@ -35,6 +36,12 @@ bool Profesor::cargarCopia(std::string fichero){
 }
 
 bool Coordinador::addProfesor(std::string usuario, std::string password){
-  std::ifstream credenciales("credenciales.bin", std::ios::binary);
-//Hcer un push_back() en el fichero para añadir el profesor con la ','.
+  if(identificar(usuario, password) == true){
+    return false;
+  }
+  std::ofstream credenciales("credenciales.bin", std::ios::binary);
+  credenciales << usuario + ", " + password;
+
+  credenciales.close();
+  return true;
 }
