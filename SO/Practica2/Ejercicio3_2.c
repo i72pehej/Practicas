@@ -11,9 +11,9 @@ double suma_P = 0, suma_C = 0;
 //Inicialización de Semáforos.
 pthread_mutex_t semaforo_P, semaforo_C;
 
-#define N 30
-#define N_Prod 50
-#define N_Cons 10
+#define N 5
+#define N_Prod 15
+#define N_Cons 3
 
 //Buffer/Vector de almacenamiento compartido.
 int buffer[N];
