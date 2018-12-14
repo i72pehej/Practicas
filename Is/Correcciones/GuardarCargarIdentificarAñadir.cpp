@@ -3,6 +3,11 @@
 
 #include "GuardarCargarIdentificarAñadir.hpp"
 
+bool stringToBool(std::string str){
+  if (str == "true" || str == "TRUE") {return true;}
+  else {return false;}
+}
+
 bool Profesor::identificar(std::string usuario, std::string password){
   std::ifstream credenciales("credenciales.bin", std::ios::binary);
   std::string nombreProfesor, contrProfesor;
@@ -20,22 +25,52 @@ bool Profesor::identificar(std::string usuario, std::string password){
 }
 
 bool Profesor::guardarCopia(std::string fichero){
-  std::ofstream ficheroAlumnos(fichero, std::ios::binary);
+  std::ofstream copiaSeguridad(fichero, std::ios::binary);
 
   for (std::list <Alumno>::iterator iAlumno = alumnos_.begin(); iAlumno != alumnos_.end(); iAlumno++) {
-    ficheroAlumnos << iAlumno.getDNI() + ',' << iAlumno.getNombre() + ',' << iAlumno.getApellidos() + ',' << iAlumno.getTelefono() + ','
+    copiaSeguridad << iAlumno.getDNI() + ',' << iAlumno.getNombre() + ',' << iAlumno.getApellidos() + ',' << iAlumno.getTelefono() + ','
       << iAlumno.getEmail() + ',' << iAlumno.getDireccion() + ',' << iAlumno.getCurso() + ',' << iAlumno.getFechaNacimiento() + ','
       << iAlumno.getGrupo() + ',' << iAlumno.getLider() + '\n';
   }
-  ficheroAlumnos.close();
+  copiaSeguridad.close();
 }
 
 bool Profesor::cargarCopia(std::string fichero){
-/*
-  for (std::list <Alumno>::iterator iAlumno = alumnos_.begin(); iAlumno != alumnos_.end(); iAlumno++) {
+  std::ifstream copiaSeguridad(fichero, std::ios::binary);
+  std::string aux;
 
+  for (std::list <Alumno>::iterator iAlumno = alumnos_.begin(); iAlumno != alumnos_.end(); iAlumno++) {
+    getline(copiaSeguridad, aux, ',');
+    iAlumno.setDNI(aux);
+
+    getline(copiaSeguridad, aux, ',');
+    iAlumno.setNombre(aux);
+
+    getline(copiaSeguridad, aux, ',');
+    iAlumno.setApellidos(aux);
+
+    getline(copiaSeguridad, aux, ',');
+    iAlumno.setTelefono(aux);
+
+    getline(copiaSeguridad, aux, ',');
+    iAlumno.setEmail(aux);
+
+    getline(copiaSeguridad, aux, ',');
+    iAlumno.setDireccion(aux);
+
+    getline(copiaSeguridad, aux, ',');
+    iAlumno.setCurso(atoi(aux));
+
+    getline(copiaSeguridad, aux, ',');
+    iAlumno.setFechaNacimiento(aux);
+
+    getline(copiaSeguridad, aux, ',');
+    iAlumno.setGrupo(atoi(aux));
+
+    getline(copiaSeguridad, aux, '\n');
+    iAlumno.setLider(stringToBool(aux));
   }
-*/
+  copiaSeguridad.close();
 }
 
 bool Coordinador::addProfesor(std::string usuario, std::string password){
