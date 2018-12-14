@@ -20,11 +20,14 @@ bool Profesor::identificar(std::string usuario, std::string password){
 }
 
 bool Profesor::guardarCopia(std::string fichero){
-/*
-  for (std::list <Alumno>::iterator iAlumno = alumnos_.begin(); iAlumno != alumnos_.end(); iAlumno++) {
+  std::ofstream ficheroAlumnos(fichero, std::ios::binary);
 
+  for (std::list <Alumno>::iterator iAlumno = alumnos_.begin(); iAlumno != alumnos_.end(); iAlumno++) {
+    ficheroAlumnos << iAlumno.getDNI() + ',' << iAlumno.getNombre() + ',' << iAlumno.getApellidos() + ',' << iAlumno.getTelefono() + ','
+      << iAlumno.getEmail() + ',' << iAlumno.getDireccion() + ',' << iAlumno.getCurso() + ',' << iAlumno.getFechaNacimiento() + ','
+      << iAlumno.getGrupo() + ',' << iAlumno.getLider() + '\n';
   }
-*/
+  ficheroAlumnos.close();
 }
 
 bool Profesor::cargarCopia(std::string fichero){
