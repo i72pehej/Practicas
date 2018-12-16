@@ -2,16 +2,17 @@
 
 #include <pthread.h>
 #include <stdio.h>
-#include <unistd.h>
 #include <stdlib.h>
 #include <time.h>
+#include <semaphore.h>  //Para utilizar semáforos.
 
 double suma_P = 0, suma_C = 0;
 
-//Inicialización de Semáforos.
-pthread_mutex_t semaforo_P, semaforo_C;
+//Creación de semáforos.
+sem_t SCritica, Ocupados, Libres;
 
 #define N 30
+#define ITER 100
 
 //Buffer/Vector de almacenamiento compartido.
 int buffer[N];
@@ -26,16 +27,21 @@ int main(){
 
   srand(time(NULL));
 
-  //Creación del semáforo.
-  if(pthread_mutex_init(&semaforo_P, NULL) != 0){
-    printf("\nERROR. No se pudo crear el semáforo productor correctamente.\n");
+  //Inicialización del semáforo.
+  if(sem_init(&SCritica, 0, 1) != 0){
+    printf("\nERROR. No se pudo crear el semáforo SCritica correctamente.\n");
     return 1;
-  }else{printf("\nEl semáforo productor se ha creado correctamente.\n");}
+  }else{printf("\nEl semáforo SCritica se ha creado correctamente.\n");}
 
-  if(pthread_mutex_init(&semaforo_C, NULL) != 0){
-    printf("\nERROR. No se pudo crear el semáforo consumidor correctamente.\n");
+  if(sem_init(&Ocupados, 0, 0) != 0){
+    printf("\nERROR. No se pudo crear el semáforo Ocupados correctamente.\n");
     return 1;
-  }else{printf("\nEl semáforo consumidor se ha creado correctamente.\n");}
+  }else{printf("\nEl semáforo Ocupados se ha creado correctamente.\n");}
+
+  if(sem_init(&Libres, 0, N) != 0){
+    printf("\nERROR. No se pudo crear el semáforo Libres correctamente.\n");
+    return 1;
+  }else{printf("\nEl semáforo Libres se ha creado correctamente.\n");}
 
   //Creación de un hilo productor.
   if ((status = pthread_create(&hilo_P, NULL, productor, (void *) &idProductor)))
@@ -45,24 +51,31 @@ int main(){
   if ((status = pthread_create(&hilo_C, NULL, consumidor, (void *) &idConsumidor)))
   exit(status);
 
-  // Wait threads
+  //Espera de lo hilos.
   pthread_join(hilo_P, (void **) &r_value_P);
-  printf("Value returned by %lu thread: %lf\n", hilo_P, *r_value_P);
+  printf("Valor retornado por el hilo productor %lu: %lf\n", hilo_P, *r_value_P);
+
   pthread_join(hilo_C, (void **) &r_value_C);
-  printf("Value returned by %lu thread: %lf\n", hilo_C, *r_value_C);
+  printf("Valor retornado por el hilo consumidor %lu: %lf\n", hilo_C, *r_value_C);
 
   //Destrucción de Semáforos.
-  if (pthread_mutex_destroy(&semaforo_P) != 0) {
-    printf("\nERROR. No se pudo destruir el semáforo productor.\n");
+  if (sem_destroy(&SCritica) != 0) {
+    printf("\nERROR. No se pudo destruir el semáforo SCritica.\n");
     return 1;
   }
-  else{printf("\nEl semáforo productor se ha destruido. Memoria liberada.\n");}
+  else {printf("\nEl semáforo SCritica se ha destruido. Memoria liberada.\n");}
 
-  if (pthread_mutex_destroy(&semaforo_C) != 0) {
-    printf("\nERROR. No se pudo destruir el semáforo consumidor.\n");
+  if (sem_destroy(&Ocupados) != 0) {
+    printf("\nERROR. No se pudo destruir el semáforo Ocupados.\n");
     return 1;
   }
-  else{printf("\nEl semáforo consumidor se ha destruido. Memoria liberada.\n");}
+  else {printf("\nEl semáforo Ocupados se ha destruido. Memoria liberada.\n");}
+
+  if (sem_destroy(&Libres) != 0) {
+    printf("\nERROR. No se pudo destruir el semáforo Libres.\n");
+    return 1;
+  }
+  else {printf("\nEl semáforo Libres se ha destruido. Memoria liberada.\n");}
 
   // Final result
   fprintf(stdout, "\nResultado final productor: %f\n", suma_P);
@@ -80,24 +93,19 @@ void *productor(void *p){
 
   id = (int *) p;
 
-  //Bloqueo de semáforo para que  únicamnete un hilo entre en SC.
-  if(pthread_mutex_lock(&semaforo_P) != 0){printf("\nERROR. No se pudo bloquear el semáforo productor.\n");}
-  else{printf("\nEl semáforo productor se ha bloqueado.\n\n");}
-
-  for (i = 0; i < N; i++) {
+  for (i = 0; i < ITER; i++) {
+    sem_wait(&Libres);  //Espera a la existencia de espacios libres.
     //Genera números aleatorios entre 0 y 1000.
     l = rand() % 1001;
-    buffer[i] = l;
-    suma_P += buffer[i];
-    fprintf(stdout, "Suma de Hilo Productor (id = %d): %f\n", *id, suma_P);
+    sem_wait(&SCritica);  //Espera a que la SC sea accesible.
+      buffer[i] = l;
+      suma_P += buffer[i];
+      fprintf(stdout, "Suma de Hilo Productor (id = %d): %f\n", *id, suma_P);
+    sem_post(&SCritica);  //Señal de desbloqueo de SC.
+    sem_post(&Ocupados);  //Señal para indicar que se ha ocupado un espacio.
   }
 
-  //Desbloqueo del semáforo al terminar la SC.
-  if (pthread_mutex_unlock(&semaforo_P) != 0) {printf("\nERROR. No se pudo desbloquear el semáforo productor.\n");}
-  else{printf("\nEl semáforo productor se ha desbloqueado.\n\n");}
-
   to_return_P = malloc(sizeof(double));
-
   *to_return_P = suma_P;
 
   pthread_exit((void *) to_return_P);
@@ -112,21 +120,16 @@ void *consumidor(void *c){
 
   id = (int *) c;
 
-  //Bloqueo de semáforo para que  únicamnete un hilo entre en SC.
-  if(pthread_mutex_lock(&semaforo_C) != 0){printf("\nERROR. No se pudo bloquear el semáforo consumidor.\n");}
-  else{printf("\nEl semáforo consumidor se ha bloqueado.\n\n");}
-
-  for (i = 0; i < N; i++) {
-    suma_C += buffer[i];
+  for (i = 0; i < ITER; i++) {
+    sem_wait(&Ocupados);  //Espera a la existencia de espacios ocupados que consumir.
+    sem_wait(&SCritica);  //Espera a que la SC sea accesible.
+      suma_C += buffer[i];
     fprintf(stdout, "Suma de Hilo Consumidor (id = %d): %f\n", *id, suma_C);
+    sem_post(&SCritica);  //Señal de desbloqueo de SC.
+    sem_post(&Libres);  //Señal para indicar que se ha consumido un espacio.
   }
 
-  //Desbloqueo del semáforo al terminar la SC.
-  if (pthread_mutex_unlock(&semaforo_C) != 0) {printf("\nERROR. No se pudo desbloquear el semáforo consumidor.\n");}
-  else{printf("\nEl semáforo consumidor se ha desbloqueado.\n\n");}
-
   to_return_C = malloc(sizeof(double));
-
   *to_return_C = suma_C;
 
   pthread_exit((void *) to_return_C);
