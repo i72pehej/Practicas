@@ -27,7 +27,7 @@ bool Profesor::identificar(std::string usuario, std::string password){
 bool Profesor::guardarCopia(std::string fichero){
   std::ofstream copiaSeguridad(fichero, std::ios::binary);
 
-  for (std::list <Alumno>::iterator iAlumno = alumnos_.begin(); iAlumno != alumnos_.end(); iAlumno++) {
+  for (std::list <Alumno>::iterator iAlumno = getListaAlumnos().begin(); iAlumno != getListaAlumnos().end(); iAlumno++) {
     copiaSeguridad << iAlumno.getDNI() + ',' << iAlumno.getNombre() + ',' << iAlumno.getApellidos() + ',' << iAlumno.getTelefono() + ','
       << iAlumno.getEmail() + ',' << iAlumno.getDireccion() + ',' << iAlumno.getCurso() + ',' << iAlumno.getFechaNacimiento() + ','
       << iAlumno.getGrupo() + ',' << iAlumno.getLider() + '\n';
@@ -39,7 +39,7 @@ bool Profesor::cargarCopia(std::string fichero){
   std::ifstream copiaSeguridad(fichero, std::ios::binary);
   std::string aux;
 
-  for (std::list <Alumno>::iterator iAlumno = alumnos_.begin(); iAlumno != alumnos_.end(); iAlumno++) {
+  for (std::list <Alumno>::iterator iAlumno = getListaAlumnos().begin(); iAlumno != getListaAlumnos().end(); iAlumno++) {
     getline(copiaSeguridad, aux, ',');
     iAlumno.setDNI(aux);
 
