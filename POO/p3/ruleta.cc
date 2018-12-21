@@ -7,7 +7,7 @@ bool Ruleta::setBanca(int banca){
     if (banca < 0) {
     return false;
   } else {
-    banca_ = banca;
+    setBanca(banca);
     return true;
   }
 }
@@ -16,19 +16,19 @@ bool Ruleta::setBola(int bola){
   if (bola < 0 || bola > 36 ) {
     return false;
   } else {
-    bola_ = bola;
+    setBola(bola);
     return true;
   }
 }
 
 bool Ruleta::addJugador(Jugador j){
-  for (std::list <Jugador>::iterator i = jugadores_.begin(); i != jugadores_.end(); i++) {
+  for (std::list <Jugador>::iterator i = getJugadores().begin(); i != getJugadores().end(); i++) {
     if (i -> getDNI() == j.getDNI()) {  //Si el DNI del jugador que queremos añadir se encuentra en nuestra lista...
       return false;
     }
   }
 
-  jugadores_.push_back(j);
+  getJugadores().push_back(j);
 
   std::string nomFicheroNuevo = (j.getDNI() + ".txt");
   std::fstream ficheroNuevo (nomFicheroNuevo.c_str());
@@ -38,14 +38,14 @@ bool Ruleta::addJugador(Jugador j){
 }
 
 int Ruleta::deleteJugador(std::string dni){
-  for (std::list <Jugador>::iterator i = jugadores_.begin(); i != jugadores_.end(); i++) {
+  for (std::list <Jugador>::iterator i = getJugadores().begin(); i != getJugadores().end(); i++) {
     if (i -> getDNI() == dni) {
-      jugadores_.erase(i);
+      getJugadores().erase(i);
       return 1;
     }
   }
 
-  if (jugadores_.empty()) {
+  if (getJugadores().empty()) {
     return -1;
   }
 
@@ -59,7 +59,7 @@ int Ruleta::deleteJugador(Jugador j){
 void Ruleta::escribeJugadores(){
   std::ofstream ficheroNuevo ("jugadores.txt"); //Crea + Abre fichero en modo escritura.
 
-  for (std::list <Jugador>::iterator i = jugadores_.begin(); i != jugadores_.end(); i++) {
+  for (std::list <Jugador>::iterator i = getJugadores().begin(); i != getJugadores().end(); i++) {
     ficheroNuevo << i -> getDNI() + ",";
     ficheroNuevo << i -> getCodigo() + ",";
     ficheroNuevo << i -> getNombre() + ",";
@@ -76,7 +76,7 @@ void Ruleta::escribeJugadores(){
 
 void Ruleta::leeJugadores(){
   std::ifstream ficheroJugadores("jugadores.txt");
-  jugadores_.clear();
+  getJugadores().clear();
 
   std::string cadAux; //Cadena auxuliar para introducir los datos leidos del fichero y después añadirlos a una variable jugadorAux.
   Jugador jugadorAux("dniAux", "codAux"); //Variable para introducir cada dato de cadAux y después añadir a la lista de jugadores.
@@ -112,7 +112,7 @@ void Ruleta::leeJugadores(){
     getline(ficheroJugadores, cadAux, '\n');
     jugadorAux.setDinero(atoi(cadAux.c_str()));
 
-    jugadores_.push_back(jugadorAux);
+    getJugadores().push_back(jugadorAux);
   }
 
   ficheroJugadores.close();
@@ -125,88 +125,88 @@ void Ruleta::giraRuleta(){
 }
 
 void Ruleta::getPremios(){
-//  std::list <Apuesta> auxApuesta;
-  int opcion;
+  std::list<Apuesta> auxApuesta;
 
-  for (std::list <Jugador>::iterator iJugador = jugadores_.begin(); iJugador != jugadores_.end(); iJugador++) {
+  for (std::list<Jugador>::iterator iJugador = getJugadores().begin(); iJugador != getJugadores().end(); iJugador++) {
     iJugador -> setApuestas();  //Carga las apuestas de cada jugador en la lista de apuestas.
-//    auxApuesta = iJugador -> getApuestas();  //Lista auxiliar para trabajar con las apuestas.
+    auxApuesta = iJugador -> getApuestas();
 
-    for (std::list <Apuesta>::iterator iApuestas = auxApuesta.begin(); iApuestas != auxApuesta.end(); iApuestas++) {
-      opcion = apuestas_.getTipoApuesta();
+    for (std::list<Apuesta>::iterator iApuestas = auxApuesta.begin(); iApuestas != auxApuesta.end(); iApuestas++) {
+      seleccionPremios(*iJugador, *iApuestas);
+    }
+  }
+}
 
-      switch (opcion){
+void Ruleta::seleccionPremios(Jugador &jugador, Apuesta apuesta){
+  int opcion = apuesta.getTipoApuesta();
 
-        case 1:  //Apuesta sencilla.
-        if(atoi(apuestas_.getValorApuesta().c_str()) == getBola()){  //Si se acierta el número, se gana el 35:1 de lo que se apuesta.
-          iJugador.setDinero(iJugador.getDinero() + (35 * apuestas_.getCantidadApuesta()));  //Se le suma lo ganado al jugador.
-          setBanca(getBanca() - (35 * apuestas_.getCantidadApuesta()));  //Se le resta lo perdido a la banca.
-        }
-        else{ //En caso contrario, se pierde lo apostado y lo gana la banca.
-          iJugador.setDinero(iJugador.getDinero() - (apuestas_.getCantidadApuesta()));  //El jugador pierde el dinero.
-          setBanca(getBanca() + (apuestas_.getCantidadApuesta()));  //La banca lo gana.
-        }
-        break;
+  switch (opcion){
+    case 1:  //Apuesta sencilla.
+    if(atoi(apuesta.getValorApuesta().c_str()) == getBola()){  //Si se acierta el número, se gana el 35:1 de lo que se apuesta.
+      jugador.setDinero(jugador.getDinero() + (35 * apuesta.getCantidadApuesta()));  //Se le suma lo ganado al jugador.
+      setBanca(getBanca() - (35 * apuesta.getCantidadApuesta()));  //Se le resta lo perdido a la banca.
+    }
+    else{ //En caso contrario, se pierde lo apostado y lo gana la banca.
+      jugador.setDinero(jugador.getDinero() - (apuesta.getCantidadApuesta()));  //El jugador pierde el dinero.
+      setBanca(getBanca() + (apuesta.getCantidadApuesta()));  //La banca lo gana.
+    }
+    break;
 
-        case 2:  //Apuesta rojo o negro.
-        if(getBola() == 0){  //Si sale cero se pierde lo apostado.
-          iJugador.setDinero(iJugador.getDinero() - apuestas_.getCantidadApuesta());
-          setBanca(getBanca() + apuestas_.getCantidadApuesta());
-        }
-        else{ //Si se acierta el color se gana el 1:1 de lo que se apuesta.
-          if((apuestas_.getValorApuesta() == "rojo" && ((getBola() % 2 + ((getBola() / 10) % 2)) % 2) == 0) || (apuestas_.getValorApuesta() == "negro" && ((getBola() % 2 + ((getBola() / 10) % 2)) % 2) == 1 )){  //Si el número de la  bola corresponde con el color de la apuesta.
-            iJugador.setDinero(iJugador.getDinero() + apuestas_.getCantidadApuesta());
-            setBanca(getBanca() - apuestas_.getCantidadApuesta());
-          }
-          else{ //Si no se acierta el color, se pierde lo apostado.
-            iJugador.setDinero(iJugador.getDinero() - apuestas_.getCantidadApuesta());
-            setBanca(getBanca() + apuestas_.getCantidadApuesta());
-          }
-        }
-        break;
-
-        case 3:  //Apuesta par o impar.
-        if(getBola()==0){//si la bola sale cero pierdes lo apostado
-    			j.setDinero(j.getDinero()-a.cantidad);
-    			setBanca(getBanca()+a.cantidad);
-    		}
-
-    				else{ //y si no sale cero y aciertas par/impar ganas 2.0 y la banca lo pierde
-    					if((a.valor=="par" && getBola()%2==0) || (a.valor =="impar" && getBola()%2==1)){
-
-    					j.setDinero(j.getDinero()+a.cantidad);
-    					setBanca(getBanca()-a.cantidad);
-    					}
-    					else{//y si no aciertas pierdes lo apostado
-
-    						j.setDinero(j.getDinero()-a.cantidad);
-    						setBanca(getBanca()+a.cantidad);
-    					}
-    				}
-    		break;
-
-
-    		case 4: if(getBola()==0){//si la bola sale 0 pierdes lo apostado
-
-    			j.setDinero(j.getDinero()-a.cantidad);
-    			setBanca(getBanca()+a.cantidad);
-    		}
-    		else{//y si no y aciertas si es bajo o alto ganas 2.0 de tus apuestas
-    			if((a.valor=="bajo" && (getBola()>=1 && getBola()<=18)) || ((a.valor=="alto" && (getBola()>=19 && getBola()<=36)))){
-
-    			j.setDinero(j.getDinero()+a.cantidad);
-    			setBanca(getBanca()-a.cantidad);
-        }
-          else{//pero si no aciertas pierdes lo apostado y lo gana la banca
-            j.setDinero(j.getDinero()-a.cantidad);
-            setBanca(getBanca()+a.cantidad);
-          }
-        }
-        break;
-
-      default:
-      exit(-1);
+    case 2:  //Apuesta rojo o negro.
+    if(getBola() == 0){  //Si sale cero se pierde lo apostado.
+      jugador.setDinero(jugador.getDinero() - apuesta.getCantidadApuesta());
+      setBanca(getBanca() + apuesta.getCantidadApuesta());
+    }
+    else{ //Si se acierta el color se gana el 1:1 de lo que se apuesta.
+      if((apuesta.getValorApuesta() == "rojo" && ((getBola() % 2 + ((getBola() / 10) % 2)) % 2) == 0) ||
+        (apuesta.getValorApuesta() == "negro" && ((getBola() % 2 + ((getBola() / 10) % 2)) % 2) == 1 )){  //Si el número de la  bola corresponde con el color de la apuesta.
+        jugador.setDinero(jugador.getDinero() + apuesta.getCantidadApuesta());
+        setBanca(getBanca() - apuesta.getCantidadApuesta());
+      }
+      else{ //Si no se acierta el color, se pierde lo apostado.
+        jugador.setDinero(jugador.getDinero() - apuesta.getCantidadApuesta());
+        setBanca(getBanca() + apuesta.getCantidadApuesta());
       }
     }
+    break;
+
+    case 3:  //Apuesta par o impar.
+    if(getBola() == 0){  //Si sale cero se pierde lo apostado.
+      jugador.setDinero(jugador.getDinero() - apuesta.getCantidadApuesta());
+      setBanca(getBanca() + apuesta.getCantidadApuesta());
+    }
+    else{  //Se se acierta par/impar se gana 1:1 lo apostado.
+      if((apuesta.getValorApuesta() == "par" && getBola() % 2 == 0) ||
+        (apuesta.getValorApuesta() == "impar" && getBola() % 2 == 1)){  //Si el valor de la bola coincide con la apuesta.
+        jugador.setDinero(jugador.getDinero() + apuesta.getCantidadApuesta());
+        setBanca(getBanca() - apuesta.getCantidadApuesta());
+      }
+      else{  //Si no se acierta, se pierde lo apostado y lo gana la banca.
+        jugador.setDinero(jugador.getDinero() - apuesta.getCantidadApuesta());
+        setBanca(getBanca() + apuesta.getCantidadApuesta());
+      }
+    }
+    break;
+
+    case 4:  //Apuesta alto o bajo.
+    if(getBola() == 0){  //Si sale cero se pierde lo apostado.
+      jugador.setDinero(jugador.getDinero() - apuesta.getCantidadApuesta());
+      setBanca(getBanca() + apuesta.getCantidadApuesta());
+    }
+    else{  //Si se acierta bajo/alto, se gana 1:1 lo apostado.
+      if((apuesta.getValorApuesta() == "bajo" && (getBola() >= 1 && getBola() <= 18)) ||
+        (apuesta.getValorApuesta() == "alto" && (getBola() >= 19 && getBola() <= 36))){  //Si el valor de la bola coincide con la apuesta.
+        jugador.setDinero(jugador.getDinero() + apuesta.getCantidadApuesta());
+        setBanca(getBanca() - apuesta.getCantidadApuesta());
+    }
+    else{  //Si no se acierta, se pierde lo apostado y lo gana la banca.
+      jugador.setDinero(jugador.getDinero() - apuesta.getCantidadApuesta());
+      setBanca(getBanca() + apuesta.getCantidadApuesta());
+    }
+  }
+  break;
+
+  default:
+  exit(-1);
   }
 }

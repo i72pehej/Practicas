@@ -51,7 +51,7 @@ public:
 
   inline int getDinero() const {return (dinero_);}; // Devuelve el dinero introducido.
   inline std::string getCodigo() const {return (codigoJugador_);};  // Devuelve el código del jugador.
-  inline std::list <Apuesta> getApuestas() const {return (apuestas_);};  // Devuelve las Apuesta leídas.
+  inline std::list <Apuesta> getApuestas() const {return (apuestas_);};  // Devuelve las apuestas leídas.
 };
 
 #endif

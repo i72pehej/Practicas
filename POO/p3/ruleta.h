@@ -16,7 +16,7 @@ class Ruleta{
     std::list <Jugador> jugadores_;
     Crupier crupier_;
   public:
-    Ruleta(); //Constructor de la clase Ruleta.
+    Ruleta(Crupier c) : crupier_(c) {banca_=1000000; bola_=-1; srand(time(NULL));} //Constructor de la clase Ruleta.
 
     bool setBanca(int banca);  //Asigna el valor introducido a la banca.
     bool setBola(int bola); //Asigna el valor introducido a la bola.
@@ -35,6 +35,8 @@ class Ruleta{
 
     void giraRuleta();  //Simula el giro de la ruleta y la obtención de un número aleatorio entre 0 y 36.
     void getPremios();  //Recorre la lista de jugadores y carga sus apuestas de los ficheros correspondientes, y actualiza el dinero de cada jugador y banca con lo ganado o perdido en cada apuesta.
+
+    void seleccionPremios(Jugador &jugador, Apuesta apuesta);  //Simula las variaciones del dinero de la banca y el jugador en función de las apuestas realizadas.
 };
 
 #endif
