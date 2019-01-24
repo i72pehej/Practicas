@@ -79,7 +79,7 @@ void Ruleta::leeJugadores(){
   getJugadores().clear();
 
   std::string cadAux; //Cadena auxuliar para introducir los datos leidos del fichero y después añadirlos a una variable jugadorAux.
-  Jugador jugadorAux("dniAux", "codAux"); //Variable para introducir cada dato de cadAux y después añadir a la lista de jugadores.
+  Jugador jugadorAux("dniAux", "cadAux"); //Variable para introducir cada dato de cadAux y después añadir a la lista de jugadores.
 
   while (!ficheroJugadores.eof()) {
     getline(ficheroJugadores, cadAux, ',');
