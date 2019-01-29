@@ -9,6 +9,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include <time.h>
+
 #define HIJOS 3
 #define ITER 3
 #define SUCCESS 10
@@ -16,10 +18,10 @@
 
 //Ejercicio 1.
 //Implementar un proceso PADRE que cree 3 hijos y luego espera a que finalicen antes de finalizar él mismo.
-
+/*
 void procesoHijo(int id) {
-  key_t clave, i;
-  int shmid;
+  key_t clave;
+  int shmid, i;
   int *contador;
 
 //Memoria compartida.
@@ -81,31 +83,66 @@ int main(int argc, char const *argv[]) {
   printf("\n");
   return 0;
 }
-
+*/
 
 //Ejercicio 2.
 /*Los tres hijos comparten un vector de 100 enteros. Cada uno ha de realizar lo siguiente:
   - Pedir un íncide del vector y un valor entero por teclado y almacenarlo en el vector. Ha de repetirse 10 veces.
   - Cambiar aleatoriamente un elemento del vesctor y bloquearse durante 1 segundo. Ha de repetirse 100 veces.
   - Sumar todos los elementos del vector, mostrar la suma y bloquearse durante 30 segundos. Ha de repetirse  5 veces.*/
+/*
+//Proceso Hijo 1 -> Pide un indice y un valor y lo almacena.
+void procesoHijo1(int *vector) {
+  int i, indice, valor;
 
-void procesoHijo1() {
+  for (i = 0; i < 2; i++) {
+    printf("Introduzca el índice que quieras actualizar/modificar:\n");
+    fscanf(stdin, "%d", &indice);
+    printf("Introduzca el valor\n");
+    fscanf(stdin, "%d", &valor);
 
+    printf("\nValor actual del vector, índice <%d>: <%d>.\n", indice, vector[indice]);
+    vector[indice] = valor;
+    printf("\nVector modificado. Valor de índice <%d>: <%d>.\n\n", indice, vector[indice]);
+  }
+
+  printf("\n");
+  exit(SUCCESS);
 }
 
-void procesoHijo2() {
+//Proceso Hijo 2 -> Cambia aleatoriamente un elemento del vector y se bloquea 1s 100 veces.
+void procesoHijo2(int *vector) {
+  int i;
+  int indice = rand() % TAM;
+  int valor = rand();
 
+  for (i = 0; i < TAM; i++) {
+    vector[indice] = valor;
+  }
+
+  sleep(1);
+  exit(SUCCESS);
 }
 
-void procesoHijo3() {
+//proceso Hijo 3 -> Suma los elementos del vector y muestra la suma. Se bloquea 30s.
+void procesoHijo3(int *vector) {
+  int i, suma = 0;
 
+  for (i = 0; i < TAM; i++) {
+    suma += vector[i];
+  }
+
+  printf("El total de la suma de los elementos del vector: <%d>.\n\n", suma);
+  sleep(5);
+  exit(SUCCESS);
 }
 
 int main(int argc, char const *argv[]) {
+  srand(time(NULL));
   int i, shmid, estado, pID;
   key_t clave;
-  shmid_ds &buffer;
-  int vector[TAM];
+  struct shmid_ds buffer;
+  int *vector;
 
 //Memoria compartida.
   clave = ftok("Pract1_SO.c", 1);
@@ -116,11 +153,15 @@ int main(int argc, char const *argv[]) {
   vector = (int *) shmat(shmid, NULL, 0);
 
 //Creación de Hijos.
-for (i = 0; i < HIJOS; i++) {
-  if (i == 0) {procesoHijo1(i);}
-  else if (i == 1) {procesoHijo2(i);}
-  else {procesoHijo3(i);}
-}
+  for (i = 0; i < HIJOS; i++) {
+    if (fork() == 0) {
+      if (i == 0) {procesoHijo1(vector);}
+      else if (i == 1) {procesoHijo2(vector);}
+      else {procesoHijo3(vector);}
+
+      exit(EXIT_SUCCESS);
+    }
+  }
 
 //Espera de hijos.
   for (i = 0; i < HIJOS; i++) {
@@ -137,7 +178,112 @@ for (i = 0; i < HIJOS; i++) {
 
   return 0;
 }
-
+*/
 
 //Ejercicio 3.
 //El proceso es inicialmente rellenado por el proceso PADRE aleatoriamente.
+
+//Proceso Hijo 1 -> Pide un indice y un valor y lo almacena.
+void procesoHijo1(int id) {
+  int shmid;
+  key_t clave;
+  int *vector;
+
+  int i, indice, valor;
+
+  clave = ftok("Pract1_SO", 1);
+
+  shmid = shmget(clave, (TAM * sizeof(int)), 0);
+  if (shmid == -1) {exit(EXIT_FAILURE);}
+
+  vector = (int *) shmat(shmid, NULL, 0);
+
+  for (i = 0; i < 2; i++) {
+    printf("Introduzca el índice que quieras actualizar/modificar:\n");
+    fscanf(stdin, "%d", &indice);
+    printf("Introduzca el valor\n");
+    fscanf(stdin, "%d", &valor);
+
+    printf("\nValor actual del vector, índice <%d>: <%d>.\n", indice, vector[indice]);
+    vector[indice] = valor;
+    printf("\nVector modificado. Valor de índice <%d>: <%d>.\n\n", indice, vector[indice]);
+  }
+
+  printf("\n");
+  shmdt(vector);
+  exit(SUCCESS);
+}
+
+//Proceso Hijo 2 -> Cambia aleatoriamente un elemento del vector y se bloquea 1s 100 veces.
+void procesoHijo2(int *vector) {
+  int i;
+  int indice = rand() % TAM;
+  int valor = rand();
+
+  for (i = 0; i < TAM; i++) {
+    vector[indice] = valor;
+  }
+
+  sleep(1);
+  exit(SUCCESS);
+}
+
+//proceso Hijo 3 -> Suma los elementos del vector y muestra la suma. Se bloquea 30s.
+void procesoHijo3(int *vector) {
+  int i, suma = 0;
+
+  for (i = 0; i < TAM; i++) {
+    suma += vector[i];
+  }
+
+  printf("El total de la suma de los elementos del vector: <%d>.\n\n", suma);
+  sleep(5);
+  exit(SUCCESS);
+}
+
+int main(int argc, char const *argv[]) {
+  srand(time(NULL));
+  int i, shmid, estado, pID;
+  key_t clave;
+  struct shmid_ds buffer;
+  int *vector;
+
+//Memoria compartida.
+  clave = ftok("Pract1_SO.c", 1);
+
+  shmid = shmget(clave, (TAM * sizeof(int)), IPC_CREAT | 0777);
+  if(shmid == -1) {exit(EXIT_FAILURE);}
+
+  vector = (int *) shmat(shmid, NULL, 0);
+
+//Rellenado del vector.
+  for (i = 0; i < TAM; i++) {
+    vector[i] = rand();
+  }
+
+//Creación de Hijos.
+  for (i = 0; i < HIJOS; i++) {
+    if (fork() == 0) {
+      if (i == 0) {procesoHijo1(i);}
+      else if (i == 1) {procesoHijo2(vector);}
+      else {procesoHijo3(vector);}
+
+      exit(EXIT_SUCCESS);
+    }
+  }
+
+//Espera de hijos.
+  for (i = 0; i < HIJOS; i++) {
+    pID = wait(&estado);
+    if (pID == -1) {exit(EXIT_FAILURE);}
+    printf("Proceso Hijo <%d> terminado con estado: <%d>.\n", pID, WEXITSTATUS(estado));
+  }
+
+//Desconexión.
+  shmdt(vector);
+
+//Destrucción de memoria compartida.
+  shmctl(shmid, IPC_RMID, &buffer);
+
+  return 0;
+}
