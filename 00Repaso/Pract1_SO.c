@@ -179,7 +179,7 @@ int main(int argc, char const *argv[]) {
   return 0;
 }
 */
-
+/*
 //Ejercicio 3.
 //El proceso es inicialmente rellenado por el proceso PADRE aleatoriamente.
 
@@ -287,3 +287,32 @@ int main(int argc, char const *argv[]) {
 
   return 0;
 }
+*/
+/*
+int main(int argc, char const *argv[]) {
+  pid_t pid;
+  int estado, pidHijo;
+
+  pid = fork();
+  switch (pid) {
+    case -1:  //Caso ERROR del fork().
+      printf("\nError al crear proceso HIJO.\n");
+      exit(EXIT_FAILURE);
+
+    case 0:  //Proceso HIJO.
+      //FUNCIONES DE LOS HIJOS
+      printf("\nSoy el HIJO <%d>, y mi PADRE <%d>.\n", getpid(), getppid());
+      exit(EXIT_SUCCESS);
+
+    default:  //Proceso PADRE.
+      printf("\nProceso PADRE, con PID = <%d>.\n", getpid());
+      //FUNCIONES DEL PADRE
+      pidHijo = wait(&estado);
+      if(pidHijo == -1) {exit(EXIT_FAILURE);}
+      else {printf("\nProceso HIJO <%d> terminado con estado: <%d>.\n", pidHijo, WEXITSTATUS(&estado));}
+  }
+
+  printf("\n");
+  return 0;
+}
+*/
