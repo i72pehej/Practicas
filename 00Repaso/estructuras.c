@@ -10,13 +10,13 @@
 
 
 //Lineal/Secuencial.
-/*
+
 int main(int argc, char const *argv[]) {
   if (argc == 2) {
     int i, estado;
     pid_t pid;
 
-    printf("Formato correcto.\n");
+    printf("\nFormato correcto.\n");
 
     for (i = 0; i < atoi(argv[1]); i++) {
       switch (fork()) {
@@ -36,20 +36,21 @@ int main(int argc, char const *argv[]) {
           else {printf("\nProceso HIJO <%d> terminó con estado: <%d>.\n", pid, WEXITSTATUS(estado));}
       }
     }
+    
+    printf("\n\n");
+    printf("FIN. Ejecucuión terminada correctamente . . .\n\n");
+    exit(EXIT_SUCCESS);
   }
+
   else {
     printf("\n¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡ERROR. Formato de comando incorrecto!!!!!!!!!!!!!!!!!!\n");
     printf("\nTerminando ejecucuión . . .\n\n");
     sleep(2);
     exit(EXIT_FAILURE);
   }
-
-  printf("\n\n");
-  printf("FIN. Ejecucuión terminada correctamente . . .\n\n");
-  exit(EXIT_SUCCESS);
 }
-*/
 
+/*
 //Abanico.
 
 int main(int argc, char const *argv[]) {
@@ -91,3 +92,4 @@ int main(int argc, char const *argv[]) {
   printf("FIN. Ejecucuión terminada correctamente . . .\n\n");
   exit(EXIT_SUCCESS);
 }
+*/

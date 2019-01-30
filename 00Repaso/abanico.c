@@ -6,44 +6,31 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
-int main(int argc,char**argv)
-{
-  if(argc==2)
-  {
-    int i,pid_aux,estado;
+int main(int argc, char const *argv[]) {
+  if(argc == 2) {
+    int i, estado;
     pid_t pid;
 
-    for(i=0;  i<atoi(argv[1]);  i++)
-    {
-      pid=fork();
-
-      switch(pid)
-      {
+    for(i = 0; i < atoi(argv[1]); i++) {
+      switch(fork()) {
         case -1:
-        printf("ERROR en el fork\n");
-        exit(EXIT_FAILURE);
+          printf("ERROR. No se ha podido crear el proceso.\n");
+          exit(EXIT_FAILURE);
 
         case 0:
-        printf("Soy el hijo %lf y mi padre es %lf\n",(double)getpid(),(double)getppid());
-        exit(EXIT_SUCCESS);
+          printf("Proceso HIJO <%lf>, con PADRE <%lf>, creado correctamente.\n", (double)getpid(), (double)getppid());
+          exit(EXIT_SUCCESS);
       }
     }
-    while(pid_aux = wait(&estado) > 0)
-    {
-      if(pid_aux > 0)
-      {
-        if(WIFEXITED(estado))
-        {
-          printf("El hijo %d salio y su Status %d\n",pid_aux,WEXITSTATUS(estado));
-        }
+
+    while((pid = wait(&estado)) > 0) {
+      if(pid > 0) {
+        if(WIFEXITED(estado)) {printf("Proceso HIJO <%d> terminado con estado: <%d>.\n", pid, WEXITSTATUS(estado));}
       }
     }
+
     exit(EXIT_SUCCESS);
   }
 
-  else
-  {
-    printf("ERROR de argumentos\n");
-    exit(EXIT_FAILURE);
-  }
+  else {printf("ERROR. Formato de argumentos incorrecto.\n"); exit(EXIT_FAILURE);}
 }
