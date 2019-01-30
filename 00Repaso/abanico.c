@@ -11,7 +11,7 @@ int main(int argc, char const *argv[]) {
     int i, estado;
     pid_t pid;
 
-    printf("\n");
+    printf("\nFormato correcto.\n\n");
     for(i = 0; i < atoi(argv[1]); i++) {
       switch(fork()) {
         case -1:
