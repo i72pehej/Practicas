@@ -19,13 +19,14 @@ int main(int argc, char const *argv[]) {
     printf("\nFormato correcto.\n");
 
     for (i = 0; i < atoi(argv[1]); i++) {
+      printf("\n");
       switch (fork()) {
         case -1:  //ERROR.
           printf("\nERROR. No se ha podido crear el nuevo proceso.\n");
           exit(EXIT_FAILURE);
 
         case 0:  //Proceso HIJO.
-          printf("\nCreación del HIJO <%d>, con PADRE <%d>, correctamente.\n", getpid(), getppid());
+          printf("Creación del HIJO <%d>, con PADRE <%d>, correctamente.\n", getpid(), getppid());
           exit(EXIT_SUCCESS);
 
         break;
@@ -33,10 +34,10 @@ int main(int argc, char const *argv[]) {
         default:  //Proceso PADRE.
           pid = wait(&estado);
           if(pid == -1) {exit(EXIT_FAILURE);}
-          else {printf("\nProceso HIJO <%d> terminó con estado: <%d>.\n", pid, WEXITSTATUS(estado));}
+          else {printf("Proceso HIJO <%d> terminó con estado: <%d>.\n", pid, WEXITSTATUS(estado));}
       }
     }
-    
+
     printf("\n\n");
     printf("FIN. Ejecucuión terminada correctamente . . .\n\n");
     exit(EXIT_SUCCESS);

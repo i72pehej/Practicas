@@ -11,10 +11,11 @@ int main(int argc, char const *argv[]) {
     int i, estado;
     pid_t pid;
 
+    printf("\n");
     for(i = 0; i < atoi(argv[1]); i++) {
       switch(fork()) {
         case -1:
-          printf("ERROR. No se ha podido crear el proceso.\n");
+          printf("\nERROR. No se ha podido crear el proceso.\n");
           exit(EXIT_FAILURE);
 
         case 0:
@@ -23,14 +24,15 @@ int main(int argc, char const *argv[]) {
       }
     }
 
+    sleep(1);
+    printf("\n");
     while((pid = wait(&estado)) > 0) {
-      if(pid > 0) {
-        if(WIFEXITED(estado)) {printf("Proceso HIJO <%d> terminado con estado: <%d>.\n", pid, WEXITSTATUS(estado));}
-      }
+      if(WIFEXITED(estado)) {printf("Proceso HIJO <%d> terminado con estado: <%d>.\n", pid, WEXITSTATUS(estado));}
     }
 
+    printf("\nEjecucuión terminada con éxito.\n\n");
     exit(EXIT_SUCCESS);
   }
 
-  else {printf("ERROR. Formato de argumentos incorrecto.\n"); exit(EXIT_FAILURE);}
+  else {printf("\n\nERROR. Formato de argumentos incorrecto.\n\n"); exit(EXIT_FAILURE);}
 }
