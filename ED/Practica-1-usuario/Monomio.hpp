@@ -22,59 +22,71 @@ class Monomio {
 
 	//! \name Funciones o métodos públicos de la clase Monomio
 	public:
-	//! \name Constructores de la clase Monomio
-	inline Monomio(double coeficiente = 0.0, int grado = 0) {
-		#ifndef NDEBUG
-			assert(grado >= 0);
-		#endif
+		//! \name Constructores de la clase Monomio
+		inline Monomio(double coeficiente = 0.0, int grado = 0) {
+			#ifndef NDEBUG
+				assert(grado >= 0);
+			#endif
 
-		setCoeficiente(coeficiente);
-		setGrado(grado);
+				setCoeficiente(coeficiente);
+				setGrado(grado);
 
-		#ifndef NDEBUG
-			assert(std::abs(getCoeficiente() - coeficiente) > COTA_ERROR);
-			assert(getGrado() == grado);
-		#endif
-	}
+			#ifndef NDEBUG
+				assert(std::abs(getCoeficiente() - coeficiente) > COTA_ERROR);
+				assert(getGrado() == grado);
+			#endif
+		}
 
-	inline Monomio(Monomio &m) {
-		setCoeficiente(m.getCoeficiente());
-		setGrado(m.getGrado());
+		inline Monomio(Monomio &m) {
+			setCoeficiente(m.getCoeficiente());
+			setGrado(m.getGrado());
 
-		#ifndef NDEBUG
-			assert(std::abs(getCoeficiente() - m.getCoeficiente()) > COTA_ERROR);
-			assert(getGrado() == m.getGrado());
-		#endif
-	}
+			#ifndef NDEBUG
+				assert(std::abs(getCoeficiente() - m.getCoeficiente()) > COTA_ERROR);
+				assert(getGrado() == m.getGrado());
+			#endif
+		}
 
-	//! \name Observadores: funciones de consulta de la clase Monomio
-	inline double getCoeficiente() const {return coeficiente_;}
-	inline int getGrado() const {return grado_;}
+		//! \name Observadores: funciones de consulta de la clase Monomio
+		inline double getCoeficiente() const {return coeficiente_;}
+		inline int getGrado() const {return grado_;}
 
-	//! \name Funciones de modificación de la clase Monomio
-	inline void setCoeficiente(double coeficiente) {
-		coeficiente_ = coeficiente;
+		//! \name Funciones de modificación de la clase Monomio
+		inline void setCoeficiente(double coeficiente) {
+			coeficiente_ = coeficiente;
 
-		#ifndef NDEBUG
-			assert(std::abs(getCoeficiente() == coeficiente) > COTA_ERROR);
-		#endif
-	}
-	inline void setGrado(int grado) {
-		#ifndef NDEBUG
-			assert(grado >= 0);
-		#endif
+			#ifndef NDEBUG
+				assert(std::abs(getCoeficiente() == coeficiente) > COTA_ERROR);
+			#endif
+		}
+		inline void setGrado(int grado) {
+			#ifndef NDEBUG
+				assert(grado >= 0);
+			#endif
 
-		grado_ = grado;
+			grado_ = grado;
 
-		#ifndef NDEBUG
-			assert(getGrado() == grado);
-		#endif
-	}
+			#ifndef NDEBUG
+				assert(getGrado() == grado);
+			#endif
+		}
 
-	/////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////
 
 	//! \name Operadores de la clase Monomio
 	// Operadores de asignación
+
+	/*!
+		\brief     Operador de asignación: operacor que "copia" un monomio en otro.
+		\attention Se sobrecarga el operador de asignación "=".
+		\warning   Se requiere que las funciones de acceso getCoeficiente y getGrado tengan el modificador const.
+		\param     m: objeto de tipo monomio pasado como referencia constante.
+		\post	     La abscisa del Vertice2D debe tener el valor de la abscisa del Vertice2D v
+		\post	     La ordenada del Vertice2D debe tener el valor de la ordenada del Vertice2D v
+		\note	     Se debe utilizar COTA_ERROR para controlar la precisiÃ³n de los nÃºmeros reales
+		\sa        getX(), getY(), setX(), setY()
+	*/
+
 
 		// COMPLETAR LOS COMENTARIOS DE DOXYGEN
 		Monomio & operator = (Monomio const &m);
@@ -92,7 +104,7 @@ class Monomio {
 		// COMPLETAR EL RESTO DE OPERADORES
 
 
-	/////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////
 
 	//! \name Funciones lectura y escritura de la clase Monomio
 
@@ -107,7 +119,6 @@ class Monomio {
 
 
 };  // Fin de la definición de la clase Monomio
-
 }  //  Fin de namespace ed.
 
 // _MONOMIO_HPP_
