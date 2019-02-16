@@ -179,7 +179,7 @@ int main(int argc, char const *argv[]) {
   return 0;
 }
 */
-/*
+
 //Ejercicio 3.
 //El proceso es inicialmente rellenado por el proceso PADRE aleatoriamente.
 
@@ -241,6 +241,7 @@ void procesoHijo3(int *vector) {
   exit(SUCCESS);
 }
 
+
 int main(int argc, char const *argv[]) {
   srand(time(NULL));
   int i, shmid, estado, pID;
@@ -267,8 +268,6 @@ int main(int argc, char const *argv[]) {
       if (i == 0) {procesoHijo1(i);}
       else if (i == 1) {procesoHijo2(vector);}
       else {procesoHijo3(vector);}
-
-      exit(EXIT_SUCCESS);
     }
   }
 
@@ -285,7 +284,7 @@ int main(int argc, char const *argv[]) {
 //Destrucción de memoria compartida.
   shmctl(shmid, IPC_RMID, &buffer);
 
-  return 0;
+  exit(EXIT_SUCCESS);
 }
 */
 /*

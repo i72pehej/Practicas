@@ -23,7 +23,6 @@ void *funcionHilo(void *id_Hilo) {
   int *res, i, *id;
 
   id = (int *) id_Hilo;
-  res = malloc(sizeof(int));  //Reserva de memoria para no perder resultado.
 
 //Sección crítica.
 //-------------------------------------------------------------
@@ -43,6 +42,7 @@ void *funcionHilo(void *id_Hilo) {
 //-------------------------------------------------------------
   printf("\n");
 
+  res = malloc(sizeof(int));  //Reserva de memoria para no perder resultado.
   *res = contador;
   pthread_exit((void *) res);
 }

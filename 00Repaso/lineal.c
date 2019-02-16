@@ -3,9 +3,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
-#include <sys/wait.h>
 
-#include <pthread.h>
+#include <sys/wait.h>
+#include <sys/types.h>
 
 int main(int argc, char const *argv[]) {
   if (argc == 2) {

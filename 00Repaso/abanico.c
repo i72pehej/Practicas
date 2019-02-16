@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+
 #include <sys/types.h>
 #include <sys/wait.h>
 
@@ -24,10 +25,10 @@ int main(int argc, char const *argv[]) {
       }
     }
 
-    sleep(1);
+    sleep(1);  //Para dar tiempo a que se creen los hijos.
     printf("\n");
     while((pid = wait(&estado)) > 0) {
-      if(WIFEXITED(estado)) {printf("Proceso HIJO <%d> terminado con estado: <%d>.\n", pid, WEXITSTATUS(estado));}
+      /*if(WIFEXITED(estado)) */{printf("Proceso HIJO <%d> terminado con estado: <%d>.\n", pid, WEXITSTATUS(estado));}
     }
 
     printf("\nEjecucuión terminada con éxito.\n\n");
