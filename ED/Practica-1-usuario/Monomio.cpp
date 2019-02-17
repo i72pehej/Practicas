@@ -13,8 +13,7 @@
 
 // COMPLETAR
 
-ed::Monomio & ed::Monomio::operator=(ed::Monomio const &m)
-{
+ed::Monomio & ed::Monomio::operator= (ed::Monomio const &m) {
 	// COMPLETAR
 
 
@@ -23,8 +22,7 @@ ed::Monomio & ed::Monomio::operator=(ed::Monomio const &m)
 }
 
 
-ed::Monomio & ed::Monomio::operator=(double const &x)
-{
+ed::Monomio & ed::Monomio::operator= (double const &x) {
 	// COMPLETAR
 
 	// Se devuelve el objeto actual
@@ -39,8 +37,7 @@ ed::Monomio & ed::Monomio::operator=(double const &x)
 
 // COMPLETAR
 
-ed::Monomio & ed::Monomio::operator+=(ed::Monomio const &m)
-{
+ed::Monomio & ed::Monomio::operator+= (ed::Monomio const &m) {
 	// COMPLETAR
 
 

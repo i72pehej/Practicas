@@ -81,23 +81,30 @@ class Monomio {
 		\attention Se sobrecarga el operador de asignación "=".
 		\warning   Se requiere que las funciones de acceso getCoeficiente y getGrado tengan el modificador const.
 		\param     m: objeto de tipo monomio pasado como referencia constante.
-		\post	     La abscisa del Vertice2D debe tener el valor de la abscisa del Vertice2D v
-		\post	     La ordenada del Vertice2D debe tener el valor de la ordenada del Vertice2D v
-		\note	     Se debe utilizar COTA_ERROR para controlar la precisiÃ³n de los nÃºmeros reales
-		\sa        getX(), getY(), setX(), setY()
+		\param     coeficiente: objeto de tipo real pasado como referencia constante.
+		\post	     El coeficiente del monomio es igual al coeficiente del monomio "m".
+		\post	     El grado del monomio es igual al grado del monomio "m".
+		\note	     Se debe utilizar COTA_ERROR para controlar la precisión de los números reales.
+		\sa        getCoeficiente(), getGrado(), setCoeficiente(), setGrado().
 	*/
 
-
-		// COMPLETAR LOS COMENTARIOS DE DOXYGEN
 		Monomio & operator = (Monomio const &m);
-
-		// COMPLETAR LOS COMENTARIOS DE DOXYGEN
 		Monomio & operator = (double const &x);
 
 
 	// Operadores aritméticos y asignación
 
-		// COMPLETAR LOS COMENTARIOS DE DOXYGEN
+	/*!
+		\brief     Operador de asignación: operacor que "copia" un monomio en otro.
+		\attention Se sobrecarga el operador "+=".
+		\warning   Se requiere que las funciones de acceso getCoeficiente y getGrado tengan el modificador const.
+		\param     m: objeto de tipo monomio pasado como referencia constante.
+		\pre	     El monomio "m" tiene el mismo grado que el monomio actual.
+		\post	     El coeficiente del monomio actual se ha incrementado con el coeficiente del monomio "m".
+		\note	     Se debe utilizar COTA_ERROR para controlar la precisión de los números reales.
+		\sa        getCoeficiente(), getGrado(), setCoeficiente(), setGrado().
+	*/
+
 		Monomio & operator += (Monomio const &m);
 
 
