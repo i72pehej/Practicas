@@ -195,6 +195,9 @@ class Monomio {
 	//! \name Funciones lectura y escritura de la clase Monomio.
 
 	// COMPLETAR
+	leerMonomio();
+
+	escribirMonomio();
 
 
 	//////////////////////////////////////////////////////////////////////////////
@@ -202,6 +205,7 @@ class Monomio {
 	//! \name Funciones auxiliares de la clase Monomio.
 
 	// COMPLETAR
+	double calcularValor();
 
 
 };  // Fin de la definición de la clase Monomio.
