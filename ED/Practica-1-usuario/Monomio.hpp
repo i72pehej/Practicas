@@ -164,12 +164,12 @@ class Monomio {
 
 
 		/*!
-			\brief     Operador de asignación: operador que "copia" un monomio en otro.
+			\brief     Operador de asignación: operador que multiplica el monomio actual por un número real.
 			\attention Se sobrecarga el operador "*=".
 			\warning   Se requiere que las funciones de acceso getCoeficiente y getGrado tengan el modificador const.
 			\param     x: objeto de tipo real pasado como referencia constante.
-			\pre	     El monomio "m" tiene el mismo grado que el monomio actual.
-			\post	     El coeficiente del monomio actual se ha incrementado con el coeficiente del monomio "m".
+			\post	     El coeficiente del monomio actual se ha multiplicado por el número real "x".
+			\post	     El grado del monomio actual no ha sido modificado.
 			\note	     Se debe utilizar COTA_ERROR para controlar la precisión de los números reales.
 			\sa        getCoeficiente(), getGrado(), setCoeficiente(), setGrado().
 		*/
@@ -181,8 +181,9 @@ class Monomio {
 			\attention Se sobrecarga el operador "/=".
 			\warning   Se requiere que las funciones de acceso getCoeficiente y getGrado tengan el modificador const.
 			\param     x: objeto de tipo real pasado como referencia constante.
-			\pre	     El monomio "m" tiene el mismo grado que el monomio actual.
-			\post	     El coeficiente del monomio actual se ha incrementado con el coeficiente del monomio "m".
+			\pre	     El número real "x" no es 0.0.
+			\post	     El coeficiente del monomio actual se ha dividido por el número real "x".
+			\post      El grado del monomio actual no ha sido modificado.
 			\note	     Se debe utilizar COTA_ERROR para controlar la precisión de los números reales.
 			\sa        getCoeficiente(), getGrado(), setCoeficiente(), setGrado().
 		*/
