@@ -16,13 +16,12 @@
 ed::Monomio & ed::Monomio::operator= (ed::Monomio const &m) {
 	// COMPLETAR
 
-
 	// Se devuelve el objeto actual
 	return *this;
 }
 
 
-ed::Monomio & ed::Monomio::operator= (double const &x) {
+ed::Monomio & ed::Monomio::operator= (double const &coeficiente) {
 	// COMPLETAR
 
 	// Se devuelve el objeto actual
@@ -39,7 +38,6 @@ ed::Monomio & ed::Monomio::operator= (double const &x) {
 
 ed::Monomio & ed::Monomio::operator+= (ed::Monomio const &m) {
 	// COMPLETAR
-
 
 	// Se devuelve el objeto actual
 	return *this;
