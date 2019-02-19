@@ -32,7 +32,7 @@ class Monomio {
 				setGrado(grado);
 
 			#ifndef NDEBUG
-				assert(std::abs(getCoeficiente() - coeficiente) > COTA_ERROR);
+				assert(std::abs(getCoeficiente() - coeficiente) < COTA_ERROR);
 				assert(getGrado() == grado);
 			#endif
 		}
@@ -42,7 +42,7 @@ class Monomio {
 			setGrado(m.getGrado());
 
 			#ifndef NDEBUG
-				assert(std::abs(getCoeficiente() - m.getCoeficiente()) > COTA_ERROR);
+				assert(std::abs(getCoeficiente() - m.getCoeficiente()) < COTA_ERROR);
 				assert(getGrado() == m.getGrado());
 			#endif
 		}
@@ -56,9 +56,10 @@ class Monomio {
 			coeficiente_ = coeficiente;
 
 			#ifndef NDEBUG
-				assert(std::abs(getCoeficiente() == coeficiente) > COTA_ERROR);
+				assert(std::abs(getCoeficiente() == coeficiente) < COTA_ERROR);
 			#endif
 		}
+
 		inline void setGrado(int grado) {
 			#ifndef NDEBUG
 				assert(grado >= 0);
@@ -194,18 +195,40 @@ class Monomio {
 
 	//! \name Funciones lectura y escritura de la clase Monomio.
 
-	// COMPLETAR
-	leerMonomio();
+	/*!
+		\brief     Función que lee desde el teclado los atributos del monomio.
+		\warning   Se requiere que las funciones de acceso getCoeficiente y getGrado tengan el modificador const.
+		\post      El grado del monomio actual es mayor o igual que 0.
+		\note	     Se debe utilizar COTA_ERROR para controlar la precisión de los números reales.
+		\sa        getCoeficiente(), getGrado(), setCoeficiente(), setGrado().
+	*/
+	void leerMonomio();
 
-	escribirMonomio();
+
+	/*!
+		\brief     Función que escribe por pantalla los atributos del monomio con el formato: "coeficiente X ^ grado".
+		\warning   Se requiere que las funciones de acceso getCoeficiente y getGrado tengan el modificador const.
+		\note      Si el grado es 0, entonces se escribirá solo el coeficiente.
+		\note      Si el grado es 1, entonces se escribirá X pero sin grado.
+		\note	     Si el coeficiente es 1, entonces se escribirá X ^ grado.
+		\note      Si el coeficiente es -1, entonces se escribirá -X ^ grado.
+		\sa        getCoeficiente(), getGrado(), setCoeficiente(), setGrado().
+	*/
+	void escribirMonomio();
 
 
 	//////////////////////////////////////////////////////////////////////////////
 
 	//! \name Funciones auxiliares de la clase Monomio.
 
-	// COMPLETAR
-	double calcularValor();
+	/*!
+		\brief     Función que calcula el valor del monomio para un número real "x".
+		\warning   Se requiere que las funciones de acceso getCoeficiente y getGrado tengan el modificador const.
+		\param     x: objeto de tipo real pasado como referencia constante.
+		\note	     Se debe utilizar COTA_ERROR para controlar la precisión de los números reales.
+		\sa        getCoeficiente(), getGrado(), setCoeficiente(), setGrado().
+	*/
+	double calcularValor(double const &x);
 
 
 };  // Fin de la definición de la clase Monomio.
