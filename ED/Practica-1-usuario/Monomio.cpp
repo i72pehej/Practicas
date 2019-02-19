@@ -9,59 +9,114 @@
 
 #include "Monomio.hpp"
 
-// Operadores de asignación
-ed::Monomio & ed::Monomio::operator = (ed::Monomio const &m) {
-	setCoeficiente(m.getCoeficiente());
-	setGrado(m.getGrado());
+	// Operadores de asignación.
 
-	#ifndef NDEBUG
-		assert(std::abs(getCoeficiente() - m.getCoeficiente()) < COTA_ERROR);
-		assert(getGrado() == m.getGrado());
-	#endif
+	ed::Monomio & ed::Monomio::operator = (ed::Monomio const &m) {
+		bool valorDevuelto;
 
-	// Se devuelve el objeto actual
-	return *this;
-}
+		setCoeficiente(m.getCoeficiente());
+		setGrado(m.getGrado());
+
+		if (valorDevuelto = ((std::abs(getCoeficiente() - m.getCoeficiente()) < COTA_ERROR) and (getGrado() == m.getGrado()))) {
+			/* code */
+		}
+/*
+		#ifndef NDEBUG
+			assert(std::abs(getCoeficiente() - m.getCoeficiente()) < COTA_ERROR);
+			assert(getGrado() == m.getGrado());
+		#endif
+*/
+		// Se devuelve el objeto actual.
+		return *this;
+	}
 
 
-ed::Monomio & ed::Monomio::operator = (double const &coeficiente) {
-	setCoeficiente(coeficiente);
-	setGrado(0);
+	ed::Monomio & ed::Monomio::operator = (double const &coeficiente) {
+		setCoeficiente(coeficiente);
+		setGrado(0);
 
-	// Se devuelve el objeto actual
-	return *this;
-}
+		#ifndef NDEBUG
+			assert(std::abs(getCoeficiente() - coeficiente) < COTA_ERROR);
+			assert(getGrado() == 0);
+		#endif
+
+		// Se devuelve el objeto actual.
+		return *this;
+	}
+
+
+////////////////////////////////////////////////////////////////////////////////
+
+
+	// Operadores aritméticos y asignación
+
+	ed::Monomio & ed::Monomio::operator += (ed::Monomio const &m) {
+
+		// Se devuelve el objeto actual.
+		return *this;
+	}
+
+	ed::Monomio & ed::Monomio::operator -= (ed::Monomio const &m) {
+
+		// Se devuelve el objeto actual.
+		return *this;
+	}
+
+
+	ed::Monomio & ed::Monomio::operator *= (ed::Monomio const &m) {
+
+		// Se devuelve el objeto actual.
+		return *this;
+	}
+
+
+	ed::Monomio & ed::Monomio::operator /= (ed::Monomio const &m) {
+
+		// Se devuelve el objeto actual.
+		return *this;
+	}
+
+
+	ed::Monomio & ed::Monomio::operator += (ed::Monomio const &m) {
+
+		// Se devuelve el objeto actual.
+		return *this;
+	}
+
+
+	ed::Monomio & ed::Monomio::operator -= (ed::Monomio const &m) {
+
+		// Se devuelve el objeto actual.
+		return *this;
+	}
 
 
 ////////////////////////////////////////////////////////////////////////////////
 
 
-// Operadores aritméticos y asignación
+	// Funciones lectura y escritura de la clase Monomio
 
-// COMPLETAR
+	void leerMonomio() {
 
-ed::Monomio & ed::Monomio::operator+= (ed::Monomio const &m) {
-	// COMPLETAR
-
-	// Se devuelve el objeto actual
-	return *this;
-}
+		// Se devuelve el objeto actual.
+		return *this;
+	}
 
 
+	void escribirMonomio() {
 
-// COMPLETAR EL RESTO DE OPERADORES
-
-
-
-////////////////////////////////////////////////////////////////////////////////
-
-// Funciones lectura y escritura de la clase Monomio
-
-// COMPLETAR
+		// Se devuelve el objeto actual.
+		return *this;
+	}
 
 
 ////////////////////////////////////////////////////////////////////////////////
 
-// Funciones auxiliares de la clase Monomio
 
-// COMPLETAR
+	// Funciones auxiliares de la clase Monomio
+
+	double calcularValor(double const &x) {
+
+		// Se devuelve el objeto actual.
+		return *this;
+	}
