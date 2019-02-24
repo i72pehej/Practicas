@@ -12,20 +12,14 @@
 	// Operadores de asignación.
 
 	ed::Monomio & ed::Monomio::operator = (ed::Monomio const &m) {
-		bool valorDevuelto;
-
 		setCoeficiente(m.getCoeficiente());
 		setGrado(m.getGrado());
 
-		if (valorDevuelto = ((std::abs(getCoeficiente() - m.getCoeficiente()) < COTA_ERROR) and (getGrado() == m.getGrado()))) {
-			/* code */
-		}
-/*
 		#ifndef NDEBUG
 			assert(std::abs(getCoeficiente() - m.getCoeficiente()) < COTA_ERROR);
 			assert(getGrado() == m.getGrado());
 		#endif
-*/
+
 		// Se devuelve el objeto actual.
 		return *this;
 	}
@@ -51,9 +45,15 @@
 	// Operadores aritméticos y asignación
 
 	ed::Monomio & ed::Monomio::operator += (ed::Monomio const &m) {
+		if (m->getGrado() == *this->getGrado()) {
+			setCoeficiente(m->getCoeficiente() + *this->getCoeficiente());
 
-		// Se devuelve el objeto actual.
-		return *this;
+			// Se devuelve el objeto actual.
+			return *this;
+		}
+		else {
+			return EXIT_FAILURE;
+		}
 	}
 
 	ed::Monomio & ed::Monomio::operator -= (ed::Monomio const &m) {
