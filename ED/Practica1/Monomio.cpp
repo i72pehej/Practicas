@@ -45,25 +45,61 @@
 	// Operadores aritméticos y asignación
 
 	ed::Monomio & ed::Monomio::operator += (ed::Monomio const &m) {
-		if (m->getGrado() == *this->getGrado()) {
-			setCoeficiente(m->getCoeficiente() + *this->getCoeficiente());
+		#ifndef NDEBUG
+			double oldCoeficiente = std::abs(getCoeficiente());
+		#endif
+
+		if (m.getGrado() == getGrado()) {
+			setCoeficiente(std::abs(m.getCoeficiente() + getCoeficiente()));
+
+			#ifndef NDEBUG
+				assert(oldCoeficiente == std::abs(getCoeficiente() - m.getCoeficiente()));
+			#endif
 
 			// Se devuelve el objeto actual.
 			return *this;
 		}
 		else {
-			return EXIT_FAILURE;
+			exit (EXIT_FAILURE);
 		}
 	}
 
 	ed::Monomio & ed::Monomio::operator -= (ed::Monomio const &m) {
+		#ifndef NDEBUG
+			double oldCoeficiente = std::abs(getCoeficiente());
+			int oldGrado = getGrado();
+		#endif
 
-		// Se devuelve el objeto actual.
-		return *this;
+		if (m.getGrado() == getGrado()) {
+			setCoeficiente(std::abs(m.getCoeficiente() - getCoeficiente()));
+
+			#ifndef NDEBUG
+				assert(oldCoeficiente == std::abs(getCoeficiente() + m.getCoeficiente()));
+				assert(oldGrado == getGrado());
+			#endif
+
+			// Se devuelve el objeto actual.
+			return *this;
+		}
+		else {
+			exit (EXIT_FAILURE);
+		}
 	}
 
 
 	ed::Monomio & ed::Monomio::operator *= (ed::Monomio const &m) {
+		#ifndef NDEBUG
+			double oldCoeficiente = std::abs(getCoeficiente());
+			int oldGrado = getGrado();
+		#endif
+
+		setCoeficiente(getCoeficiente() * m.getCoeficiente());
+		setGrado(getGrado() + m.getGrado());
+
+		#ifndef NDEBUG
+			assert(getCoeficiente() == std::abs(oldCoeficiente * m.getCoeficiente()));
+			assert(getGrado() == oldGrado + m.getGrado());
+		#endif
 
 		// Se devuelve el objeto actual.
 		return *this;
@@ -71,20 +107,37 @@
 
 
 	ed::Monomio & ed::Monomio::operator /= (ed::Monomio const &m) {
+		#ifndef NDEBUG
+			double oldCoeficiente = std::abs(getCoeficiente());
+			int oldGrado = getGrado();
+		#endif
+
+		if ((m.getGrado() <= getGrado()) and (std::abs(m.getCoeficiente()) not_eq 0.0)) {
+			setCoeficiente(std::abs(getCoeficiente() / m.getCoeficiente()));
+			setGrado(getGrado() - m.getGrado());
+
+			#ifndef NDEBUG
+				assert(oldCoeficiente == std::abs(getCoeficiente() * m.getCoeficiente()));
+				assert(oldGrado == (getGrado() + m.getGrado()));
+			#endif
+
+			// Se devuelve el objeto actual.
+			return *this;
+		}
+		else {
+			exit (EXIT_FAILURE);
+		}
+	}
+
+
+	ed::Monomio & ed::Monomio::operator *= (double const &x) {
 
 		// Se devuelve el objeto actual.
 		return *this;
 	}
 
 
-	ed::Monomio & ed::Monomio::operator += (ed::Monomio const &m) {
-
-		// Se devuelve el objeto actual.
-		return *this;
-	}
-
-
-	ed::Monomio & ed::Monomio::operator -= (ed::Monomio const &m) {
+	ed::Monomio & ed::Monomio::operator /= (double const &x) {
 
 		// Se devuelve el objeto actual.
 		return *this;
