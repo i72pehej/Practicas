@@ -131,6 +131,17 @@
 
 
 	ed::Monomio & ed::Monomio::operator *= (double const &x) {
+		#ifndef NDEBUG
+			double oldCoeficiente = std::abs(getCoeficiente());
+			int oldGrado = getGrado();
+		#endif
+
+		setCoeficiente(getCoeficiente() * x);
+
+		#ifndef NDEBUG
+			assert(getCoeficiente() == std::abs(oldCoeficiente * x));
+			assert(getGrado() == oldGrado);
+		#endif
 
 		// Se devuelve el objeto actual.
 		return *this;
@@ -138,9 +149,25 @@
 
 
 	ed::Monomio & ed::Monomio::operator /= (double const &x) {
+		#ifndef NDEBUG
+			double oldCoeficiente = std::abs(getCoeficiente());
+			int oldGrado = getGrado();
+		#endif
 
-		// Se devuelve el objeto actual.
-		return *this;
+		if (x not_eq 0.0) {
+			setCoeficiente(std::abs(getCoeficiente() / x));
+
+			#ifndef NDEBUG
+				assert(getCoeficiente() == std::abs(oldCoeficiente / x));
+				assert(getGrado() == oldGrado);
+			#endif
+
+			// Se devuelve el objeto actual.
+			return *this;
+		}
+		else {
+			exit (EXIT_FAILURE);
+		}
 	}
 
 
@@ -150,16 +177,29 @@
 	// Funciones lectura y escritura de la clase Monomio
 
 	void leerMonomio() {
+		std::cout << "Introduzca el coeficiente del monomio." << '\n';
+		double coeficiente;
+		std::cin >> coeficiente;
 
-		// Se devuelve el objeto actual.
-		return *this;
+		std::cout << "Introduzca el grado del monomio." << '\n';
+		int grado;
+		std::cin >> grado;
+
+		ed::Monomio m(coeficiente, grado);
+
+		#ifndef NDEBUG
+			assert(m.getGrado() >= 0);
+		#endif
 	}
 
 
-	void escribirMonomio() {
+	void escribirMonomio(ed::Monomio const &m) {
+		if (m.getGrado() == 0) {std::cout << "Monomio (con grado = 0): " << m.getCoeficiente() << '\n';}
+		if (m.getGrado() == 1) {std::cout << "Monomio (con grado = 1): " << m.getCoeficiente() << "x" << '\n';}
+		if (std::abs(m.getCoeficiente()) == 1) {std::cout << "Monomio (con coeficiente = 1): " << "x ^ " << m.getGrado() << '\n';}
+		if (std::abs(m.getCoeficiente()) == -1) {std::cout << "Monomio (con coeficiente = -1): " << "-x ^ " << m.getGrado() << '\n';}
 
-		// Se devuelve el objeto actual.
-		return *this;
+		std::cout << "Monomio: " << m.getCoeficiente() << "x ^ " << m.getGrado() << '\n';
 	}
 
 
@@ -169,7 +209,10 @@
 	// Funciones auxiliares de la clase Monomio
 
 	double calcularValor(double const &x) {
+		double valorFinal;
 
-		// Se devuelve el objeto actual.
-		return *this;
+		valorFinal = getCoeficiente() * pow(x, getGrado());
+
+		// Se devuelve el valor del monomio tras sustituir la variable.
+		return valorFinal;
 	}
