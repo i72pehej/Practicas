@@ -1,5 +1,5 @@
 /*!
-   \file  operadoresExternosMonomios.cpp
+  \file operadoresExternosMonomios.cpp
 	\brief Ficheros con el código de los operadores externos de la clase Monomio.
 */
 
@@ -228,16 +228,16 @@ namespace ed {
 ////////////////////////////////////////////////////////////////////////////////
 
 
-	//  Sobrecarga del operador de entrada
+	// Sobrecarga del operador de entrada
 	istream &operator >> (istream &stream, ed::Monomio &m) {
 		// COMPLETAR
 
-   		// Se devuelve el flujo de entrada.
+  		// Se devuelve el flujo de entrada.
 		return stream;
 	}
 
 
-	//  Sobrecarga del operador de salida
+	// Sobrecarga del operador de salida
 	ostream &operator << (ostream &stream, ed::Monomio const &m) {
 		// COMPLETAR
 
@@ -249,4 +249,4 @@ namespace ed {
 ////////////////////////////////////////////////////////////////////////////////
 
 
-}  // namespace ed
+} // namespace ed
