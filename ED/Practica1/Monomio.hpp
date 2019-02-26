@@ -8,12 +8,18 @@
 
 #include <cmath>  // Para usar la funciones pow y std::abs.
 #include <cassert>  // Para controlar las pre y post condiciones mediante asertos.
+#include <stdlib.h>  // Para las funciones exit.
 
 #define COTA_ERROR 1.0e-6  //!< Cota de error para la comparación números reales.
 
 namespace ed {  // Se incluye la clase Monomio dentro del espacio de nombre de la asigantura: ed.
 
+
+////////////////////////////////////////////////////////////////////////////////
+
+
 //!  Definición de la clase Monomio:  \f$ coeficiente \hspace{1ex} X^{grado} \f$
+
 class Monomio {
 	//! \name Atributos privados de la clase Monomio.
 	private:
@@ -37,6 +43,7 @@ class Monomio {
 			#endif
 		}
 
+
 		inline Monomio(Monomio &m) {
 			setCoeficiente(m.getCoeficiente());
 			setGrado(m.getGrado());
@@ -46,6 +53,7 @@ class Monomio {
 				assert(getGrado() == m.getGrado());
 			#endif
 		}
+
 
 		//! \name Observadores: funciones de consulta de la clase Monomio.
 		inline double getCoeficiente() const {return coeficiente_;}
@@ -60,6 +68,7 @@ class Monomio {
 			#endif
 		}
 
+
 		inline void setGrado(int grado) {
 			#ifndef NDEBUG
 				assert(grado >= 0);
@@ -72,7 +81,9 @@ class Monomio {
 			#endif
 		}
 
-	//////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////
+
 
 	//! \name Operadores de la clase Monomio.
 	// Operadores de asignación.
@@ -106,6 +117,7 @@ class Monomio {
 
 
 ////////////////////////////////////////////////////////////////////////////////
+
 
 	// Operadores aritméticos y asignación.
 	/*!
@@ -191,7 +203,8 @@ class Monomio {
 		Monomio & operator /= (double const &x);
 
 
-	//////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
 
 	//! \name Funciones lectura y escritura de la clase Monomio.
 
@@ -217,7 +230,8 @@ class Monomio {
 	void escribirMonomio();
 
 
-	//////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
 
 	//! \name Funciones auxiliares de la clase Monomio.
 
@@ -229,6 +243,9 @@ class Monomio {
 		\sa        getCoeficiente(), getGrado(), setCoeficiente(), setGrado().
 	*/
 	double calcularValor(double const &x);
+
+
+////////////////////////////////////////////////////////////////////////////////
 
 
 };  // Fin de la definición de la clase Monomio.

@@ -9,6 +9,10 @@
 
 #include "Monomio.hpp"
 
+
+////////////////////////////////////////////////////////////////////////////////
+
+
 	// Operadores de asignación.
 
 	// Devuelve el monomio actual que ha sido modificado con los atributos del monomio "m".

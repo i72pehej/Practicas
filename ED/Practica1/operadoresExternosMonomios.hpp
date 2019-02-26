@@ -16,8 +16,7 @@ using std::istream;
 using std::ostream;
 
 // Espacio de nombre de la asigantura: ed.
-namespace ed
-{
+namespace ed {
 
 
 ////////////////////////////////////////////////////////////////////////////////
