@@ -1,8 +1,8 @@
 /*!
   \file   funcionesAuxiliares.cpp
   \brief  Código de las funciones auxiliares para el programa principal de la práctica 1
-  \author 
-  \date   
+  \author
+  \date
 */
 
 // Para los flujos de entrada y salida
@@ -60,13 +60,14 @@ int ed::menu()
 ///////////////////////////////////////////////////////////////////////////
 void ed::testMonomio()
 {
+  /*
 	// QUITAR ESTAS SENTENCIAS Y EL COMENTARIO DE BLOQUE
 	std::cout << BIGREEN;
 	std::cout << "testMonomio()" << std::endl;
 	std::cout << RESET;
 	std::cout << "Quitar el comentario de bloque cuando se haya codificado la clase Monomio " << std::endl << std::endl;
+*/
 
-/*
 
 	double x;
 
@@ -137,7 +138,7 @@ void ed::testMonomio()
 	std::cout<< "m3 = ";
 	m3.escribirMonomio();
 	std::cout << std::endl;
-	std::cout<< "x = " << x; 
+	std::cout<< "x = " << x;
 	std::cout << std::endl << std::endl;
 
 	std::cout << "Para continuar, pulse ";
@@ -151,14 +152,14 @@ void ed::testMonomio()
 	// Operadores aritméticos y asignación
 	std::cout << BIGREEN;
 	std::cout<< "Operadores artiméticos y asignación "<< std::endl;
-	std::cout << RESET;	
+	std::cout << RESET;
 
 	std::cout << BIYELLOW;
 	std::cout<< "Operadores artiméticos y asignación con dos monomios"<< std::endl;
-	std::cout << RESET;	
+	std::cout << RESET;
 
 
-	// Operador de suma y asignación 
+	// Operador de suma y asignación
 	std::cout<< "Operador m1 += m2"<< std::endl;
 	std::cout<< "m1 = ";
 	m1.escribirMonomio();
@@ -172,7 +173,7 @@ void ed::testMonomio()
 	m1.escribirMonomio();
 	std::cout << std::endl << std::endl;
 
-	// Operador de resta y asignación 
+	// Operador de resta y asignación
 	std::cout<< "Operador m1 -= m2"<< std::endl;
 	std::cout<< "m1 = ";
 	m1.escribirMonomio();
@@ -186,7 +187,7 @@ void ed::testMonomio()
 	m1.escribirMonomio();
 	std::cout << std::endl << std::endl;
 
-	// Operador de multiplicación y asignación 
+	// Operador de multiplicación y asignación
 	std::cout<< "Operador m1 *= m2"<< std::endl;
 	std::cout<< "m1 = ";
 	m1.escribirMonomio();
@@ -200,7 +201,7 @@ void ed::testMonomio()
 	m1.escribirMonomio();
 	std::cout << std::endl << std::endl;
 
-	// Operador de división y asignación 
+	// Operador de división y asignación
 	if ((m1.getGrado() >= m2.getGrado()) and (std::abs(m2.getCoeficiente() )> COTA_ERROR))
 	{
 		std::cout<< "Operador m1 /= m2"<< std::endl;
@@ -231,7 +232,7 @@ void ed::testMonomio()
 		std::cout << std::endl;
 	}
 
-	// 
+	//
 	std::cout << "Para continuar, pulse ";
 	std::cout << INVERSE ;
 	std::cout << "ENTER";
@@ -244,14 +245,14 @@ void ed::testMonomio()
 
 	std::cout << BIYELLOW;
 	std::cout<< "Operadores artiméticos y asignación con un monomio y un número "<< std::endl;
-	std::cout << RESET;	
+	std::cout << RESET;
 
-	// Operador de multiplicación por un número y asignación 
+	// Operador de multiplicación por un número y asignación
 	std::cout<< "Operador m1 *= x "<< std::endl;
 	std::cout<< "m1 = ";
 	m1.escribirMonomio();
 	std::cout << std::endl;
-	std::cout<< "x = " << x; 
+	std::cout<< "x = " << x;
 	std::cout << std::endl;
 	std::cout<< "Resultado de m1 *= x "<< std::endl;
 	m1 *= x;
@@ -259,14 +260,14 @@ void ed::testMonomio()
 	m1.escribirMonomio();
 	std::cout << std::endl << std::endl;
 
-	// Operador de división por un número y asignación 
+	// Operador de división por un número y asignación
 	if (std::abs(x) > COTA_ERROR)
 	{
 		std::cout<< "Operador m1 /= x "<< std::endl;
 		std::cout<< "m1 = ";
 		m1.escribirMonomio();
 		std::cout << std::endl;
-		std::cout<< "x = " << x; 
+		std::cout<< "x = " << x;
 		std::cout << std::endl;
 		std::cout<< "Resultado de m1 /= x "<< std::endl;
 		m1 /= x;
@@ -283,7 +284,7 @@ void ed::testMonomio()
 		std::cout << std::endl;
 	}
 
-	// 
+	//
 	std::cout << "Para continuar, pulse ";
 	std::cout << INVERSE ;
 	std::cout << "ENTER";
@@ -298,7 +299,7 @@ void ed::testMonomio()
 	std::cout << RESET;
 
 	std::cout<< "m1 = ";
-	m1.escribirMonomio();	
+	m1.escribirMonomio();
 	std::cout << std::endl;
 	std::cout<< "m1(" << x << ") = " << m1.calcularValor(x) << std::endl << std::endl;
 
@@ -312,7 +313,7 @@ void ed::testMonomio()
 	std::cout << std::endl;
 	std::cout<< "m3(" << x << ") = " << m3.calcularValor(x) << std::endl << std::endl;
 
-*/
+
 
 	// Fin
 	return;
@@ -325,13 +326,6 @@ void ed::testMonomio()
 
 void ed::operadoresExternosMonomios()
 {
-	// QUITAR ESTAS SENTENCIAS Y EL COMENTARIO DE BLOQUE
-	std::cout << BIGREEN;
-	std::cout << "operadoresExternosMonomios()" << std::endl;
-	std::cout << RESET;
-	std::cout << "Quitar el comentario de bloque cuando se haya codificado la clase Monomio y los operadores externos de dicha clase" << std::endl << std::endl;
-
-
 /*
 	double x;
 
@@ -368,12 +362,12 @@ void ed::operadoresExternosMonomios()
 	std::cout << BIGREEN;
 	std::cout<< "Escritura de monomios usando los operadores de flujo" << std::endl;
 	std::cout << RESET;
-	
+
 	std::cout<< "m1 = " << m1 << std::endl;
 	std::cout<< "m2 = " << m2 << std::endl;
 	std::cout<< "m3 = " << m3 << std::endl;
 
-	// 
+	//
 	std::cout << "Para continuar, pulse ";
 	std::cout << INVERSE ;
 	std::cout << "ENTER";
@@ -386,14 +380,14 @@ void ed::operadoresExternosMonomios()
 	std::cout << BIGREEN;
 	std::cout<< "Operadores que no son miembros de la clase" << std::endl << std::endl;
 	std::cout << RESET;
-	
+
 	// Igualdad
 	std::cout << BIYELLOW;
 	std::cout<< "Operadores de igualdad" << std::endl << std::endl;
 	std::cout << RESET;
 
 	std::cout<< "Igualdad: m1 == m2" << std::endl;
-    std::cout << "m1 = " << m1 ;	
+    std::cout << "m1 = " << m1 ;
 	if (m1 == m2)
 		std::cout << " es igual que ";
 	else
@@ -402,9 +396,9 @@ void ed::operadoresExternosMonomios()
     std::cout << "m2 = " << m2 << std::endl << std::endl;
 
 
-	// 
+	//
 	std::cout<< "Igualdad: m1 == " << x << std::endl;
-    std::cout << "m1 = " << m1 ;	
+    std::cout << "m1 = " << m1 ;
 
 	if (m1 == x)
 		std::cout << " es igual que ";
@@ -421,7 +415,7 @@ void ed::operadoresExternosMonomios()
 		std::cout << " es igual que ";
 	else
 		std::cout << " no es igual que ";
-	
+
 	std::cout << "m1 = " << m1 << std::endl << std::endl;
 
 
@@ -431,7 +425,7 @@ void ed::operadoresExternosMonomios()
 	std::cout << RESET;
 
 	std::cout<< "Desigualdad: m1 != m2" << std::endl;
-    std::cout << "m1 = " << m1 ;	
+    std::cout << "m1 = " << m1 ;
 	if (m1 != m2)
 		std::cout << " no es igual que ";
 	else
@@ -440,9 +434,9 @@ void ed::operadoresExternosMonomios()
     std::cout << "m2 = " << m2 << std::endl << std::endl;
 
 
-	// 
+	//
 	std::cout<< "Desigualdad: m1 == " << x << std::endl;
-    std::cout << "m1 = " << m1 ;	
+    std::cout << "m1 = " << m1 ;
 
 	if (m1 != x)
 		std::cout << " no es igual que ";
@@ -453,16 +447,16 @@ void ed::operadoresExternosMonomios()
 
 	//
 	std::cout<< "Desigualdad: " << x << " == m1" << std::endl;
-    std::cout << x;    
+    std::cout << x;
 
 	if (x != m1)
 		std::cout << " no es igual que ";
 	else
 		std::cout << " es igual que ";
-	
+
 	std::cout << "m1 = " << m1 << std::endl << std::endl;
 
-	// 
+	//
 	std::cout << "Para continuar, pulse ";
 	std::cout << INVERSE ;
 	std::cout << "ENTER";
@@ -479,7 +473,7 @@ void ed::operadoresExternosMonomios()
 	std::cout << RESET;
 
 	std::cout << "+ m1 = " << + m1 << std::endl;
-	std::cout << "- m1 = " << - m1 << std::endl;		
+	std::cout << "- m1 = " << - m1 << std::endl;
 
 	std::cout << "+ m2 = " << + m2 << std::endl;
 	std::cout << "- m2 = " << - m2 << std::endl;
@@ -550,7 +544,7 @@ void ed::operadoresExternosMonomios()
 	}
 
 	if ((m1.getGrado() != 0) or (std::abs(m1.getCoeficiente()) < COTA_ERROR))
-	{		
+	{
 		std::cout << BIRED;
 		std::cout<< "No se puede realizar la  división de un número por el monomio m1 porque su grado no es 0 o su coeficiente es 0.0" << std::endl;
 		std::cout << RESET;

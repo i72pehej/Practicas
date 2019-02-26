@@ -57,15 +57,15 @@
 	ed::Monomio & ed::Monomio::operator += (ed::Monomio const &m) {
 		// Precondiciones.
 		#ifndef NDEBUG
-			double oldCoeficiente = std::abs(getCoeficiente());
+			double oldCoeficiente = getCoeficiente();
 		#endif
 
 		if (m.getGrado() == getGrado()) {
-			setCoeficiente(std::abs(m.getCoeficiente() + getCoeficiente()));
+			setCoeficiente(m.getCoeficiente() + getCoeficiente());
 
 			// Postcondiciones.
 			#ifndef NDEBUG
-				assert(oldCoeficiente == std::abs(getCoeficiente() - m.getCoeficiente()));
+				assert(oldCoeficiente == getCoeficiente() - m.getCoeficiente());
 			#endif
 
 			// Se devuelve el objeto actual.
@@ -81,16 +81,16 @@
 	ed::Monomio & ed::Monomio::operator -= (ed::Monomio const &m) {
 		// Precondiciones.
 		#ifndef NDEBUG
-			double oldCoeficiente = std::abs(getCoeficiente());
+			double oldCoeficiente = getCoeficiente();
 			int oldGrado = getGrado();
 		#endif
 
 		if (m.getGrado() == getGrado()) {
-			setCoeficiente(std::abs(m.getCoeficiente() - getCoeficiente()));
+			setCoeficiente(getCoeficiente() - m.getCoeficiente());
 
 			// Postcondiciones.
 			#ifndef NDEBUG
-				assert(oldCoeficiente == std::abs(getCoeficiente() + m.getCoeficiente()));
+				assert(getCoeficiente() == (oldCoeficiente - m.getCoeficiente()));
 				assert(oldGrado == getGrado());
 			#endif
 
@@ -107,7 +107,7 @@
 	ed::Monomio & ed::Monomio::operator *= (ed::Monomio const &m) {
 		// Precondiciones.
 		#ifndef NDEBUG
-			double oldCoeficiente = std::abs(getCoeficiente());
+			double oldCoeficiente = getCoeficiente();
 			int oldGrado = getGrado();
 		#endif
 
@@ -116,7 +116,7 @@
 
 		// Postcondiciones.
 		#ifndef NDEBUG
-			assert(getCoeficiente() == std::abs(oldCoeficiente * m.getCoeficiente()));
+			assert(getCoeficiente() == (oldCoeficiente * m.getCoeficiente()));
 			assert(getGrado() == oldGrado + m.getGrado());
 		#endif
 
@@ -129,17 +129,17 @@
 	ed::Monomio & ed::Monomio::operator /= (ed::Monomio const &m) {
 		// Precondiciones.
 		#ifndef NDEBUG
-			double oldCoeficiente = std::abs(getCoeficiente());
+			double oldCoeficiente = getCoeficiente();
 			int oldGrado = getGrado();
 		#endif
 
-		if ((m.getGrado() <= getGrado()) and (std::abs(m.getCoeficiente()) not_eq 0.0)) {
-			setCoeficiente(std::abs(getCoeficiente() / m.getCoeficiente()));
+		if ((m.getGrado() <= getGrado()) and (m.getCoeficiente() not_eq 0.0)) {
+			setCoeficiente(getCoeficiente() / m.getCoeficiente());
 			setGrado(getGrado() - m.getGrado());
 
 			// Postcondiciones.
 			#ifndef NDEBUG
-				assert(oldCoeficiente == std::abs(getCoeficiente() * m.getCoeficiente()));
+				assert(oldCoeficiente == getCoeficiente() * m.getCoeficiente());
 				assert(oldGrado == (getGrado() + m.getGrado()));
 			#endif
 
@@ -156,7 +156,7 @@
 	ed::Monomio & ed::Monomio::operator *= (double const &x) {
 		// Precondiciones.
 		#ifndef NDEBUG
-			double oldCoeficiente = std::abs(getCoeficiente());
+			double oldCoeficiente = getCoeficiente();
 			int oldGrado = getGrado();
 		#endif
 
@@ -164,7 +164,7 @@
 
 		// Postcondiciones.
 		#ifndef NDEBUG
-			assert(getCoeficiente() == std::abs(oldCoeficiente * x));
+			assert(getCoeficiente() == oldCoeficiente * x);
 			assert(getGrado() == oldGrado);
 		#endif
 
@@ -177,16 +177,16 @@
 	ed::Monomio & ed::Monomio::operator /= (double const &x) {
 		// Precondiciones.
 		#ifndef NDEBUG
-			double oldCoeficiente = std::abs(getCoeficiente());
+			double oldCoeficiente = getCoeficiente();
 			int oldGrado = getGrado();
 		#endif
 
 		if (x not_eq 0.0) {
-			setCoeficiente(std::abs(getCoeficiente() / x));
+			setCoeficiente(getCoeficiente() / x);
 
 			// Postcondiciones.
 			#ifndef NDEBUG
-				assert(getCoeficiente() == std::abs(oldCoeficiente / x));
+				assert(getCoeficiente() == oldCoeficiente / x);
 				assert(getGrado() == oldGrado);
 			#endif
 
@@ -209,17 +209,16 @@
 		std::cout << "Introduzca el coeficiente del monomio." << '\n';
 		double coeficiente;
 		std::cin >> coeficiente;
+		setCoeficiente(coeficiente);
 
 		std::cout << "Introduzca el grado del monomio." << '\n';
 		int grado;
 		std::cin >> grado;
-
-		// Constructor del monomio.
-		ed::Monomio m(coeficiente, grado);
+		setGrado(grado);
 
 		// Postcondiciones.
 		#ifndef NDEBUG
-			assert(m.getGrado() >= 0);
+			assert(getGrado() >= 0);
 		#endif
 	}
 
@@ -228,11 +227,11 @@
 	void ed::Monomio::escribirMonomio() {
 		// Diferentes casos para el ahorro de elementos sin valor.
 		if (getGrado() == 0) {std::cout << "Monomio (con grado = 0): " << getCoeficiente() << '\n';}
-		if (getGrado() == 1) {std::cout << "Monomio (con grado = 1): " << getCoeficiente() << "x" << '\n';}
-		if (std::abs(getCoeficiente()) == 1) {std::cout << "Monomio (con coeficiente = 1): " << "x ^ " << getGrado() << '\n';}
-		if (std::abs(getCoeficiente()) == -1) {std::cout << "Monomio (con coeficiente = -1): " << "-x ^ " << getGrado() << '\n';}
+		else if (getGrado() == 1) {std::cout << "Monomio (con grado = 1): " << getCoeficiente() << "x" << '\n';}
+		else if (getCoeficiente() == 1) {std::cout << "Monomio (con coeficiente = 1): " << "x ^ " << getGrado() << '\n';}
+		else if (getCoeficiente() == -1) {std::cout << "Monomio (con coeficiente = -1): " << "-x ^ " << getGrado() << '\n';}
 
-		std::cout << "Monomio: " << getCoeficiente() << "x ^ " << getGrado() << '\n';
+		else {std::cout << "Monomio: " << getCoeficiente() << "x ^ " << getGrado() << '\n';}
 	}
 
 

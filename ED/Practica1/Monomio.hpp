@@ -64,7 +64,7 @@ class Monomio {
 			coeficiente_ = coeficiente;
 
 			#ifndef NDEBUG
-				assert(std::abs(getCoeficiente() == coeficiente) < COTA_ERROR);
+				assert(std::abs(getCoeficiente() - coeficiente) < COTA_ERROR);
 			#endif
 		}
 
