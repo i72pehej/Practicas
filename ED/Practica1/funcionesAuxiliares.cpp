@@ -326,7 +326,7 @@ void ed::testMonomio()
 
 void ed::operadoresExternosMonomios()
 {
-/*
+///*
 	double x;
 
 	// Constructor por defecto
@@ -557,7 +557,7 @@ void ed::operadoresExternosMonomios()
 
 
 	std::cout << std::endl;
-*/
+//*/
 
 	return;
 }

@@ -191,12 +191,20 @@
 
 	// Lee desde teclado los atributos del monomio.
 	void ed::Monomio::leerMonomio() {
-		std::cout << "Introduzca el coeficiente del monomio." << '\n';
+		std::cout << "Introduzca el ";
+		std::cout << UCYAN;
+		std::cout << "coeficiente";
+		std::cout << RESET;
+		std::cout << " del monomio." << '\n';
 		double coeficiente;
 		std::cin >> coeficiente;
 		setCoeficiente(coeficiente);
 
-		std::cout << "Introduzca el grado del monomio." << '\n';
+		std::cout << "Introduzca el ";
+		std::cout << UCYAN;
+		std::cout << "grado";
+		std::cout << RESET;
+		std::cout << " del monomio." << '\n';
 		int grado;
 		std::cin >> grado;
 		setGrado(grado);
@@ -216,7 +224,11 @@
 		else if (getCoeficiente() == 1) {std::cout << "Monomio (con coeficiente = 1): " << "x ^ " << getGrado() << '\n';}
 		else if (getCoeficiente() == -1) {std::cout << "Monomio (con coeficiente = -1): " << "-x ^ " << getGrado() << '\n';}
 
-		else {std::cout << "Monomio: " << getCoeficiente() << "x ^ " << getGrado() << '\n';}
+		else {
+			std::cout << CYAN;
+			std::cout << "Monomio: ";
+			std::cout << RESET;
+			std::cout << getCoeficiente() << "x ^ " << getGrado() << '\n';}
 	}
 
 
