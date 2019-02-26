@@ -12,3 +12,8 @@ Cliente = Navegador
    |
    V
 Servidor
+
+
+Apache -> Solución de ERRORES de unificación de servidores --> librería "nodejs"
+
+Para ejecutar NODE -- "node server.js"
