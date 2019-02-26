@@ -8,6 +8,7 @@
 #include <iostream>
 
 #include "Monomio.hpp"
+#include "macros.hpp"
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -58,22 +59,18 @@
 		// Precondiciones.
 		#ifndef NDEBUG
 			double oldCoeficiente = getCoeficiente();
+			assert(m.getGrado() == getGrado());
 		#endif
 
-		if (m.getGrado() == getGrado()) {
-			setCoeficiente(m.getCoeficiente() + getCoeficiente());
+		setCoeficiente(m.getCoeficiente() + getCoeficiente());
 
-			// Postcondiciones.
-			#ifndef NDEBUG
-				assert(oldCoeficiente == getCoeficiente() - m.getCoeficiente());
-			#endif
+		// Postcondiciones.
+		#ifndef NDEBUG
+			assert(oldCoeficiente == getCoeficiente() - m.getCoeficiente());
+		#endif
 
-			// Se devuelve el objeto actual.
-			return *this;
-		}
-		else { // En caso de error.
-			exit (EXIT_FAILURE);
-		}
+		// Se devuelve el objeto actual.
+		return *this;
 	}
 
 
@@ -83,23 +80,19 @@
 		#ifndef NDEBUG
 			double oldCoeficiente = getCoeficiente();
 			int oldGrado = getGrado();
+			assert(m.getGrado() == getGrado());
 		#endif
 
-		if (m.getGrado() == getGrado()) {
-			setCoeficiente(getCoeficiente() - m.getCoeficiente());
+		setCoeficiente(getCoeficiente() - m.getCoeficiente());
 
-			// Postcondiciones.
-			#ifndef NDEBUG
-				assert(getCoeficiente() == (oldCoeficiente - m.getCoeficiente()));
-				assert(oldGrado == getGrado());
-			#endif
+		// Postcondiciones.
+		#ifndef NDEBUG
+			assert(getCoeficiente() == (oldCoeficiente - m.getCoeficiente()));
+			assert(oldGrado == getGrado());
+		#endif
 
 			// Se devuelve el objeto actual.
 			return *this;
-		}
-		else { // En caso de error.
-			exit (EXIT_FAILURE);
-		}
 	}
 
 
@@ -131,24 +124,20 @@
 		#ifndef NDEBUG
 			double oldCoeficiente = getCoeficiente();
 			int oldGrado = getGrado();
+			assert((m.getGrado() <= getGrado()) and (m.getCoeficiente() not_eq 0.0));
 		#endif
 
-		if ((m.getGrado() <= getGrado()) and (m.getCoeficiente() not_eq 0.0)) {
-			setCoeficiente(getCoeficiente() / m.getCoeficiente());
-			setGrado(getGrado() - m.getGrado());
+		setCoeficiente(getCoeficiente() / m.getCoeficiente());
+		setGrado(getGrado() - m.getGrado());
 
-			// Postcondiciones.
-			#ifndef NDEBUG
-				assert(oldCoeficiente == getCoeficiente() * m.getCoeficiente());
-				assert(oldGrado == (getGrado() + m.getGrado()));
-			#endif
+		// Postcondiciones.
+		#ifndef NDEBUG
+			assert(oldCoeficiente == getCoeficiente() * m.getCoeficiente());
+			assert(oldGrado == (getGrado() + m.getGrado()));
+		#endif
 
-			// Se devuelve el objeto actual.
-			return *this;
-		}
-		else { // En caso de error.
-			exit (EXIT_FAILURE);
-		}
+		// Se devuelve el objeto actual.
+		return *this;
 	}
 
 
@@ -179,23 +168,19 @@
 		#ifndef NDEBUG
 			double oldCoeficiente = getCoeficiente();
 			int oldGrado = getGrado();
+			assert(x not_eq 0.0);
 		#endif
 
-		if (x not_eq 0.0) {
-			setCoeficiente(getCoeficiente() / x);
+		setCoeficiente(getCoeficiente() / x);
 
-			// Postcondiciones.
-			#ifndef NDEBUG
-				assert(getCoeficiente() == oldCoeficiente / x);
-				assert(getGrado() == oldGrado);
-			#endif
+		// Postcondiciones.
+		#ifndef NDEBUG
+			assert(getCoeficiente() == oldCoeficiente / x);
+			assert(getGrado() == oldGrado);
+		#endif
 
-			// Se devuelve el objeto actual.
-			return *this;
-		}
-		else { // En caso de error.
-			exit (EXIT_FAILURE);
-		}
+		// Se devuelve el objeto actual.
+		return *this;
 	}
 
 
