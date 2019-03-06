@@ -194,7 +194,11 @@ namespace ed {
 		#endif
 
 		// Se crea un nuevo monomio con grado igual a la resta de los monomios y coeficiente igual a la división de los coeficientes de los monomios.
+<<<<<<< HEAD
 		ed::Monomio *nuevo = new ed::Monomio((m1.getCoeficiente() / m2. getCoeficiente()), (m1.getGrado() - m2.getGrado()));
+=======
+		ed::Monomio *nuevo = new ed::Monomio((m1.getGrado() - m2.getGrado()), m1.getCoeficiente() / m2. getCoeficiente());
+>>>>>>> e6531b1562ad84bff79b9643e58a2b06e3ee7f6f
 
 		// Postcondiciones.
 		#ifndef NDEBUG
@@ -215,7 +219,11 @@ namespace ed {
 		#endif
 
 		// Se crea un nuevo monomio resultado de la división del monomio actual por el número.
+<<<<<<< HEAD
 		ed::Monomio *nuevo = new ed::Monomio((m.getCoeficiente() / x), m.getGrado());
+=======
+		ed::Monomio *nuevo = new ed::Monomio(m.getGrado(), (m.getCoeficiente() / x));
+>>>>>>> e6531b1562ad84bff79b9643e58a2b06e3ee7f6f
 
 		#ifndef NDEBUG
 			assert(nuevo -> getGrado() == m.getGrado());
@@ -235,7 +243,11 @@ namespace ed {
 		#endif
 
 		// Se crea un nuevo monomio resultado de la división del monomio actual por el número.
+<<<<<<< HEAD
 		ed::Monomio *nuevo = new ed::Monomio((x / m.getCoeficiente()), m.getGrado());
+=======
+		ed::Monomio *nuevo = new ed::Monomio(m.getGrado(), (x / m.getCoeficiente()));
+>>>>>>> e6531b1562ad84bff79b9643e58a2b06e3ee7f6f
 
 		#ifndef NDEBUG
 			assert(nuevo -> getGrado() == 0);
@@ -268,7 +280,13 @@ namespace ed {
 
 	// Sobrecarga del operador de salida "<<".
 	ostream &operator << (ostream &stream, ed::Monomio const &m) {
+<<<<<<< HEAD
 		stream << m.getGrado() << " " << m.getCoeficiente();
+=======
+		stream << m.getGrado();
+		stream << " ";
+		stream << m.getCoeficiente();
+>>>>>>> e6531b1562ad84bff79b9643e58a2b06e3ee7f6f
 
 		// Se devuelve el flujo de salida.
 		return stream;
