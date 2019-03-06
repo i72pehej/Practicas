@@ -1,0 +1,46 @@
+Trabajamos con "glibc" o "libc" que utiliza POSIX y éste a su vez engloba a a basicC.
+
+Trabajaremos con líneas de comando y argumentos. -> gcc -c fichero.c
+
+Trabajaremos las prácticas con getopt(), de POSIX, y getoptlong(), de GLIBC.
+
+-optind -> Almacena el índice de comienzo de las opciones no reconocidas.
+
+-optopt -> Almacena la opción cuando existe algún error con la misma.
+
+-optarg -> ALmacena el argumento de la opción.
+
+
+TRABAJO -> Mejorar el case "?"
+
+
+--------------------------------------------------------------------------------
+
+La estructura getoptlong requiere una estructura que PODEMOS COPY-PASTEAR
+
+TRABAJO -> Realizar control de errores Case "?"
+
+--------------------------------------------------------------------------------
+
+Consulta de variables de entorno: getenv().
+
+--------------------------------------------------------------------------------
+
+Consulta de los usuarios: cat /etc/passwd
+getent passwd i72pehej
+cat /etc/group
+getent group 700
+
+getpwuid(uuario) -> Devuelve una estructura con información de usuario pasando su id como parámetro.
+getpwnam(login) -> Igual que al anterior pero pasando previamente su login.
+
+getgrgid(usuario) -> Devuelve estructura.
+getgrgnam() -> """""""""
+
+--------------------------------------------------------------------------------
+
+
+HAY 4 EJERCICIOS RESUMEN QUE SI SE SUBEN, PODEMOS USAR EN PRÁCTICAS.
+
+- Utilizar función que divida el string en función de los ":" y buscar en función del id del grupo.
+- Opciones incompatibles -> Comprobar en función de las flags.

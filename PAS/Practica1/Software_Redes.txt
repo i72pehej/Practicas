@@ -1,0 +1,19 @@
+SOFTWARE DE REDES
+MODELO TCP/IP
+
+1- Capa De Aplicación -> Protocolos de alto nivel (HTTP, FTP, DNS, POP3, SMTP, ...)
+2- Capa De Transporte -> Comunicación de tipo lógico (TCP/UDP). Las direciones de transporte se denominan PUERTOS.
+3- Capa De REDE -> Direccionamiento de mejor ruta. ---> IP // IPV6 (Sucesor de IPV4).
+4- Capa De Enlace -> Acceso al medio.
+5- Capa Física -> Cables, modelos de transmisiones...
+
+
+Cliente = Navegador
+   |
+   V
+Servidor
+
+
+Apache -> Solución de ERRORES de unificación de servidores --> librería "nodejs"
+
+Para ejecutar NODE -- "node server.js"

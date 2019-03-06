@@ -1,9 +1,9 @@
 /*!
   \file   macros.hpp
-  \brief  Macros para la pantalla
-  \author 
-  \date   
-  \note  http://isthe.com/chongo/tech/comp/ansi_escapes.html
+  \brief  Macros para la pantalla.
+  \author Julen Pérez Hernández
+  \date   26/02/2019
+  \note   http://isthe.com/chongo/tech/comp/ansi_escapes.html
 */
 
 
@@ -101,4 +101,3 @@
 
 
 #endif  // _MACROS_HPP_
-
