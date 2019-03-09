@@ -1,0 +1,10 @@
+#! /bin/sh
+#
+# Created by configure
+
+CC="gcc"; export CC
+"./configure" \
+"--prefix=/home/i72pehej/httpd" \
+"--with-included-apr" \
+"CC=gcc" \
+"$@"

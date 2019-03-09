@@ -1,0 +1,262 @@
+[Fri Feb 15 13:20:34.463208 2019] [mpm_event:notice] [pid 7265:tid 4148045568] AH00489: Apache/2.4.38 (Unix) configured -- resuming normal operations
+[Fri Feb 15 13:20:34.463307 2019] [core:notice] [pid 7265:tid 4148045568] AH00094: Command line: '/home/i72pehej/httpd/bin/httpd'
+[Fri Feb 15 13:30:17.565963 2019] [mpm_event:notice] [pid 7265:tid 4148045568] AH00494: SIGHUP received.  Attempting to restart
+[Fri Feb 15 13:30:17.629932 2019] [mpm_event:notice] [pid 7265:tid 4148045568] AH00489: Apache/2.4.38 (Unix) configured -- resuming normal operations
+[Fri Feb 15 13:30:17.629959 2019] [core:notice] [pid 7265:tid 4148045568] AH00094: Command line: '/home/i72pehej/httpd/bin/httpd'
+[Fri Feb 15 13:41:09.975205 2019] [mpm_event:notice] [pid 7265:tid 4148045568] AH00491: caught SIGTERM, shutting down
+[Fri Feb 22 12:30:09.614487 2019] [mpm_event:notice] [pid 11111:tid 4147627776] AH00489: Apache/2.4.38 (Unix) configured -- resuming normal operations
+[Fri Feb 22 12:30:09.614593 2019] [core:notice] [pid 11111:tid 4147627776] AH00094: Command line: '/home/i72pehej/httpd/bin/httpd'
+[Fri Feb 22 12:30:33.194442 2019] [mpm_event:notice] [pid 11111:tid 4147627776] AH00494: SIGHUP received.  Attempting to restart
+[Fri Feb 22 12:30:33.243983 2019] [mpm_event:notice] [pid 11111:tid 4147627776] AH00489: Apache/2.4.38 (Unix) configured -- resuming normal operations
+[Fri Feb 22 12:30:33.244006 2019] [core:notice] [pid 11111:tid 4147627776] AH00094: Command line: '/home/i72pehej/httpd/bin/httpd'
+[Fri Feb 22 12:34:25.553174 2019] [mpm_event:notice] [pid 11111:tid 4147627776] AH00494: SIGHUP received.  Attempting to restart
+[Fri Feb 22 12:34:25.616709 2019] [mpm_event:notice] [pid 11111:tid 4147627776] AH00489: Apache/2.4.38 (Unix) configured -- resuming normal operations
+[Fri Feb 22 12:34:25.616735 2019] [core:notice] [pid 11111:tid 4147627776] AH00094: Command line: '/home/i72pehej/httpd/bin/httpd'
+[Fri Feb 22 13:20:16.328639 2019] [mpm_event:notice] [pid 11111:tid 4147627776] AH00494: SIGHUP received.  Attempting to restart
+[Fri Feb 22 13:20:16.368373 2019] [mpm_event:notice] [pid 11111:tid 4147627776] AH00489: Apache/2.4.38 (Unix) configured -- resuming normal operations
+[Fri Feb 22 13:20:16.368396 2019] [core:notice] [pid 11111:tid 4147627776] AH00094: Command line: '/home/i72pehej/httpd/bin/httpd'
+[Fri Feb 22 13:20:19.662854 2019] [mpm_event:notice] [pid 11111:tid 4147627776] AH00494: SIGHUP received.  Attempting to restart
+[Fri Feb 22 13:20:19.715157 2019] [mpm_event:notice] [pid 11111:tid 4147627776] AH00489: Apache/2.4.38 (Unix) configured -- resuming normal operations
+[Fri Feb 22 13:20:19.715175 2019] [core:notice] [pid 11111:tid 4147627776] AH00094: Command line: '/home/i72pehej/httpd/bin/httpd'
+[Fri Feb 22 13:22:27.771639 2019] [mpm_event:notice] [pid 11111:tid 4147627776] AH00494: SIGHUP received.  Attempting to restart
+[Fri Feb 22 13:22:27.804379 2019] [mpm_event:notice] [pid 11111:tid 4147627776] AH00489: Apache/2.4.38 (Unix) configured -- resuming normal operations
+[Fri Feb 22 13:22:27.804400 2019] [core:notice] [pid 11111:tid 4147627776] AH00094: Command line: '/home/i72pehej/httpd/bin/httpd'
+[Fri Feb 22 13:25:02.667431 2019] [mpm_event:notice] [pid 11111:tid 4147627776] AH00494: SIGHUP received.  Attempting to restart
+[Fri Feb 22 13:25:02.710070 2019] [mpm_event:notice] [pid 11111:tid 4147627776] AH00489: Apache/2.4.38 (Unix) configured -- resuming normal operations
+[Fri Feb 22 13:25:02.710089 2019] [core:notice] [pid 11111:tid 4147627776] AH00094: Command line: '/home/i72pehej/httpd/bin/httpd'
+[Fri Feb 22 13:25:22.036066 2019] [mpm_event:notice] [pid 11111:tid 4147627776] AH00494: SIGHUP received.  Attempting to restart
+[Fri Feb 22 13:25:22.067169 2019] [mpm_event:notice] [pid 11111:tid 4147627776] AH00489: Apache/2.4.38 (Unix) configured -- resuming normal operations
+[Fri Feb 22 13:25:22.067194 2019] [core:notice] [pid 11111:tid 4147627776] AH00094: Command line: '/home/i72pehej/httpd/bin/httpd'
+[Fri Feb 22 13:28:43.619164 2019] [mpm_event:notice] [pid 11111:tid 4147627776] AH00494: SIGHUP received.  Attempting to restart
+[Fri Feb 22 13:28:43.646538 2019] [mpm_event:notice] [pid 11111:tid 4147627776] AH00489: Apache/2.4.38 (Unix) configured -- resuming normal operations
+[Fri Feb 22 13:28:43.646566 2019] [core:notice] [pid 11111:tid 4147627776] AH00094: Command line: '/home/i72pehej/httpd/bin/httpd'
+[Fri Feb 22 13:29:02.988283 2019] [mpm_event:notice] [pid 11111:tid 4147627776] AH00494: SIGHUP received.  Attempting to restart
+[Fri Feb 22 13:29:03.050367 2019] [mpm_event:notice] [pid 11111:tid 4147627776] AH00489: Apache/2.4.38 (Unix) configured -- resuming normal operations
+[Fri Feb 22 13:29:03.050394 2019] [core:notice] [pid 11111:tid 4147627776] AH00094: Command line: '/home/i72pehej/httpd/bin/httpd'
+[Fri Feb 22 13:29:57.169241 2019] [mpm_event:notice] [pid 11111:tid 4147627776] AH00494: SIGHUP received.  Attempting to restart
+[Fri Feb 22 13:29:57.204186 2019] [mpm_event:notice] [pid 11111:tid 4147627776] AH00489: Apache/2.4.38 (Unix) configured -- resuming normal operations
+[Fri Feb 22 13:29:57.204210 2019] [core:notice] [pid 11111:tid 4147627776] AH00094: Command line: '/home/i72pehej/httpd/bin/httpd'
+[Fri Feb 22 13:30:43.080316 2019] [mpm_event:notice] [pid 11111:tid 4147627776] AH00494: SIGHUP received.  Attempting to restart
+[Fri Feb 22 13:30:43.104609 2019] [mpm_event:notice] [pid 11111:tid 4147627776] AH00489: Apache/2.4.38 (Unix) configured -- resuming normal operations
+[Fri Feb 22 13:30:43.104631 2019] [core:notice] [pid 11111:tid 4147627776] AH00094: Command line: '/home/i72pehej/httpd/bin/httpd'
+[Fri Feb 22 13:31:47.199412 2019] [mpm_event:notice] [pid 11111:tid 4147627776] AH00491: caught SIGTERM, shutting down
+[Tue Mar 05 09:10:46.674457 2019] [mpm_event:notice] [pid 6435:tid 4148451072] AH00489: Apache/2.4.38 (Unix) configured -- resuming normal operations
+[Tue Mar 05 09:10:46.674569 2019] [core:notice] [pid 6435:tid 4148451072] AH00094: Command line: '/home/i72pehej/httpd/bin/httpd'
+[Tue Mar 05 09:35:26.962202 2019] [mpm_event:notice] [pid 6435:tid 4148451072] AH00494: SIGHUP received.  Attempting to restart
+[Tue Mar 05 09:35:26.992005 2019] [mpm_event:notice] [pid 6435:tid 4148451072] AH00489: Apache/2.4.38 (Unix) configured -- resuming normal operations
+[Tue Mar 05 09:35:26.992023 2019] [core:notice] [pid 6435:tid 4148451072] AH00094: Command line: '/home/i72pehej/httpd/bin/httpd'
+[Tue Mar 05 09:35:48.782742 2019] [mpm_event:notice] [pid 6435:tid 4148451072] AH00494: SIGHUP received.  Attempting to restart
+[Tue Mar 05 09:35:48.837374 2019] [mpm_event:notice] [pid 6435:tid 4148451072] AH00489: Apache/2.4.38 (Unix) configured -- resuming normal operations
+[Tue Mar 05 09:35:48.837394 2019] [core:notice] [pid 6435:tid 4148451072] AH00094: Command line: '/home/i72pehej/httpd/bin/httpd'
+[Tue Mar 05 10:40:07.188118 2019] [mpm_event:notice] [pid 6435:tid 4148451072] AH00494: SIGHUP received.  Attempting to restart
+[Tue Mar 05 10:40:07.311038 2019] [mpm_event:notice] [pid 6435:tid 4148451072] AH00489: Apache/2.4.38 (Unix) configured -- resuming normal operations
+[Tue Mar 05 10:40:07.311059 2019] [core:notice] [pid 6435:tid 4148451072] AH00094: Command line: '/home/i72pehej/httpd/bin/httpd'
+[Tue Mar 05 10:42:29.169298 2019] [mpm_event:notice] [pid 6435:tid 4148451072] AH00494: SIGHUP received.  Attempting to restart
+[Tue Mar 05 10:42:29.272776 2019] [mpm_event:notice] [pid 6435:tid 4148451072] AH00489: Apache/2.4.38 (Unix) configured -- resuming normal operations
+[Tue Mar 05 10:42:29.272800 2019] [core:notice] [pid 6435:tid 4148451072] AH00094: Command line: '/home/i72pehej/httpd/bin/httpd'
+[Tue Mar 05 10:58:58.701381 2019] [mpm_event:notice] [pid 6435:tid 4148451072] AH00491: caught SIGTERM, shutting down
+[Tue Mar 05 17:46:33.000752 2019] [mpm_event:notice] [pid 23294:tid 4148422400] AH00489: Apache/2.4.38 (Unix) configured -- resuming normal operations
+[Tue Mar 05 17:46:33.000856 2019] [core:notice] [pid 23294:tid 4148422400] AH00094: Command line: '/home/i72pehej/httpd/bin/httpd'
+[Tue Mar 05 17:46:40.306544 2019] [mpm_event:notice] [pid 23294:tid 4148422400] AH00494: SIGHUP received.  Attempting to restart
+[Tue Mar 05 17:46:40.327977 2019] [mpm_event:notice] [pid 23294:tid 4148422400] AH00489: Apache/2.4.38 (Unix) configured -- resuming normal operations
+[Tue Mar 05 17:46:40.328005 2019] [core:notice] [pid 23294:tid 4148422400] AH00094: Command line: '/home/i72pehej/httpd/bin/httpd'
+[Tue Mar 05 17:46:48.354038 2019] [authz_core:error] [pid 23403:tid 4137679680] [client 127.0.0.1:47672] AH01630: client denied by server configuration: /home/i72pehej/httpd/docs/
+[Tue Mar 05 17:46:59.868128 2019] [authz_core:error] [pid 23403:tid 4104108864] [client 127.0.0.1:47704] AH01630: client denied by server configuration: /home/i72pehej/httpd/docs/
+[Tue Mar 05 17:46:59.925900 2019] [authz_core:error] [pid 23403:tid 4095716160] [client 127.0.0.1:47704] AH01630: client denied by server configuration: /home/i72pehej/httpd/docs/favicon.ico
+[Tue Mar 05 17:47:00.090736 2019] [authz_core:error] [pid 23403:tid 4087323456] [client 127.0.0.1:47704] AH01630: client denied by server configuration: /home/i72pehej/httpd/docs/favicon.ico
+[Tue Mar 05 17:48:30.780377 2019] [authz_core:error] [pid 23402:tid 4137679680] [client 127.0.0.1:47752] AH01630: client denied by server configuration: /home/i72pehej/httpd/docs/, referer: http://localhost:8080/newFolder/
+[Tue Mar 05 17:49:34.042949 2019] [authz_core:error] [pid 23402:tid 4104108864] [client 127.0.0.1:47766] AH01630: client denied by server configuration: /home/i72pehej/httpd/docs/, referer: http://localhost:8080/newFolder/
+[Tue Mar 05 17:50:42.239909 2019] [mpm_event:notice] [pid 23294:tid 4148422400] AH00491: caught SIGTERM, shutting down
+[Tue Mar 05 18:09:12.465479 2019] [mpm_event:notice] [pid 5925:tid 4147844864] AH00489: Apache/2.4.38 (Unix) configured -- resuming normal operations
+[Tue Mar 05 18:09:12.465551 2019] [core:notice] [pid 5925:tid 4147844864] AH00094: Command line: '/home/i72pehej/httpd/bin/httpd'
+[Tue Mar 05 18:09:14.868266 2019] [authz_core:error] [pid 5927:tid 4119845696] [client 127.0.0.1:42510] AH01630: client denied by server configuration: /home/i72pehej/httpd/docs/favicon.ico
+[Tue Mar 05 18:09:14.998295 2019] [authz_core:error] [pid 5927:tid 4111452992] [client 127.0.0.1:42510] AH01630: client denied by server configuration: /home/i72pehej/httpd/docs/favicon.ico
+[Tue Mar 05 18:10:20.726052 2019] [authz_core:error] [pid 5927:tid 4077882176] [client 127.0.0.1:42904] AH01630: client denied by server configuration: /home/i72pehej/httpd/docs/
+[Tue Mar 05 18:33:51.750342 2019] [mpm_event:notice] [pid 5925:tid 4147844864] AH00494: SIGHUP received.  Attempting to restart
+[Tue Mar 05 18:33:51.829358 2019] [mpm_event:notice] [pid 5925:tid 4147844864] AH00489: Apache/2.4.38 (Unix) configured -- resuming normal operations
+[Tue Mar 05 18:33:51.829371 2019] [core:notice] [pid 5925:tid 4147844864] AH00094: Command line: '/home/i72pehej/httpd/bin/httpd'
+[Tue Mar 05 18:34:17.289598 2019] [authz_core:error] [pid 13277:tid 4019133248] [client 127.0.0.1:43014] AH01630: client denied by server configuration: /home/i72pehej/httpd/docs/, referer: http://localhost:8080/newFolder/
+[Tue Mar 05 18:35:10.598617 2019] [mpm_event:notice] [pid 5925:tid 4147844864] AH00494: SIGHUP received.  Attempting to restart
+[Tue Mar 05 18:35:10.744036 2019] [mpm_event:notice] [pid 5925:tid 4147844864] AH00489: Apache/2.4.38 (Unix) configured -- resuming normal operations
+[Tue Mar 05 18:35:10.744059 2019] [core:notice] [pid 5925:tid 4147844864] AH00094: Command line: '/home/i72pehej/httpd/bin/httpd'
+[Tue Mar 05 18:41:23.872330 2019] [mpm_event:notice] [pid 5925:tid 4147844864] AH00494: SIGHUP received.  Attempting to restart
+[Tue Mar 05 18:41:23.913283 2019] [mpm_event:notice] [pid 5925:tid 4147844864] AH00489: Apache/2.4.38 (Unix) configured -- resuming normal operations
+[Tue Mar 05 18:41:23.913298 2019] [core:notice] [pid 5925:tid 4147844864] AH00094: Command line: '/home/i72pehej/httpd/bin/httpd'
+[Tue Mar 05 18:41:51.573723 2019] [mpm_event:notice] [pid 5925:tid 4147844864] AH00494: SIGHUP received.  Attempting to restart
+[Tue Mar 05 18:41:51.605017 2019] [mpm_event:notice] [pid 5925:tid 4147844864] AH00489: Apache/2.4.38 (Unix) configured -- resuming normal operations
+[Tue Mar 05 18:41:51.605036 2019] [core:notice] [pid 5925:tid 4147844864] AH00094: Command line: '/home/i72pehej/httpd/bin/httpd'
+[Tue Mar 05 18:42:13.917594 2019] [mpm_event:notice] [pid 5925:tid 4147844864] AH00494: SIGHUP received.  Attempting to restart
+[Tue Mar 05 18:42:13.955232 2019] [mpm_event:notice] [pid 5925:tid 4147844864] AH00489: Apache/2.4.38 (Unix) configured -- resuming normal operations
+[Tue Mar 05 18:42:13.955247 2019] [core:notice] [pid 5925:tid 4147844864] AH00094: Command line: '/home/i72pehej/httpd/bin/httpd'
+[Tue Mar 05 18:45:36.001965 2019] [mpm_event:notice] [pid 5925:tid 4147844864] AH00494: SIGHUP received.  Attempting to restart
+[Tue Mar 05 18:45:36.035127 2019] [mpm_event:notice] [pid 5925:tid 4147844864] AH00489: Apache/2.4.38 (Unix) configured -- resuming normal operations
+[Tue Mar 05 18:45:36.035143 2019] [core:notice] [pid 5925:tid 4147844864] AH00094: Command line: '/home/i72pehej/httpd/bin/httpd'
+[Tue Mar 05 18:45:38.471651 2019] [mpm_event:notice] [pid 5925:tid 4147844864] AH00494: SIGHUP received.  Attempting to restart
+[Tue Mar 05 18:45:38.508889 2019] [mpm_event:notice] [pid 5925:tid 4147844864] AH00489: Apache/2.4.38 (Unix) configured -- resuming normal operations
+[Tue Mar 05 18:45:38.508928 2019] [core:notice] [pid 5925:tid 4147844864] AH00094: Command line: '/home/i72pehej/httpd/bin/httpd'
+[Tue Mar 05 18:46:26.865976 2019] [mpm_event:notice] [pid 5925:tid 4147844864] AH00494: SIGHUP received.  Attempting to restart
+[Tue Mar 05 18:46:26.898896 2019] [mpm_event:notice] [pid 5925:tid 4147844864] AH00489: Apache/2.4.38 (Unix) configured -- resuming normal operations
+[Tue Mar 05 18:46:26.898911 2019] [core:notice] [pid 5925:tid 4147844864] AH00094: Command line: '/home/i72pehej/httpd/bin/httpd'
+[Tue Mar 05 18:46:35.712695 2019] [authz_core:error] [pid 17251:tid 4103060288] [client 127.0.0.1:43436] AH01630: client denied by server configuration: /home/i72pehej/httpd/docs/, referer: http://localhost:8080/newFolder/
+[Tue Mar 05 18:47:55.785859 2019] [mpm_event:notice] [pid 5925:tid 4147844864] AH00494: SIGHUP received.  Attempting to restart
+[Tue Mar 05 18:47:55.818300 2019] [mpm_event:notice] [pid 5925:tid 4147844864] AH00489: Apache/2.4.38 (Unix) configured -- resuming normal operations
+[Tue Mar 05 18:47:55.818321 2019] [core:notice] [pid 5925:tid 4147844864] AH00094: Command line: '/home/i72pehej/httpd/bin/httpd'
+[Tue Mar 05 18:47:59.338154 2019] [autoindex:error] [pid 17767:tid 4077882176] [client 127.0.0.1:43442] AH01276: Cannot serve directory /home/i72pehej/httpd/docs/newFolder/: No matching DirectoryIndex (index.html,index2.html) found, and server-generated directory index forbidden by Options directive
+[Tue Mar 05 18:48:00.513024 2019] [autoindex:error] [pid 17767:tid 4069489472] [client 127.0.0.1:43442] AH01276: Cannot serve directory /home/i72pehej/httpd/docs/newFolder/: No matching DirectoryIndex (index.html,index2.html) found, and server-generated directory index forbidden by Options directive
+[Tue Mar 05 18:48:07.509334 2019] [autoindex:error] [pid 17766:tid 4136631104] [client 127.0.0.1:43444] AH01276: Cannot serve directory /home/i72pehej/httpd/docs/newFolder/: No matching DirectoryIndex (index.html,index2.html) found, and server-generated directory index forbidden by Options directive
+[Tue Mar 05 18:48:09.288859 2019] [autoindex:error] [pid 17766:tid 4128238400] [client 127.0.0.1:43444] AH01276: Cannot serve directory /home/i72pehej/httpd/docs/newFolder/: No matching DirectoryIndex (index.html,index2.html) found, and server-generated directory index forbidden by Options directive
+[Tue Mar 05 18:48:14.504890 2019] [autoindex:error] [pid 17767:tid 4052704064] [client 127.0.0.1:43446] AH01276: Cannot serve directory /home/i72pehej/httpd/docs/newFolder/: No matching DirectoryIndex (index.html,index2.html) found, and server-generated directory index forbidden by Options directive
+[Tue Mar 05 18:48:15.720679 2019] [autoindex:error] [pid 17767:tid 4128238400] [client 127.0.0.1:43446] AH01276: Cannot serve directory /home/i72pehej/httpd/docs/newFolder/: No matching DirectoryIndex (index.html,index2.html) found, and server-generated directory index forbidden by Options directive
+[Tue Mar 05 18:48:18.542196 2019] [mpm_event:notice] [pid 5925:tid 4147844864] AH00494: SIGHUP received.  Attempting to restart
+[Tue Mar 05 18:48:18.568315 2019] [mpm_event:notice] [pid 5925:tid 4147844864] AH00489: Apache/2.4.38 (Unix) configured -- resuming normal operations
+[Tue Mar 05 18:48:18.568330 2019] [core:notice] [pid 5925:tid 4147844864] AH00094: Command line: '/home/i72pehej/httpd/bin/httpd'
+[Tue Mar 05 18:49:38.393916 2019] [mpm_event:notice] [pid 5925:tid 4147844864] AH00494: SIGHUP received.  Attempting to restart
+[Tue Mar 05 18:49:38.422876 2019] [mpm_event:notice] [pid 5925:tid 4147844864] AH00489: Apache/2.4.38 (Unix) configured -- resuming normal operations
+[Tue Mar 05 18:49:38.422894 2019] [core:notice] [pid 5925:tid 4147844864] AH00094: Command line: '/home/i72pehej/httpd/bin/httpd'
+[Tue Mar 05 18:49:39.849902 2019] [autoindex:error] [pid 18441:tid 4119845696] [client 127.0.0.1:43452] AH01276: Cannot serve directory /home/i72pehej/httpd/docs/newFolder/: No matching DirectoryIndex (index.html,index2.html) found, and server-generated directory index forbidden by Options directive
+[Tue Mar 05 18:59:04.743927 2019] [mpm_event:notice] [pid 5925:tid 4147844864] AH00494: SIGHUP received.  Attempting to restart
+[Tue Mar 05 18:59:04.772868 2019] [mpm_event:notice] [pid 5925:tid 4147844864] AH00489: Apache/2.4.38 (Unix) configured -- resuming normal operations
+[Tue Mar 05 18:59:04.772883 2019] [core:notice] [pid 5925:tid 4147844864] AH00094: Command line: '/home/i72pehej/httpd/bin/httpd'
+[Tue Mar 05 19:02:24.033084 2019] [mpm_event:notice] [pid 5925:tid 4147844864] AH00494: SIGHUP received.  Attempting to restart
+[Tue Mar 05 19:02:24.080513 2019] [mpm_event:notice] [pid 5925:tid 4147844864] AH00489: Apache/2.4.38 (Unix) configured -- resuming normal operations
+[Tue Mar 05 19:02:24.080538 2019] [core:notice] [pid 5925:tid 4147844864] AH00094: Command line: '/home/i72pehej/httpd/bin/httpd'
+[Tue Mar 05 19:02:38.744750 2019] [mpm_event:notice] [pid 5925:tid 4147844864] AH00494: SIGHUP received.  Attempting to restart
+[Tue Mar 05 19:02:38.787309 2019] [mpm_event:notice] [pid 5925:tid 4147844864] AH00489: Apache/2.4.38 (Unix) configured -- resuming normal operations
+[Tue Mar 05 19:02:38.787336 2019] [core:notice] [pid 5925:tid 4147844864] AH00094: Command line: '/home/i72pehej/httpd/bin/httpd'
+[Tue Mar 05 19:04:30.465856 2019] [mpm_event:notice] [pid 5925:tid 4147844864] AH00494: SIGHUP received.  Attempting to restart
+[Tue Mar 05 19:04:30.497742 2019] [mpm_event:notice] [pid 5925:tid 4147844864] AH00489: Apache/2.4.38 (Unix) configured -- resuming normal operations
+[Tue Mar 05 19:04:30.497760 2019] [core:notice] [pid 5925:tid 4147844864] AH00094: Command line: '/home/i72pehej/httpd/bin/httpd'
+[Tue Mar 05 19:10:31.263377 2019] [mpm_event:notice] [pid 5925:tid 4147844864] AH00494: SIGHUP received.  Attempting to restart
+[Tue Mar 05 19:10:31.293031 2019] [mpm_event:notice] [pid 5925:tid 4147844864] AH00489: Apache/2.4.38 (Unix) configured -- resuming normal operations
+[Tue Mar 05 19:10:31.293046 2019] [core:notice] [pid 5925:tid 4147844864] AH00094: Command line: '/home/i72pehej/httpd/bin/httpd'
+[Tue Mar 05 19:10:41.836025 2019] [mpm_event:notice] [pid 5925:tid 4147844864] AH00494: SIGHUP received.  Attempting to restart
+[Tue Mar 05 19:10:41.863825 2019] [mpm_event:notice] [pid 5925:tid 4147844864] AH00489: Apache/2.4.38 (Unix) configured -- resuming normal operations
+[Tue Mar 05 19:10:41.863841 2019] [core:notice] [pid 5925:tid 4147844864] AH00094: Command line: '/home/i72pehej/httpd/bin/httpd'
+[Tue Mar 05 19:12:11.629711 2019] [mpm_event:notice] [pid 5925:tid 4147844864] AH00494: SIGHUP received.  Attempting to restart
+[Tue Mar 05 19:12:11.657380 2019] [mpm_event:notice] [pid 5925:tid 4147844864] AH00489: Apache/2.4.38 (Unix) configured -- resuming normal operations
+[Tue Mar 05 19:12:11.657394 2019] [core:notice] [pid 5925:tid 4147844864] AH00094: Command line: '/home/i72pehej/httpd/bin/httpd'
+[Tue Mar 05 19:12:38.226171 2019] [mpm_event:notice] [pid 5925:tid 4147844864] AH00494: SIGHUP received.  Attempting to restart
+[Tue Mar 05 19:12:38.253263 2019] [mpm_event:notice] [pid 5925:tid 4147844864] AH00489: Apache/2.4.38 (Unix) configured -- resuming normal operations
+[Tue Mar 05 19:12:38.253278 2019] [core:notice] [pid 5925:tid 4147844864] AH00094: Command line: '/home/i72pehej/httpd/bin/httpd'
+[Tue Mar 05 19:18:56.414887 2019] [mpm_event:notice] [pid 5925:tid 4147844864] AH00494: SIGHUP received.  Attempting to restart
+[Tue Mar 05 19:18:56.549379 2019] [mpm_event:notice] [pid 5925:tid 4147844864] AH00489: Apache/2.4.38 (Unix) configured -- resuming normal operations
+[Tue Mar 05 19:18:56.549395 2019] [core:notice] [pid 5925:tid 4147844864] AH00094: Command line: '/home/i72pehej/httpd/bin/httpd'
+[Tue Mar 05 19:23:17.593964 2019] [mpm_event:notice] [pid 5925:tid 4147844864] AH00494: SIGHUP received.  Attempting to restart
+[Tue Mar 05 19:23:17.678710 2019] [mpm_event:notice] [pid 5925:tid 4147844864] AH00489: Apache/2.4.38 (Unix) configured -- resuming normal operations
+[Tue Mar 05 19:23:17.678729 2019] [core:notice] [pid 5925:tid 4147844864] AH00094: Command line: '/home/i72pehej/httpd/bin/httpd'
+[Tue Mar 05 19:28:20.990641 2019] [mpm_event:notice] [pid 5925:tid 4147844864] AH00494: SIGHUP received.  Attempting to restart
+[Tue Mar 05 19:28:21.071884 2019] [mpm_event:notice] [pid 5925:tid 4147844864] AH00489: Apache/2.4.38 (Unix) configured -- resuming normal operations
+[Tue Mar 05 19:28:21.071911 2019] [core:notice] [pid 5925:tid 4147844864] AH00094: Command line: '/home/i72pehej/httpd/bin/httpd'
+[Tue Mar 05 19:59:26.526522 2019] [mpm_event:notice] [pid 5925:tid 4147844864] AH00494: SIGHUP received.  Attempting to restart
+[Tue Mar 05 19:59:26.555268 2019] [mpm_event:notice] [pid 5925:tid 4147844864] AH00489: Apache/2.4.38 (Unix) configured -- resuming normal operations
+[Tue Mar 05 19:59:26.555286 2019] [core:notice] [pid 5925:tid 4147844864] AH00094: Command line: '/home/i72pehej/httpd/bin/httpd'
+[Tue Mar 05 20:00:26.614510 2019] [authz_core:error] [pid 7426:tid 4077882176] [client 127.0.0.1:43804] AH01630: client denied by server configuration: /home/i72pehej/httpd/docs/
+[Tue Mar 05 20:01:25.302945 2019] [authz_core:error] [pid 7428:tid 4136631104] [client 127.0.0.1:43810] AH01630: client denied by server configuration: /home/i72pehej/httpd/docs/
+[Tue Mar 05 20:02:53.723859 2019] [mpm_event:notice] [pid 5925:tid 4147844864] AH00494: SIGHUP received.  Attempting to restart
+[Tue Mar 05 20:02:53.756601 2019] [mpm_event:notice] [pid 5925:tid 4147844864] AH00489: Apache/2.4.38 (Unix) configured -- resuming normal operations
+[Tue Mar 05 20:02:53.756614 2019] [core:notice] [pid 5925:tid 4147844864] AH00094: Command line: '/home/i72pehej/httpd/bin/httpd'
+[Tue Mar 05 20:03:20.646690 2019] [mpm_event:notice] [pid 5925:tid 4147844864] AH00494: SIGHUP received.  Attempting to restart
+[Tue Mar 05 20:03:20.682784 2019] [mpm_event:notice] [pid 5925:tid 4147844864] AH00489: Apache/2.4.38 (Unix) configured -- resuming normal operations
+[Tue Mar 05 20:03:20.682805 2019] [core:notice] [pid 5925:tid 4147844864] AH00094: Command line: '/home/i72pehej/httpd/bin/httpd'
+[Tue Mar 05 20:03:41.575138 2019] [authz_core:error] [pid 8848:tid 4027525952] [client 127.0.0.1:43824] AH01630: client denied by server configuration: /home/i72pehej/httpd/docs/
+[Tue Mar 05 20:03:53.449469 2019] [authz_core:error] [pid 8850:tid 4128238400] [client 127.0.0.1:43826] AH01630: client denied by server configuration: /home/i72pehej/httpd/docs/, referer: http://localhost:8080/newFolder/
+[Tue Mar 05 20:04:45.318038 2019] [mpm_event:notice] [pid 5925:tid 4147844864] AH00494: SIGHUP received.  Attempting to restart
+[Tue Mar 05 20:04:45.349371 2019] [mpm_event:notice] [pid 5925:tid 4147844864] AH00489: Apache/2.4.38 (Unix) configured -- resuming normal operations
+[Tue Mar 05 20:04:45.349384 2019] [core:notice] [pid 5925:tid 4147844864] AH00094: Command line: '/home/i72pehej/httpd/bin/httpd'
+[Tue Mar 05 20:08:22.155778 2019] [mpm_event:notice] [pid 5925:tid 4147844864] AH00491: caught SIGTERM, shutting down
+[Thu Mar 07 13:07:07.180754 2019] [mpm_event:notice] [pid 5111:tid 4148504320] AH00489: Apache/2.4.38 (Unix) configured -- resuming normal operations
+[Thu Mar 07 13:07:07.180879 2019] [core:notice] [pid 5111:tid 4148504320] AH00094: Command line: '/home/i72pehej/httpd/bin/httpd'
+[Thu Mar 07 13:31:36.918801 2019] [mpm_event:notice] [pid 5111:tid 4148504320] AH00494: SIGHUP received.  Attempting to restart
+[Thu Mar 07 13:31:36.952640 2019] [mpm_event:notice] [pid 5111:tid 4148504320] AH00489: Apache/2.4.38 (Unix) configured -- resuming normal operations
+[Thu Mar 07 13:31:36.952660 2019] [core:notice] [pid 5111:tid 4148504320] AH00094: Command line: '/home/i72pehej/httpd/bin/httpd'
+[Thu Mar 07 13:37:37.121458 2019] [mpm_event:notice] [pid 5111:tid 4148504320] AH00494: SIGHUP received.  Attempting to restart
+[Thu Mar 07 13:37:37.161175 2019] [mpm_event:notice] [pid 5111:tid 4148504320] AH00489: Apache/2.4.38 (Unix) configured -- resuming normal operations
+[Thu Mar 07 13:37:37.161196 2019] [core:notice] [pid 5111:tid 4148504320] AH00094: Command line: '/home/i72pehej/httpd/bin/httpd'
+[Thu Mar 07 13:38:19.166453 2019] [core:error] [pid 10586:tid 4120894272] [client 127.0.0.1:51410] AH00135: Invalid method in request HOLA / HTTP/1.0
+[Thu Mar 07 14:21:26.814666 2019] [mpm_event:notice] [pid 5111:tid 4148504320] AH00491: caught SIGTERM, shutting down
+[Fri Mar 08 08:34:04.835165 2019] [mpm_event:notice] [pid 10105:tid 4148324096] AH00489: Apache/2.4.38 (Unix) configured -- resuming normal operations
+[Fri Mar 08 08:34:04.835295 2019] [core:notice] [pid 10105:tid 4148324096] AH00094: Command line: '/home/i72pehej/httpd/bin/httpd'
+[Fri Mar 08 08:34:17.226250 2019] [mpm_event:notice] [pid 10105:tid 4148324096] AH00494: SIGHUP received.  Attempting to restart
+[Fri Mar 08 08:34:17.257585 2019] [mpm_event:notice] [pid 10105:tid 4148324096] AH00489: Apache/2.4.38 (Unix) configured -- resuming normal operations
+[Fri Mar 08 08:34:17.257605 2019] [core:notice] [pid 10105:tid 4148324096] AH00094: Command line: '/home/i72pehej/httpd/bin/httpd'
+[Fri Mar 08 08:34:19.595155 2019] [mpm_event:notice] [pid 10105:tid 4148324096] AH00494: SIGHUP received.  Attempting to restart
+[Fri Mar 08 08:34:19.647788 2019] [mpm_event:notice] [pid 10105:tid 4148324096] AH00489: Apache/2.4.38 (Unix) configured -- resuming normal operations
+[Fri Mar 08 08:34:19.647819 2019] [core:notice] [pid 10105:tid 4148324096] AH00094: Command line: '/home/i72pehej/httpd/bin/httpd'
+[Fri Mar 08 08:34:38.511580 2019] [mpm_event:notice] [pid 10105:tid 4148324096] AH00494: SIGHUP received.  Attempting to restart
+[Fri Mar 08 08:34:38.572667 2019] [mpm_event:notice] [pid 10105:tid 4148324096] AH00489: Apache/2.4.38 (Unix) configured -- resuming normal operations
+[Fri Mar 08 08:34:38.572686 2019] [core:notice] [pid 10105:tid 4148324096] AH00094: Command line: '/home/i72pehej/httpd/bin/httpd'
+[Fri Mar 08 08:41:09.154908 2019] [mpm_event:notice] [pid 10105:tid 4148324096] AH00494: SIGHUP received.  Attempting to restart
+[Fri Mar 08 08:41:09.214591 2019] [mpm_event:notice] [pid 10105:tid 4148324096] AH00489: Apache/2.4.38 (Unix) configured -- resuming normal operations
+[Fri Mar 08 08:41:09.214620 2019] [core:notice] [pid 10105:tid 4148324096] AH00094: Command line: '/home/i72pehej/httpd/bin/httpd'
+[Fri Mar 08 08:41:14.965925 2019] [authz_core:error] [pid 12516:tid 4137679680] [client 127.0.0.1:56510] AH01630: client denied by server configuration: /full
+[Fri Mar 08 08:48:48.966865 2019] [mpm_event:notice] [pid 10105:tid 4148324096] AH00494: SIGHUP received.  Attempting to restart
+[Fri Mar 08 08:48:48.996089 2019] [mpm_event:notice] [pid 10105:tid 4148324096] AH00489: Apache/2.4.38 (Unix) configured -- resuming normal operations
+[Fri Mar 08 08:48:48.996104 2019] [core:notice] [pid 10105:tid 4148324096] AH00094: Command line: '/home/i72pehej/httpd/bin/httpd'
+[Fri Mar 08 09:10:56.809405 2019] [mpm_event:notice] [pid 10105:tid 4148324096] AH00494: SIGHUP received.  Attempting to restart
+AH00112: Warning: DocumentRoot [/home/i72pehej/httpd/docs/dummy-host.example.com] does not exist
+AH00112: Warning: DocumentRoot [/home/i72pehej/httpd/docs/dummy-host2.example.com] does not exist
+[Fri Mar 08 09:10:56.876740 2019] [mpm_event:notice] [pid 10105:tid 4148324096] AH00489: Apache/2.4.38 (Unix) configured -- resuming normal operations
+[Fri Mar 08 09:10:56.876757 2019] [core:notice] [pid 10105:tid 4148324096] AH00094: Command line: '/home/i72pehej/httpd/bin/httpd'
+[Fri Mar 08 09:11:22.007751 2019] [mpm_event:notice] [pid 10105:tid 4148324096] AH00494: SIGHUP received.  Attempting to restart
+AH00112: Warning: DocumentRoot [/home/i72pehej/httpd/docs/dummy-host.example.com] does not exist
+AH00112: Warning: DocumentRoot [/home/i72pehej/httpd/docs/dummy-host2.example.com] does not exist
+[Fri Mar 08 09:11:22.085129 2019] [mpm_event:notice] [pid 10105:tid 4148324096] AH00489: Apache/2.4.38 (Unix) configured -- resuming normal operations
+[Fri Mar 08 09:11:22.085147 2019] [core:notice] [pid 10105:tid 4148324096] AH00094: Command line: '/home/i72pehej/httpd/bin/httpd'
+[Fri Mar 08 09:15:07.978096 2019] [mpm_event:notice] [pid 10105:tid 4148324096] AH00494: SIGHUP received.  Attempting to restart
+AH00112: Warning: DocumentRoot [/home/i72pehej/httpd/docs/dummy-host.example.com] does not exist
+AH00112: Warning: DocumentRoot [/home/i72pehej/httpd/docs/dummy-host2.example.com] does not exist
+[Fri Mar 08 09:15:08.069425 2019] [mpm_event:notice] [pid 10105:tid 4148324096] AH00489: Apache/2.4.38 (Unix) configured -- resuming normal operations
+[Fri Mar 08 09:15:08.069444 2019] [core:notice] [pid 10105:tid 4148324096] AH00094: Command line: '/home/i72pehej/httpd/bin/httpd'
+[Fri Mar 08 09:17:00.573073 2019] [mpm_event:notice] [pid 10105:tid 4148324096] AH00494: SIGHUP received.  Attempting to restart
+AH00112: Warning: DocumentRoot [/home/i72pehej/httpd/docs/dummy-host.example.com] does not exist
+AH00112: Warning: DocumentRoot [/home/i72pehej/httpd/docs/dummy-host2.example.com] does not exist
+[Fri Mar 08 09:17:00.627434 2019] [mpm_event:notice] [pid 10105:tid 4148324096] AH00489: Apache/2.4.38 (Unix) configured -- resuming normal operations
+[Fri Mar 08 09:17:00.627451 2019] [core:notice] [pid 10105:tid 4148324096] AH00094: Command line: '/home/i72pehej/httpd/bin/httpd'
+[Fri Mar 08 09:49:12.551674 2019] [mpm_event:notice] [pid 10105:tid 4148324096] AH00491: caught SIGTERM, shutting down
+[Fri Mar 08 13:47:10.804378 2019] [mpm_event:notice] [pid 6161:tid 4148000512] AH00489: Apache/2.4.38 (Unix) configured -- resuming normal operations
+[Fri Mar 08 13:47:10.804461 2019] [core:notice] [pid 6161:tid 4148000512] AH00094: Command line: '/home/i72pehej/httpd/bin/httpd'
+[Fri Mar 08 13:47:53.137518 2019] [core:alert] [pid 6163:tid 4128238400] [client 127.0.0.1:45802] /home/i72pehej/httpd-docs/secretFolder/.htaccess: Unknown Authz provider: usuario1
+[Fri Mar 08 13:48:00.844241 2019] [core:alert] [pid 6162:tid 4128238400] [client 127.0.0.1:45806] /home/i72pehej/httpd-docs/secretFolder/.htaccess: Unknown Authz provider: usuario1
+[Fri Mar 08 13:48:29.953323 2019] [core:alert] [pid 6163:tid 4002347840] [client 127.0.0.1:45844] /home/i72pehej/httpd-docs/secretFolder/.htaccess: Unknown Authz provider: usuario1
+[Fri Mar 08 13:51:50.419498 2019] [mpm_event:notice] [pid 6161:tid 4148000512] AH00494: SIGHUP received.  Attempting to restart
+AH00112: Warning: DocumentRoot [/home/i72pehej/httpd/docs/dummy-host.example.com] does not exist
+AH00112: Warning: DocumentRoot [/home/i72pehej/httpd/docs/dummy-host2.example.com] does not exist
+[Fri Mar 08 13:51:50.473754 2019] [mpm_event:notice] [pid 6161:tid 4148000512] AH00489: Apache/2.4.38 (Unix) configured -- resuming normal operations
+[Fri Mar 08 13:51:50.473766 2019] [core:notice] [pid 6161:tid 4148000512] AH00094: Command line: '/home/i72pehej/httpd/bin/httpd'
+[Fri Mar 08 13:53:00.374061 2019] [mpm_event:notice] [pid 6161:tid 4148000512] AH00494: SIGHUP received.  Attempting to restart
+AH00112: Warning: DocumentRoot [/home/i72pehej/httpd/docs/dummy-host.example.com] does not exist
+AH00112: Warning: DocumentRoot [/home/i72pehej/httpd/docs/dummy-host2.example.com] does not exist
+[Fri Mar 08 13:53:00.420938 2019] [mpm_event:notice] [pid 6161:tid 4148000512] AH00489: Apache/2.4.38 (Unix) configured -- resuming normal operations
+[Fri Mar 08 13:53:00.420953 2019] [core:notice] [pid 6161:tid 4148000512] AH00094: Command line: '/home/i72pehej/httpd/bin/httpd'
+[Fri Mar 08 13:54:33.536915 2019] [core:error] [pid 8063:tid 4111452992] AH00554: Access to file /home/i72pehej/httpd-docs/secretFolder denied by server: not a regular file
+[Fri Mar 08 13:54:33.537450 2019] [authn_file:error] [pid 8063:tid 4111452992] (9)Bad file descriptor: [client 127.0.0.1:45942] AH01620: Could not open password file: /home/i72pehej/httpd-docs/secretFolder
+[Fri Mar 08 13:54:44.996520 2019] [core:error] [pid 8063:tid 4094667584] AH00554: Access to file /home/i72pehej/httpd-docs/secretFolder denied by server: not a regular file
+[Fri Mar 08 13:54:44.996539 2019] [authn_file:error] [pid 8063:tid 4094667584] (9)Bad file descriptor: [client 127.0.0.1:45944] AH01620: Could not open password file: /home/i72pehej/httpd-docs/secretFolder
+[Fri Mar 08 13:54:45.747896 2019] [core:error] [pid 8063:tid 4077882176] AH00554: Access to file /home/i72pehej/httpd-docs/secretFolder denied by server: not a regular file
+[Fri Mar 08 13:54:45.747915 2019] [authn_file:error] [pid 8063:tid 4077882176] (9)Bad file descriptor: [client 127.0.0.1:45946] AH01620: Could not open password file: /home/i72pehej/httpd-docs/secretFolder
+[Fri Mar 08 13:54:49.086291 2019] [core:error] [pid 8062:tid 4136631104] AH00554: Access to file /home/i72pehej/httpd-docs/secretFolder denied by server: not a regular file
+[Fri Mar 08 13:54:49.086313 2019] [authn_file:error] [pid 8062:tid 4136631104] (9)Bad file descriptor: [client 127.0.0.1:45948] AH01620: Could not open password file: /home/i72pehej/httpd-docs/secretFolder
+[Fri Mar 08 13:55:39.023332 2019] [core:error] [pid 8063:tid 4069489472] AH00554: Access to file /home/i72pehej/httpd-docs/secretFolder denied by server: not a regular file
+[Fri Mar 08 13:55:39.024148 2019] [authn_file:error] [pid 8063:tid 4069489472] (9)Bad file descriptor: [client 127.0.0.1:46014] AH01620: Could not open password file: /home/i72pehej/httpd-docs/secretFolder
+[Fri Mar 08 14:12:07.761163 2019] [mpm_event:notice] [pid 6161:tid 4148000512] AH00494: SIGHUP received.  Attempting to restart
+AH00112: Warning: DocumentRoot [/home/i72pehej/httpd/docs/dummy-host.example.com] does not exist
+AH00112: Warning: DocumentRoot [/home/i72pehej/httpd/docs/dummy-host2.example.com] does not exist
+[Fri Mar 08 14:12:07.811650 2019] [mpm_event:notice] [pid 6161:tid 4148000512] AH00489: Apache/2.4.38 (Unix) configured -- resuming normal operations
+[Fri Mar 08 14:12:07.811664 2019] [core:notice] [pid 6161:tid 4148000512] AH00094: Command line: '/home/i72pehej/httpd/bin/httpd'
+[Fri Mar 08 14:14:18.445355 2019] [mpm_event:notice] [pid 6161:tid 4148000512] AH00494: SIGHUP received.  Attempting to restart
+AH00112: Warning: DocumentRoot [/home/i72pehej/httpd/docs/dummy-host.example.com] does not exist
+AH00112: Warning: DocumentRoot [/home/i72pehej/httpd/docs/dummy-host2.example.com] does not exist
+[Fri Mar 08 14:14:18.490819 2019] [mpm_event:notice] [pid 6161:tid 4148000512] AH00489: Apache/2.4.38 (Unix) configured -- resuming normal operations
+[Fri Mar 08 14:14:18.490833 2019] [core:notice] [pid 6161:tid 4148000512] AH00094: Command line: '/home/i72pehej/httpd/bin/httpd'
+[Fri Mar 08 14:21:22.004992 2019] [mpm_event:notice] [pid 6161:tid 4148000512] AH00494: SIGHUP received.  Attempting to restart
+AH00112: Warning: DocumentRoot [/home/i72pehej/httpd/docs/dummy-host.example.com] does not exist
+AH00112: Warning: DocumentRoot [/home/i72pehej/httpd/docs/dummy-host2.example.com] does not exist
+[Fri Mar 08 14:21:22.070303 2019] [mpm_event:notice] [pid 6161:tid 4148000512] AH00489: Apache/2.4.38 (Unix) configured -- resuming normal operations
+[Fri Mar 08 14:21:22.070316 2019] [core:notice] [pid 6161:tid 4148000512] AH00094: Command line: '/home/i72pehej/httpd/bin/httpd'
+[Fri Mar 08 14:21:26.390577 2019] [mpm_event:notice] [pid 6161:tid 4148000512] AH00494: SIGHUP received.  Attempting to restart
+AH00112: Warning: DocumentRoot [/home/i72pehej/httpd/docs/dummy-host.example.com] does not exist
+AH00112: Warning: DocumentRoot [/home/i72pehej/httpd/docs/dummy-host2.example.com] does not exist
+[Fri Mar 08 14:21:26.448022 2019] [mpm_event:notice] [pid 6161:tid 4148000512] AH00489: Apache/2.4.38 (Unix) configured -- resuming normal operations
+[Fri Mar 08 14:21:26.448048 2019] [core:notice] [pid 6161:tid 4148000512] AH00094: Command line: '/home/i72pehej/httpd/bin/httpd'
+[Fri Mar 08 14:21:46.245981 2019] [access_compat:error] [pid 16847:tid 4136631104] [client 172.16.231.22:42200] AH01797: client denied by server configuration: /home/i72pehej/httpd-docs/
+[Fri Mar 08 14:23:44.360534 2019] [mpm_event:notice] [pid 6161:tid 4148000512] AH00491: caught SIGTERM, shutting down

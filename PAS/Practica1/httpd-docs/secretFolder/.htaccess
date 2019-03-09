@@ -1,0 +1,5 @@
+AuthType Basic
+AuthName "Se requiere autorizacion."
+AuthUserFile "/home/i72pehej/httpd-docs/secretFolder"
+
+Require user    usuario1 usuario2 usuario3
