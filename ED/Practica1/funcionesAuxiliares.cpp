@@ -322,14 +322,10 @@ void ed::testMonomio() {
 ////////////////////////////////////////////////////////////////////////////////
 
 
-<<<<<<< HEAD
 void ed::operadoresExternosMonomios() {
 
-=======
-void ed::operadoresExternosMonomios()
-{
 ///*
->>>>>>> e6531b1562ad84bff79b9643e58a2b06e3ee7f6f
+
 	double x;
 
 	// Constructor por defecto.
@@ -548,12 +544,10 @@ void ed::operadoresExternosMonomios()
 	}
 
 	std::cout << std::endl;
-<<<<<<< HEAD
 
 
 ////////////////////////////////////////////////////////////////////////////////
-=======
->>>>>>> e6531b1562ad84bff79b9643e58a2b06e3ee7f6f
+
 //*/
 
 	return;

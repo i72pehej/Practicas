@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['leermonomio',['leerMonomio',['../classed_1_1Monomio.html#a990204a1b1c023eb1c1159d9940a7736',1,'ed::Monomio']]]
+  ['getcoeficiente',['getCoeficiente',['../classed_1_1Monomio.html#a38e942e39e7a85f83e758fe4bc91825e',1,'ed::Monomio']]],
+  ['getgrado',['getGrado',['../classed_1_1Monomio.html#af8f341fea5b349d51e1cdc922afa2160',1,'ed::Monomio']]]
 ];

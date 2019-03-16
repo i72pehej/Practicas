@@ -164,7 +164,8 @@ namespace ed {
 		\brief     Operador de suma: operador que devuelve otro monomio con la suma de dos monomios.
 		\attention Se sobrecarga el operador de suma: "+".
 		\warning   Se requiere que los parámetros m1 y m2 tengan el modificador const.
-		\param     m: objeto de tipo monomio pasado como referencia constante.
+		\param     m1: objeto de tipo monomio pasado como referencia constante.
+		\param     m2: objeto de tipo monomio pasado como referencia constante.
 		\pre 			 Los monomios m1 y m2 tienen el mismo grado.
 		\post 		 El monomio devuelto tiene el mismo grado que los monomios m1 y m2.
 		\post	     El monomio devuelto tiene coeficiente igual a la suma de los coeficientes de los monomios.
@@ -184,7 +185,8 @@ namespace ed {
 		\brief     Operador de suma: operador que devuelve otro monomio con la resta de dos monomios.
 		\attention Se sobrecarga el operador de resta: "-".
 		\warning   Se requiere que los parámetros m1 y m2 tengan el modificador const.
-		\param     m: objeto de tipo monomio pasado como referencia constante.
+		\param     m1: objeto de tipo monomio pasado como referencia constante.
+		\param     m2: objeto de tipo monomio pasado como referencia constante.
 		\pre 			 Los monomios m1 y m2 tienen el mismo grado.
 		\post 		 El monomio devuelto tiene el mismo grado que los monomios m1 y m2.
 		\post	     El monomio devuelto tiene coeficiente igual a la resta de los coeficientes de los monomios.
