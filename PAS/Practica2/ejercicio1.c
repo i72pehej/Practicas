@@ -24,6 +24,10 @@ argumentos.
 
 
 int main (int argc, char **argv) {
+	char *lgn;
+	struct passwd *pw;
+	struct grupo *gr;
+
 	int opcion;
 
 	/* Estructura a utilizar por getoptlong */
@@ -84,11 +88,15 @@ int main (int argc, char **argv) {
 			case '?':
 				/* getopt_long ya imprime su mensaje de error, no es necesario hacer nada.*/
 				/* Si queremos imprimir nuestros propios errores, debemos poner opterr = 0.*/
-				/*
-				if (optopt == 'c')
-					fprintf (stderr, "La opción %c requiere un argumento.\n", optopt);
+				// /*
+				if (optopt == 'u') {fprintf (stderr, "La opción %c requiere un argumento.\n", optopt);}
+				if (optopt == 'i') {fprintf (stderr, "La opción %c requiere un argumento.\n", optopt);}
+				if (optopt == 'g') {fprintf (stderr, "La opción %c requiere un argumento.\n", optopt);}
+				if (optopt == 'd') {fprintf (stderr, "La opción %c requiere un argumento.\n", optopt);}
+				if (optopt == 's') {fprintf (stderr, "La opción %c requiere un argumento.\n", optopt);}
+
 				break;
-				*/
+				// */
 
 			default:
 				abort ();
@@ -97,13 +105,13 @@ int main (int argc, char **argv) {
 	}
 
 	/* Imprimir el resto de argumentos de la línea de comandos que no son opciones con "-" */
-	if (optind < argc)
-	{
-		printf("Argumentos ARGV que no son opciones: ");
+	if (optind < argc) {
+		printf("\nArgumentos ARGV que no son opciones: ");
 		while (optind < argc)
 			printf("%s ", argv[optind++]);
 		putchar ('\n');
 	}
+
 	printf ("\nu_value = %s, i_value = %s, g_value = %s, d_value = %s, s_value = %s.\n",u_value, i_value, g_value, d_value, s_value);
 
 	exit (0);
