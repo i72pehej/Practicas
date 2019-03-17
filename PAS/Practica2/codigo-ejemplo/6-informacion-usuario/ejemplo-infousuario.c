@@ -34,7 +34,7 @@ int main(int argc, char *argv[])
     if (argc < 2)
     {
     	  //DEVUELVE LA ESTRUCTURA TRAS RECIBIR lgn COMO PARÁMETRO
-        if ((lgn = getlogin())/*getenv(USER)*/ == NULL || (pw = getpwnam(lgn)) == NULL)
+        if ((lgn = getenv("USER")) == NULL || (pw = getpwnam(lgn)) == NULL)
         {
             fprintf(stderr, "Get of user information failed.\n");
             exit(1);
