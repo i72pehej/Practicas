@@ -1,8 +1,8 @@
 /*!
-  \file   funcionesAuxiliares.hpp
-  \brief  Funciones auxiliares para el programa principal de la práctica 2
-  \author
-  \date
+  \file    funcionesAuxiliares.hpp
+  \brief   Funciones auxiliares para el programa principal de la práctica 2
+	\author  Julen Pérez Hernández
+	\date    31/03/2019
 */
 
 #ifndef _FUNCIONESAUXILIARES_HPP_
@@ -17,11 +17,20 @@ namespace ed
 	*/
 	int menu();
 
-	// COMPLETAR LOS COMENTARIOS DE DOXYGEN
+	/*!
+ 		\brief     Test sobre la clase Polinomio para comprobación de su correcto funcionamiento.
+ 		\attention Pueden surgir errores no previstos.
+ 		\warning   Se requiere que los errores sean corregidos para la correcta comprobación.
+ 		\sa        void testPolinomio(), void operadoresExternosPolinomios().
+ 	*/
 	void testPolinomio();
 
-
-	// COMPLETAR LOS COMENTARIOS DE DOXYGEN
+	/*!
+ 		\brief     Test sobre los operadores externos a la clase Polinomio para comprobación de su correcto funcionamiento.
+ 		\attention Pueden surgir errores no previstos.
+ 		\warning   Se requiere que los errores sean corregidos para la correcta comprobación.
+ 		\sa        void testPolinomio(), void operadoresExternosPolinomios().
+ 	*/
 	void operadoresExternosPolinomios();
 
 } // Fin del espacio de nombre de la asignatura: ed

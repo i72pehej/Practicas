@@ -20,7 +20,7 @@ http://www.gnu.org/software/libc/manual/html_node/Getopt-Long-Option-Example.htm
 int main (int argc, char **argv)
 {
 	int c;
-
+	
 	/* Estructura a utilizar por getoptlong */
 	static struct option long_options[] =
 	{
@@ -45,7 +45,7 @@ int main (int argc, char **argv)
 
 	/* getopt_long guardará el índice de la opción en esta variable. */
 	int option_index = 0;
-
+	
 	/* Deshabilitar la impresión de errores por defecto */
 	/* opterr=0; */
 	while ((c = getopt_long (argc, argv, "abc:d:f:", long_options, &option_index))!=-1)
@@ -106,3 +106,4 @@ int main (int argc, char **argv)
 
 	exit (0);
 }
+

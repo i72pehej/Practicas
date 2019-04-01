@@ -27,13 +27,15 @@ char serverQueue[100];
 // Función que procesará el final
 void finPrograma(int value);
 
-void imprimir_uso()
+void imprimir_uso() 
 {
     printf("Uso del programa: ejercicio4-servidor [opciones]\n");
     printf("Opciones:\n");
     printf("-h, --help\t	Imprimir esta ayuda\n");
     printf("-r, --regex=EXPR\t	Expresión regular a utilizar\n");
 }
+
+
 
 
 int main(int argc, char **argv)
@@ -43,7 +45,7 @@ int main(int argc, char **argv)
 	char *regexValue = NULL;
 	int c;
 	int option_index;
-
+	
 	static struct option long_options[] =
 	{
 		/* Opciones que no van a actuar sobre un flag */
@@ -59,16 +61,16 @@ int main(int argc, char **argv)
    regex_t regex;
 	int reti;
    char msgbuf[100];
-
+	
 	// Atributos de la cola
 	struct mq_attr attr;
 
 	// Buffer para intercambiar mensajes
 	char buffer[MAX_SIZE];
-
+	
 	// flag que indica cuando hay que parar
 	int must_stop = 0;
-
+	
 	// Inicializar los atributos de la cola
 	attr.mq_maxmsg = 10;        // Maximo número de mensajes
 	attr.mq_msgsize = MAX_SIZE; // Maximo tamaño de un mensaje
@@ -76,14 +78,14 @@ int main(int argc, char **argv)
 	// Nombre para las colas
 	sprintf(clientQueue, "%s-%s", CLIENT_QUEUE, getenv("USER"));
 	sprintf(serverQueue, "%s-%s", SERVER_QUEUE, getenv("USER"));
-
+	
 	opterr = 0;
 
-	while ((c = getopt_long (argc, argv, "hr:",long_options, &option_index))!=-1)
+	while ((c = getopt_long (argc, argv, "ehr:",long_options, &option_index))!=-1)
 		switch (c)
 		{
 			case 'h':
-				imprimir_uso();
+				imprimir_uso();				
 				break;
 			case 'r':
 				regexValue = optarg;
@@ -96,7 +98,7 @@ int main(int argc, char **argv)
 				else
 					fprintf (stderr, "Carácter de opción desconocido `\\x%x'.\n", optopt);
 					imprimir_uso();
-			default:
+			default:			
 				exit(EXIT_SUCCESS);
 		}
 
@@ -110,7 +112,7 @@ int main(int argc, char **argv)
 	printf("Valor de regexvalue en servidor:%s\n",regexValue);
 
 	/* Compilar la expresión regular */
-	reti = regcomp(&regex, regexValue, 0);
+	reti = regcomp(&regex, regexValue, 0);			
    if(reti!=0)
    {
 		fprintf(stderr, "No pude compilar la expresión regular\n");
@@ -148,8 +150,8 @@ int main(int argc, char **argv)
 		}
 
 		// Cerrar la cadena
-		//buffer[bytes_read] = '\0';
-
+		//buffer[bytes_read] = '\0'; 
+		
 		// Comprobar el fin del bucle si se lee exit
 		if (strncmp(buffer, MSG_STOP, strlen(MSG_STOP))==0)
 		{
@@ -158,17 +160,17 @@ int main(int argc, char **argv)
 		else
 		{
 			printf("Recibido el mensaje: %s\n", buffer);
-
+			
 			/* Comprobar la expresión regular sobre la cadena pasada como argumento */
 			reti = regexec(&regex, buffer, 0, NULL, 0);
-
+			
 			sprintf(msgbuf,"%s", buffer); //Hago una copia por si hay error de matching mostralo.
-
-		   // Puede servirnos, UNA VEZ COMPROBADA LA EXPRESION, por si al hacer pruebas hemos cerrado nuestro
+			
+		   // Puede servirnos, UNA VEZ COMPROBADA LA EXPRESION, por si al hacer pruebas hemos cerrado nuestro 
 		   // cliente y servidor, y se han quedado caracteres en los bufferes de entrada/salida estandar
 		   fflush(stdout);                  // Limpiar buffer de salida
-		   memset(buffer, 0, MAX_SIZE);     // Poner a 0 el buffer
-
+		   memset(buffer, 0, MAX_SIZE);     // Poner a 0 el buffer		  
+		  
 			if(reti==0)
 			{
 				strcpy(buffer,"Empareja");
@@ -181,12 +183,12 @@ int main(int argc, char **argv)
 			{
 				regerror(reti, &regex, msgbuf, sizeof(msgbuf));
 				fprintf(stderr, "Falló el matching de la expresión regular: %s\n", msgbuf);
-
+				
 				//Finalizar el programa si falla el matching (exit). Se lo enviamos al cliente
-				//sprintf(buffer,"%s",MSG_STOP);
+				//sprintf(buffer,"%s",MSG_STOP); 
 				strcpy(buffer,MSG_STOP);
 			}
-
+			
 			// Enviar y comprobar si el mensaje se manda
 			if(mq_send(mq_client, buffer, MAX_SIZE, 0) != 0)
 			{
@@ -198,14 +200,13 @@ int main(int argc, char **argv)
 	}while (!must_stop); // Iterar hasta que llegue el código de salida exit
 
 	// Cerrar el programa
-	finPrograma(-1);
-
+	finPrograma(-1);	
+	
 	/* Liberar la expresión regular utilizada */
 	regfree(&regex);
-
+	
 	exit(EXIT_SUCCESS);
 }
-
 
 void finPrograma(int value)
 {
@@ -215,11 +216,11 @@ void finPrograma(int value)
 	{
 		// Buffer para intercambiar mensajes
 		char buffer[MAX_SIZE];
-
+		
 		//Finalizar el programa si falla el matching (exit). Se lo enviamos al cliente
 		//sprintf(buffer,"%s",MSG_STOP);
 		strcpy(buffer,MSG_STOP);
-
+		
 		// Enviar y comprobar si el mensaje se manda
 		if(mq_send(mq_client, buffer, MAX_SIZE, 0) != 0)
 		{
@@ -240,7 +241,7 @@ void finPrograma(int value)
 			exit(EXIT_FAILURE);
 		}
 	}
-
+	
 	if(mq_server!=-1)
 	{
 		// Cerrar la cola del servidor
@@ -249,7 +250,7 @@ void finPrograma(int value)
 			perror("Error al cerrar la cola del servidor");
 			exit(EXIT_FAILURE);
 		}
-
+		
 		// Eliminar la cola del servidor
 		if(mq_unlink(serverQueue) == (mqd_t)-1)
 		{
@@ -257,6 +258,6 @@ void finPrograma(int value)
 			exit(EXIT_FAILURE);
 		}
 	}
-
+	
 	exit(EXIT_SUCCESS);
 }

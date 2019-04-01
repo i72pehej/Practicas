@@ -1,8 +1,8 @@
 /*!
-  \file   funcionesAuxiliares.cpp
-  \brief  Código de las funciones auxiliares para el programa principal de la práctica 2
-  \author
-  \date
+  \file    funcionesAuxiliares.cpp
+  \brief   Código de las funciones auxiliares para el programa principal de la práctica 2
+  \author  Julen Pérez Hernández
+  \date    31/03/2019
 */
 
 // Para los flujos de entrada y salida
@@ -12,39 +12,42 @@
 #include "macros.hpp"
 #include "funcionesAuxiliares.hpp"
 
+
 #include "operadoresExternosMonomios.hpp"
 #include "operadoresExternosPolinomios.hpp"
 
 
-int ed::menu() {
-  int opcion, posicion;
 
-	// Se muestran las opciones del menú.
-	posicion = 2;
+int ed::menu()
+{
+ int opcion, posicion;
 
-	// Se borra la pantalla.
+	// Se muestran las opciones del menú
+	posicion=2;
+
+	// Se borra la pantalla
 	std::cout << CLEAR_SCREEN;
 
-	PLACE(posicion++, 10);
+	PLACE(posicion++,10);
 	std::cout << BIBLUE;
 	std::cout << "Programa principal | Opciones del menú   ";
 	std::cout << RESET;
 
 	posicion++;
-	PLACE(posicion++, 10);
+	PLACE(posicion++,10);
 	std::cout << "[1] Test de la clase Polinomio" << std::endl;
 
-	PLACE(posicion++, 10);
+	PLACE(posicion++,10);
 	std::cout << "[2] Operadores externos de la clase Polinomio " << std::endl;
 
 	posicion++;
-	PLACE(posicion++, 10);
+	PLACE(posicion++,10);
 	std::cout << BIRED;
 	std::cout << "[0] Fin del programa " << std::endl;
 	std::cout << RESET;
 
 	posicion++;
-	PLACE(posicion++, 10);
+	PLACE(posicion++,10);
 	std::cout << BIYELLOW;
 	std::cout << "Opción: ";
 	std::cout << RESET;
@@ -64,12 +67,12 @@ void ed::testPolinomio()
   std::cout << BIGREEN;
   std::cout << "testPolinomio()" << std::endl;
   std::cout << RESET;
-  std::cout << "Quitar el comentario de bloque cuando se haya codificado la clase Polinomio " << std::endl << std::endl;
+  //std::cout << "Quitar el comentario de bloque cuando se haya codificado la clase Polinomio " << std::endl << std::endl;
 
-  /*
+
 	double x;
 
-	ed::Monomio m;
+	ed::Monomio m(0,0);
 
 	// Constructor sin argumentos
 	ed::Polinomio p1, p2;
@@ -82,7 +85,7 @@ void ed::testPolinomio()
 	std::cout<< "x = ";
 	std::cin >> x;
  	// Se elimina el salto de línea del flujo de entrada
-    std::cin.ignore();
+	std::cin.ignore();
 	std::cout << std::endl << std::endl;
 
 
@@ -100,6 +103,8 @@ void ed::testPolinomio()
 	std::cout<< "Lectura del polinomio "<< std::endl << std::endl;
 	std::cout << RESET;
 	p1.leerPolinomio();
+	std::cout << std::endl << std::endl;
+  p2.leerPolinomio();
 	std::cout << std::endl << std::endl;
 
 	// Constructor de copia
@@ -130,7 +135,6 @@ void ed::testPolinomio()
 
 	// Pausa
 	std::cin.ignore();
-
 
 	////////////////////////////////////////////////////////
 	// Observadores de la clase Polinomio
@@ -193,7 +197,7 @@ void ed::testPolinomio()
 	std::cout<< "Asignación de un monomio a un polinomio --> p1 = m"<< std::endl;
 	p1 = m;
 	std::cout<< "p1 = ";
-	p2.escribirPolinomio();
+	p1.escribirPolinomio();
 	std::cout << std::endl;
 	std::cout<< "m = ";
 	m.escribirMonomio();
@@ -203,7 +207,7 @@ void ed::testPolinomio()
 	std::cout<< "Asignación de un número a un polinomio --> p1 = x"<< std::endl;
 	p1 = x;
 	std::cout<< "p1 = ";
-	p2.escribirPolinomio();
+	p1.escribirPolinomio();
 	std::cout << std::endl;
 	std::cout<< "x = " << x;
 	std::cout << std::endl << std::endl;
@@ -262,7 +266,7 @@ void ed::testPolinomio()
 	std::cout<< "Resultado p1 += p2"<< std::endl;
 	p1 += p2;
 	std::cout<< "p1 = ";
-	p2.escribirPolinomio();
+	p1.escribirPolinomio();
 	std::cout << std::endl << std::endl;
 
 	// Operador de resta y asignación
@@ -276,7 +280,7 @@ void ed::testPolinomio()
 	std::cout<< "Resultado p1 -= p2"<< std::endl;
 	p1 -= p2;
 	std::cout<< "p1 = ";
-	p2.escribirPolinomio();
+	p1.escribirPolinomio();
 	std::cout << std::endl << std::endl;
 
 	// Operador de multiplicación y asignación
@@ -290,12 +294,15 @@ void ed::testPolinomio()
 	std::cout<< "Resultado p1 *= p2"<< std::endl;
 	p1 *= p2;
 	std::cout<< "p1 = ";
-	p2.escribirPolinomio();
+	p1.escribirPolinomio();
 	std::cout << std::endl << std::endl;
 
+
 	// Operador de división y asignación
+
+
 	std::cout<< "Operador p1 /= p2 "<< std::endl;
-	if ((p2.getGrado() >= p1.getGrado()) and (not p2.esNulo()))
+	if (p1.getGrado() >= p2.getGrado() and (not p2.esNulo()))
 	{
 		std::cout<< "p1 = ";
 		p1.escribirPolinomio();
@@ -303,17 +310,17 @@ void ed::testPolinomio()
 		std::cout<< "p2 = ";
 		p2.escribirPolinomio();
 		std::cout << std::endl;
-		std::cout<< "Resultado p1 *= p2"<< std::endl;
+		std::cout<< "Resultado p1 /= p2"<< std::endl;
 		p1 /= p2;
 		std::cout<< "p1 = ";
-		p2.escribirPolinomio();
+		p1.escribirPolinomio();
 		std::cout << std::endl << std::endl;
 	}
 	else
 	{
 		std::cout << "No se puede dividir p1 entre p2, porque: " << std::endl;
-		std::cout << "- el grado de p1 no es mayor o igual que el grado de p2" << std::endl;
 		std::cout << "- o el polinomio p2 es nulo" << std::endl;
+		std::cout << "- el grado de p1 no es mayor o igual que el grado de p2" << std::endl;
 	}
 
 
@@ -362,6 +369,7 @@ void ed::testPolinomio()
 	m.escribirMonomio();
 	std::cout << std::endl << std::endl;
 
+
 	// Operador de división y asignación
 	std::cout<< "Operador p3 /= m "<< std::endl;
 	if (p3.getGrado() >= m.getGrado())
@@ -387,7 +395,6 @@ void ed::testPolinomio()
 	std::cout << RESET;
 	// Pausa
 	std::cin.ignore();
-
 	////////////////////////////////////////////////////////
 	// Entre un polinomio y un número
 	std::cout << BIGREEN;
@@ -419,6 +426,7 @@ void ed::testPolinomio()
 	std::cout << std::endl;
 	std::cout<< "x = " << x << std::endl << std::endl;
 
+
 	// Operador de división y asignación
 	std::cout<< "Operador p3 /= x "<< std::endl;
 	if (std::abs(x) > COTA_ERROR)
@@ -444,7 +452,6 @@ void ed::testPolinomio()
 	std::cin.ignore();
 	std::cout << std::endl << std::endl;
 
-
 	///////////////////////////////////////////////////////////////
 	// Calcular el valor de un polinomo para un número real x
 	std::cout << BIGREEN;
@@ -465,7 +472,8 @@ void ed::testPolinomio()
 	p3.escribirPolinomio();
 	std::cout << std::endl;
 	std::cout<< "p3(" << x << ") = " << p3.calcularValor(x) << std::endl << std::endl;
-*/
+
+
 
 	// Fin
 	return;
@@ -484,7 +492,6 @@ void ed::operadoresExternosPolinomios()
   std::cout << RESET;
   std::cout << "Quitar el comentario de bloque cuando se haya codificado la clase Polinomio y los operadores externos de dicha clase" << std::endl << std::endl;
 
-/*
 	double x;
 
 	// Constructor por defecto
@@ -687,6 +694,7 @@ void ed::operadoresExternosPolinomios()
 
 	std::cout << std::endl;
 
+
 	/////////////////////////////////////////
 	// Operadores ariméticos binarios
 
@@ -812,6 +820,6 @@ void ed::operadoresExternosPolinomios()
 
 
 	std::cout << std::endl;
-*/
+
 	return;
 }

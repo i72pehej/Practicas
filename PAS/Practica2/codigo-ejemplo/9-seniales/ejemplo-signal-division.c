@@ -18,7 +18,7 @@ int main()
 	int divisor=0;
 
 	/*
-	SIGFPE Error en coma flotante. Es enviada cuando el hardware detecta un error en coma flotante,
+	SIGFPE Error en coma flotante. Es enviada cuando el hardware detecta un error en coma flotante, 
 	como el uso de número en coma flotante con un formato desconocido, errores de overflow o underflow, etc.
 	*/
     if (signal(SIGFPE, mi_manejador_sigfpe) == SIG_ERR)
@@ -26,10 +26,10 @@ int main()
 
     printf("Introduce el dividendo: ");
     scanf("%d", &dividendo);
-
+    
     printf("Introduce el divisor: ");
     scanf("%d", &divisor);
-
+    
     printf("Division=%d\n", (dividendo/divisor));
 
     exit(0);

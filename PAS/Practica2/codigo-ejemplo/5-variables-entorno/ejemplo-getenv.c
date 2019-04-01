@@ -13,7 +13,7 @@ int main(void)
 
 	 //Si el valor devuelto en value es "ES" imprime Español, sino imprime INGLES.
     value = getenv(lang);
-
+	 
     if (strstr(value,"ES"))
     {
         printf("\nLa carpeta del usuario/a es: %s\n", getenv(home));

@@ -10,12 +10,12 @@
 #define MAX_SIZE    5
 #define QUEUE_NAME  "/una_cola"
 
-int main()
+int main() 
 {
 	// Descriptor de la cola
 	mqd_t mq;
 	// Buffer para la lectura/escritura
-	char buffer[MAX_SIZE + 1];
+	char buffer[MAX_SIZE];
 	// Atributos de la cola
 	struct mq_attr attr;
 	// Resultado de las operaciones
@@ -26,9 +26,9 @@ int main()
 	// Numero aleatorio a generar
 	int numeroAleatorio;
 
-	// Inicializar los atributos de la cola.
+	// Inicializar los atributos de la cola. 
 	attr.mq_maxmsg = 10;        // Maximo número de mensajes
-	attr.mq_msgsize = MAX_SIZE; // Maximo tamaño de un mensaje
+	attr.mq_msgsize = MAX_SIZE; // Maximo tamaño de un mensaje. Tener en cuenta que debe incluir el '/0'
 
 	// Realizar el fork
 	rf = fork();
@@ -38,7 +38,7 @@ int main()
 		case -1:
 			printf ("No he podido crear el proceso hijo \n");
 			exit(1);
-
+		
 		case 0: // Hijo. El hijo solo se encargará de escribir.
 
 			/* Apertura de la cola
@@ -46,7 +46,8 @@ int main()
 			   O_RDWR: lectura/escritura
 			   O_RDONLY: solo lectura
 			   O_WRONLY: solo escritura
-			   0644: permisos rw-r--r--
+			   0644: permisos rw-r--r--  
+			         permisos de lectura y escritura para el propietario, y de sólo lectura para el grupo y para otros
 			   attr: estructura con atributos para la cola  */
 			mq = mq_open(QUEUE_NAME, O_CREAT | O_WRONLY, 0644, &attr);
 
@@ -56,13 +57,13 @@ int main()
 				exit(-1);
 			}
 			printf ("[HIJO]: mi PID es %d y mi PPID es %d\n", getpid(), getppid());
-
+			
 			/* Rellenamos el buffer que vamos a enviar
 			   Semilla de los números aleatorios, establecida a la hora actual*/
 			srand(time(NULL));
 			// Número aleatorio entre 0 y 4999
-			numeroAleatorio = rand()%5000;
-			sprintf(buffer,"%d",numeroAleatorio);
+			numeroAleatorio = rand()%5000;			
+			sprintf(buffer,"%d",numeroAleatorio); // La funcion sprintf escribe en una cadena el valor indicado y añade el '/0'.
 			printf("[HIJO]: generado el mensaje \"%s\"\n", buffer);
 
 			// Mandamos el mensaje
@@ -82,12 +83,12 @@ int main()
 				exit(-1);
 			}
 			break; //Saldría del switch()
-
+		
 		default: // Padre. El padre solo se encargará de leer
 
 			/* Apertura de la cola */
 			mq = mq_open(QUEUE_NAME, O_CREAT | O_RDONLY, 0644, &attr);
-
+			
 			if(mq==-1)
 			{
 				perror("[PADRE]: Error en la apertura de la cola");
@@ -102,9 +103,9 @@ int main()
 			if(resultado <= 0)
 			{
 				perror("[PADRE]: Error al recibir el mensaje");
-				exit(-1);
+				exit(-1);			
 			}
-
+			
 			// Imprimimos el mensaje recibido
 			printf("[PADRE]: el mensaje recibido es \"%s\"\n", buffer);
 
@@ -122,11 +123,11 @@ int main()
 				perror("[PADRE]: Error eliminando la cola");
 				exit(-1);
 			}
-
+      
     	/*Espera del padre a los hijos*/
-	   while ( (flag=wait(&status)) > 0 )
+	   while ( (flag=wait(&status)) > 0 ) 
 	   {
-		   if (WIFEXITED(status))
+		   if (WIFEXITED(status)) 
 		   {
 			   printf("Proceso Padre, Hijo con PID %ld finalizado, status = %d\n", (long int)flag, WEXITSTATUS(status));
 		   } else if (WIFSIGNALED(status)) {  //Para seniales como las de finalizar o matar
@@ -134,7 +135,7 @@ int main()
 		   } else if (WIFSTOPPED(status)) { //Para cuando se para un proceso. Al usar wait() en vez de waitpid() no nos sirve.
 			   printf("Proceso Padre, Hijo con PID %ld parado al recibir la señal %d\n", (long int)flag,WSTOPSIG(status));
 		   } else if (WIFCONTINUED(status)){ //Para cuando se reanuda un proceso parado. Al usar wait() en vez de waitpid() no nos sirve.
-			   printf("Proceso Padre, Hijo con PID %ld reanudado\n",(long int) flag);
+			   printf("Proceso Padre, Hijo con PID %ld reanudado\n",(long int) flag);		  
 		   }
 	   }
 	   if (flag==(pid_t)-1 && errno==ECHILD)
@@ -146,6 +147,6 @@ int main()
 		   printf("Error en la invocacion de wait o la llamada ha sido interrumpida por una señal.\n");
 		   exit(EXIT_FAILURE);
 	   }
-	}
+	}   	 	 
 	exit(0);
 }

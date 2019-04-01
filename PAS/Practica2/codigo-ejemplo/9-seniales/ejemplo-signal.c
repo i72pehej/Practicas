@@ -1,8 +1,8 @@
 /*
-Utilizando el comando kill, prueba a mandar señales a este programa.
+Utilizando el comando kill, prueba a mandar señales a este programa. 
 Ejecuta el programa en el background ($ ./ejemplo-signal &), o simplemente dejalo ejecutando en un
 terminal y abre otro para el envio de señales.
-
+   
 Luego manda señales al proceso, por ejemplo:
 kill -SIGHUP pid
 kill -SIGINT pid
@@ -12,7 +12,7 @@ kill -SIGTERM pid
 El pid del último proceso ejecutado en backgroud se puede obtener en bash con $! o ps.
 Si lo has dejado ejecutando en un terminal abre el "Monitor de Sistema" y busca su PID.
 
-Prueba a mandar la señal por defecto:
+Prueba a mandar la señal por defecto: 
 kill pid
 ¿Con cuál de las señales mencionadas anteriormente se corresponde la señal por defecto?
 
@@ -40,7 +40,7 @@ Enteros asociados a las macros de señales:
 /* Este será nuestro manejador (personalizado) de señales SIGINT.
    SIGINT se genera cuando el usuario pulsa Ctrl-C.
    El comportamiento por defecto de un programa al pulsar Ctrl-C es salir.
-   Con nuestro nuevo manejador, no saldrá.
+   Con nuestro nuevo manejador, no saldrá. 
 */
 void mi_manejador_sigint(int signal)
 {
@@ -81,11 +81,11 @@ void mi_manejador_sigkill(int signal)
 int main()
 {
 	/* Utilizar la función signal() para asociar nuestras funciones a las señales SIGINT, SIGHUP y SIGTERM */
-
-	/* Si la solicitud de tratamiento de senial se puede llevar a cabo, la funcion signal() devolverá
+	 
+	/* Si la solicitud de tratamiento de senial se puede llevar a cabo, la funcion signal() devolverá 
 	el nombre de la función (* void) que la tratará, en caso contrario se devuelve el valor de la macro
-	SIG_ERR y se pone errno a un valor positivo*/
-
+	SIG_ERR y se pone errno a un valor positivo*/ 
+	  
     if (signal(SIGINT, mi_manejador_sigint) == SIG_ERR)
         printf("No puedo asociar la señal SIGINT al manejador!\n");
     if (signal(SIGHUP, mi_manejador_sighup) == SIG_ERR)
@@ -103,4 +103,4 @@ int main()
 
     /* exit */
     exit(0);  //¿Llegaremos aquí?
-}
+} 

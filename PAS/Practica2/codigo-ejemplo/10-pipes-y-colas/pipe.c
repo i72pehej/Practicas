@@ -36,14 +36,14 @@ switch (fork())
 			exit(EXIT_FAILURE);
 		}
 
-		// Leer usando READ
+		// Leer usando READ. Es una llamada bloqueante.
 		nbytes = read(fildes[0], buf, BSIZE);
 		if (nbytes == -1)
 		{
 			perror("Error en read");
 			exit(EXIT_FAILURE);
 		}
-		else if (nbytes == 0) //read() no ha leido nada -> Se ha llegado a EOF -> El padre ha cerrado la tuberia
+		else if (nbytes == 0) //read() no ha leido nada -> Se llegaría a FEOF porque el padre habría cerrado la tuberia.
 			printf("[HIJO]: Detecto que mi padre ha cerrado la tuberia...\n");
 		else
 			printf("[HIJO]: Leido %s de la tuberia.\n", buf);
@@ -60,6 +60,7 @@ switch (fork())
 
 
 	default: // El padre escribe en la tubería
+
 		// No se necesita leer
 		if (close(fildes[0]) == -1)
 		{
@@ -68,13 +69,13 @@ switch (fork())
 		}
 
 		// Escribimos datos en la tubería
-		if ( write(fildes[1], "Hola Mundo!!", 14) == -1)
+		if (write(fildes[1], "Hola Mundo!!", 14) == -1)
 		{
 			perror("Error en write");
 			exit(EXIT_FAILURE);
 		}
 
-		// El hijo verá FEOF (por hacer close)
+		// El hijo verá FEOF si posterior a esta llamada close del padre hiciera una read.
 		if (close(fildes[1]) == -1)
 		{
 			perror("Error en close");

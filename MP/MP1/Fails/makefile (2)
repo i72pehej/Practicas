@@ -1,0 +1,21 @@
+#Fichero Makefile-Prácticas 4.
+
+CFLAGS = -Wall -O3
+
+#---------------------------------------------------
+all: Ej1.x clean
+#---------------------------------------------------
+Ej1.x: Ej1.o funciones1.o funciones1.h
+	@echo
+	@echo Creando el ejecutable 'Ej1.x' . . .
+	gcc $(CFLAGS) -o $@ $^
+
+%.o: %.c
+	gcc $(CFLAGS) -o $@ $<
+#---------------------------------------------------
+.PHONY:
+clean:
+	@echo
+	@echo Borrando elementos innecesarios . . .
+	@rm -f *.o
+#---------------------------------------------------

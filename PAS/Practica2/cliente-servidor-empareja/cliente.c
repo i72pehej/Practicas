@@ -57,7 +57,7 @@ int main(int argc, char **argv)
 	int must_stop = 0;
 	printf("Mandando mensajes al servidor (escribir \"%s\" para parar):\n", MSG_STOP);
 
-	do
+	do 
 	{
 		printf("> ");
 
@@ -68,23 +68,23 @@ int main(int argc, char **argv)
 
 		/* Leer por teclado. Según la documentación, fgets lo hace de esta manera:
 		It stops when either (n-1) characters are read, the newline character is read,
-		or the end-of-file is reached, whichever comes first.
+		or the end-of-file is reached, whichever comes first. 
 		Automáticamente fgets inserta el fin de cadena '\0'
 		*/
 		fgets(buffer, MAX_SIZE, stdin);
 
 		/* //Descartar el \n del final
-		if(buffer[strlen(buffer)-1] == '\n')
+		if(buffer[strlen(buffer)-1] == '\n') 
 			buffer[strlen(buffer)-1] = '\0';
 		*/
-
+		
 		// Enviar y comprobar si el mensaje se manda
 		if(mq_send(mq_server, buffer, MAX_SIZE, 0) != 0)
 		{
 			perror("Error al enviar el mensaje");
 			exit(EXIT_FAILURE);
 		}
-
+	
 		if(strncmp(buffer, MSG_STOP, strlen(MSG_STOP))==0)
 			must_stop=1;
 		else
@@ -99,10 +99,10 @@ int main(int argc, char **argv)
 				perror("Error al recibir el mensaje");
 				exit(EXIT_FAILURE);
 			}
-
+			
 			// Cerrar la cadena
-			//buffer[bytes_read] = '\0';
-
+			//buffer[bytes_read] = '\0'; 
+			 
 			printf("Recibido el mensaje: %s\n", buffer);
 			//Si recibo un exit del servidor es que ha habido fallo en el marching.
 			if(strncmp(buffer, MSG_STOP, strlen(MSG_STOP))==0)
@@ -114,6 +114,8 @@ int main(int argc, char **argv)
 	finPrograma(-1);
 	exit(EXIT_SUCCESS);
 }
+
+
 
 
 void finPrograma(int value)
@@ -129,16 +131,16 @@ void finPrograma(int value)
 			exit(EXIT_FAILURE);
 		}
 	}
-
+	
 	if(mq_server!=-1)
 	{
 		// Buffer para intercambiar mensajes
 		char buffer[MAX_SIZE];
-
+		
 		//Finalizar el programa (exit). Se lo enviamos al servidor
 		//sprintf(buffer,"%s",MSG_STOP);
 		strcpy(buffer,MSG_STOP);
-
+		
 		// Enviar y comprobar si el mensaje se manda
 		if(mq_send(mq_server, buffer, MAX_SIZE, 0) != 0)
 		{

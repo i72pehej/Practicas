@@ -11,6 +11,7 @@
 #include <cmath>  // Para usar la funciones pow y std::abs.
 #include <cassert>  // Para controlar las pre y post condiciones mediante asertos.
 #include <stdlib.h>  // Para las funciones exit.
+#include <stdio.h>	//Para el printf.
 
 #define COTA_ERROR 1.0e-6  //!< Cota de error para la comparación números reales.
 
@@ -31,6 +32,18 @@ class Monomio {
 	//! \name Funciones o métodos públicos de la clase Monomio.
 	public:
 		//! \name Constructores de la clase Monomio.
+
+		/*!
+			\brief     Constructor de la clase monomio, introduciendo  coeficiente y grado.
+			\warning   Se requiere el uso de asertos para comprobar las pre y post condiciones.
+			\param     coeficiente: objeto de tipo real pasado con valor inicial 0.0.
+			\param     grado: objeto de tipo entero pasado con valor inicial 0.
+			\pre			 El grado debe ser mayor o igual que 0.
+			\post	     El coeficiente del nuevo monomio debe ser igual al valor introducido.
+			\post	     El grado del nuevo monomio debe ser igual al valor introducido.
+			\note	     Se debe utilizar COTA_ERROR para controlar la precisión de los números reales.
+			\sa        inline Monomio(Monomio &m).
+		*/
 		inline Monomio(double coeficiente = 0.0, int grado = 0) {
 			#ifndef NDEBUG
 				assert(grado >= 0);
@@ -46,6 +59,15 @@ class Monomio {
 		}
 
 
+		/*!
+			\brief     Constructor de la clase monomio a partir de otro monomio.
+			\warning   Se requiere el uso de asertos para comprobar las pre y post condiciones.
+			\param     m: objeto de tipo monomio pasado como referencia.
+			\post	     El coeficiente del nuevo monomio debe ser igual al valor introducido.
+			\post	     El grado del nuevo monomio debe ser igual al valor introducido.
+			\note	     Se debe utilizar COTA_ERROR para controlar la precisión de los números reales.
+			\sa        inline Monomio(double coeficiente = 0.0, int grado = 0).
+		*/
 		inline Monomio(Monomio &m) {
 			setCoeficiente(m.getCoeficiente());
 			setGrado(m.getGrado());
@@ -57,11 +79,38 @@ class Monomio {
 		}
 
 
+////////////////////////////////////////////////////////////////////////////////
+
+
 		//! \name Observadores: funciones de consulta de la clase Monomio.
+
+		/*!
+			\brief     Observador del coeficiente de la clase monomio.
+			\sa        inline int getGrado().
+		*/
 		inline double getCoeficiente() const {return coeficiente_;}
+
+
+		/*!
+			\brief     Observador del grado de la clase monomio.
+			\sa        inline int getCoeficiente().
+		*/
 		inline int getGrado() const {return grado_;}
 
+
+////////////////////////////////////////////////////////////////////////////////
+
+
 		//! \name Funciones de modificación de la clase Monomio.
+
+		/*!
+			\brief     Modificador del coeficiente de la clase monomio.
+			\warning   Se requiere el uso de asertos para comprobar las pre y post condiciones.
+			\param     coeficiente: objeto de tipo real.
+			\post	     El coeficiente del nuevo monomio debe ser igual al valor introducido.
+			\note	     Se debe utilizar COTA_ERROR para controlar la precisión de los números reales.
+			\sa        inline void setGrado(int grado).
+		*/
 		inline void setCoeficiente(double coeficiente) {
 			coeficiente_ = coeficiente;
 
@@ -71,6 +120,14 @@ class Monomio {
 		}
 
 
+		/*!
+			\brief     Modificador del grado de la clase monomio.
+			\warning   Se requiere el uso de asertos para comprobar las pre y post condiciones.
+			\param     grado: objeto de tipo entero.
+			\pre			 El grado debe ser mayor o igual que 0.
+			\post	     El grado del nuevo monomio debe ser igual al valor introducido.
+			\sa        inline void setCoeficiente(double coeficiente).
+		*/
 		inline void setGrado(int grado) {
 			#ifndef NDEBUG
 				assert(grado >= 0);
@@ -96,7 +153,6 @@ class Monomio {
 		\attention Se sobrecarga el operador de asignación "=".
 		\warning   Se requiere que las funciones de acceso getCoeficiente y getGrado tengan el modificador const.
 		\param     m: objeto de tipo monomio pasado como referencia constante.
-		\param     coeficiente: objeto de tipo real pasado como referencia constante.
 		\post	     El coeficiente del monomio es igual al coeficiente del monomio "m".
 		\post	     El grado del monomio es igual al grado del monomio "m".
 		\note	     Se debe utilizar COTA_ERROR para controlar la precisión de los números reales.
@@ -109,7 +165,6 @@ class Monomio {
 			\brief     Operador de asignación: operador que modifica el grado a 0 y el coeficiente a "coeficiente".
 			\attention Se sobrecarga el operador de asignación "=".
 			\warning   Se requiere que las funciones de acceso getCoeficiente y getGrado tengan el modificador const.
-			\param     m: objeto de tipo monomio pasado como referencia constante.
 			\param     coeficiente: objeto de tipo real pasado como referencia constante.
 			\post	     El coeficiente del monomio es igual al coeficiente del monomio "m".
 			\post	     El grado del monomio es igual al grado del monomio "m".
