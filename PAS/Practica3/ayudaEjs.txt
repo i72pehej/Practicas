@@ -1,0 +1,88 @@
+EJ1
+
+cant1=$(find $1 -name "*.c" | wc -l)
+cant1=$(find $1 -name "*.h" | wc -l)
+echo "Tenemos $cant fichero .. . .. "
+for x in $(find $1 -type F -name "*.c" -o -type F -name "*.h")
+do
+echo "El fichero $x tiene $(cat $x | wc -l).... "
+done | -nr -k 8
+
+
+EJ2 * FECHA DE MODIFICACION *
+
+echo "nombre, longitud usuario, fecha mod, fecha acceso, tamaño, bloques, permisos, exe o no"
+for x in $(find $1 -size + $2c -type F -o -size $2c -type F)
+do longitud=$(stat -c %u $x | wc -m) -1
+echo "$(basename $x)", $(lonitud), $(), $(stat -e %x $x), .....
+done
+
+
+Ej3
+
+mkdir peq
+for x in $(find $1 -size "-$umbral1"c -type F)
+do
+cp $x peq
+done
+
+
+Ej4
+
+echo "El nº args en carpeta es: $(find $1 -maxdepth 1 -type F | wc -l)"
+            awk -> filtro salida por columnas/filas
+echo "$(who | awk '{print $1}' | sort | uniq)"
+read . .. . .. . .. -> c
+
+echo "El caracater $c aparece .."
+
+for x in $(find)
+do
+echo "$(basename $x)"
+done | grep $c -o | wc -l
+
+echo "veces en nombre...... . .. . ."
+
+
+
+EJ5
+
+date=$(date +%s) -> Segundos que han pasado desde 1/1/1970
+for x in $(find copia.seg -type F)
+do
+modif=$(stat $x -c %X)
+time=$date-$modif
+if [$time -get 200]
+then
+rm -F $x
+fi
+done
+
+
+
+tar -czF copa. . .. / . . .. /. . .  -$date.tar.gz $*
+
+
+EJ6
+
+function listararchivos()
+{
+echo "<ul>"
+for x in $(find $1 -maxdepth 1)
+do
+if [ .. .. .. . .. directorio o archivo ???]
+then
+echo "<li><strong>$x</strong></li>"
+fi
+done
+echo "</ul>"
+}
+
+echo "<html>"
+echo "<head>"
+echo "<title><h3>listado dir de $1</h3></title>"
+echo "</head>"
+echo "<body>"
+listararchivos $1
+echo "</body>"
+echo "</html>"
