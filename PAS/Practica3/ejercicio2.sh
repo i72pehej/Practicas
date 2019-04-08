@@ -1,4 +1,5 @@
 #!/bin/bash
+
 echo "Nombre, Longitud nombre usuario, Fecha de modificación, Fecha de acceso, Tamaño, Bloques en memoria, Permisos, Ejecutable (SI/NO)"
 if [ -d "$1" -a -n "$2" -a !$* ]; then
   for x in $(find $1 -size +$2c -type f -o -size $2c -type f); do
