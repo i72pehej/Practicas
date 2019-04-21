@@ -15,14 +15,14 @@ if [ -d "$1" -a $# -eq 2 ]; then
       ejecutable=0
     fi
 
-    echo $(basename $x), $longitud, $(stat -c %y $x), $(stat -c %x $x), $(stat -c %s $x), $(stat -c %b $x), $(stat -c %A $x), $ejecutable
+    echo $( basename $x ), $longitud, $( stat -c %y $x ), $( stat -c %x $x ), $( stat -c %s $x ), $( stat -c %b $x ), $( stat -c %A $x ), $ejecutable
   done | sort -n -k5 -t ";"
 
 #Comprobamos que el primer argumento sea un directorio y que se haya introducido 1 argumento.
 elif [ -d "$1" -a $# -eq 1 ]; then
-  for x in $(find $1 -type f); do
+  for x in $( find $1 -type f ); do
     #Con stat -c obtenemos el estado del archivo siguiendo un formato que nosotros asignamos. Con %u obtenemos el usuario. Con wc -m contamos los caracteres.
-    longitud=$(stat -c %u $x | wc -m)-1
+    longitud=$( stat -c %u $x | wc -m )-1
 
     #Comprobamos que sea un ejecutable con -x.
     if [ -x $x ]; then
@@ -31,7 +31,7 @@ elif [ -d "$1" -a $# -eq 1 ]; then
       ejecutable=0
     fi
 
-    echo $(basename $x), $longitud, $(stat -c %y $x), $(stat -c %x $x), $(stat -c %s $x), $(stat -c %b $x), $(stat -c %A $x), $ejecutable
+    echo $( basename $x ), $longitud, $( stat -c %y $x ), $( stat -c %x $x ), $( stat -c %s $x ), $( stat -c %b $x ), $( stat -c %A $x ), $ejecutable
   done | sort -n -k5 -t ";"
 
 else
