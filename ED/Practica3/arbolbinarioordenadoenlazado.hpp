@@ -123,17 +123,17 @@ namespace ed {
 
 			// Establece el valor informativo del nodo actual.
 			void setInfo(const G &info) {
-				this -> getInfo() = info;
+				this -> _info = info;
 			}
 
 			// Establece el puntero al hijo izquierdo del nodo actual.
 			void setIzquierdo(NodoArbolBinario *n) {
-				this -> getIzquierdo() = n -> getIzquierdo();
+				this -> _izquierdo = n -> getIzquierdo();
 			}
 
 			// Establece el puntero al hijo derecho del nodo actual.
 			void setDerecho(NodoArbolBinario *n) {
-				this -> getDerecho() = n -> getDerecho();
+				this -> _derecho = n -> getDerecho();
 			}
 
 			// Operador de asignación. Operador que copia el nodo "n" en el nodo actual.
@@ -165,9 +165,9 @@ namespace ed {
 
 ////////////////////////////////////////////////////////////////////////////////
 
-		NodoArbolBinario * _raiz; /*!<La raiz del árbol*/
-		NodoArbolBinario * _actual; /*!<Cursor al nodo actual*/
-		NodoArbolBinario * _padre; /*!<Cursor al nodo padre*/
+		NodoArbolBinario *_raiz; /*!<La raiz del árbol*/
+		NodoArbolBinario *_actual; /*!<Cursor al nodo actual*/
+		NodoArbolBinario *_padre; /*!<Cursor al nodo padre*/
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -206,7 +206,7 @@ namespace ed {
 
 		// Destructor.
 		~ArbolBinarioOrdenadoEnlazado () {
-			if (not this -> estaVacio())
+			if (not (this -> estaVacio()))
 			this -> borrarArbol();
 			cout << "Destructor Usado \n";
 		}
@@ -246,44 +246,58 @@ namespace ed {
 
 		// Inserta un elemento en el árbol, el cual deberá mantener el orden.
 		bool insertar(const G &x) {
+			bool insertado = false;
+
 			// Si el árbol se encuentra vacío, creamos un nodo raíz con el elemento.
-			if (this -> estaVacio()) {this -> _raiz = NodoArbolBinario(x);}
+			if (this -> estaVacio()) {this -> _raiz = new NodoArbolBinario(x);}
 			else {
-				bool insertado = false;
+				// Creamos un nodo temporal = raíz, para no modificar la raíz.
+				NodoArbolBinario *tmp;
+				tmp = this -> _raiz;
 
-				while (/* condition */) {
-					if (/* condition */) {
-						if (/* condition */) {
-							/* code */
-						}
+				while (not (insertado)) {
+					// Si el valor a insertar es menor al valor del nodo actual...
+					if (x < tmp -> getInfo()) {
+						// Y si el nodo actual tiene hijo izquierdo, se baja al hijo.
+						if (tmp -> getIzquierdo()) {tmp = tmp -> getIzquierdo();}
 
+						// En caso de no tener hijo izquierdo, se inserta un nuevo nodo.
 						else {
-							/* code */
+							NodoArbolBinario *nuevoNodo;
+							nuevoNodo -> setInfo(x);
+							tmp -> setIzquierdo(nuevoNodo);
+							insertado = true;
 						}
 					}
 
+					// En caso contrario, el valor a insertar es mayor al valor del nodo actual...
 					else {
-						if (/* condition */) {
-							/* code */
-						}
+						// Y si el nodo actual tiene hijo derecho, se baja al hijo.
+						if (tmp -> getDerecho()) {tmp = tmp -> getDerecho();}
 
+						// En caso de no tener hijo derecho, se inserta un nuevo nodo.
 						else {
-							/* code */
+							NodoArbolBinario *nuevoNodo;
+							nuevoNodo -> setInfo(x);
+							tmp -> setDerecho(nuevoNodo);
+							insertado = true;
 						}
 					}
 				}
+
+				return insertado;
 			}
 
 			// Postcondición: El elemento debe estar en el árbol. El árbol debe estar ordenado.
 
-			return false;
+			return insertado;
 		}
 
 		// Elimina el árbol por completo.
 		void borrarArbol() {
 			// Precondición: El árbol no puede estar vacío.
 			#ifndef NDEBUG
-				assert(not this -> estaVacio());
+				assert(not (this -> estaVacio()));
 			#endif
 
 			this -> _raiz 	= NULL;
@@ -299,10 +313,37 @@ namespace ed {
 		// Elimina el nodo apuntado por “_actual”.
 		bool borrar() {
 			// Precondición: “_actual” debe apuntar a algún nodo.
+			#ifndef NDEBUG
+				assert(this -> existeActual());
+			#endif
 
-			// TODO
+			bool intercambio = true;
+			if (/* condition */) {
+				/* code */
+			} else if (/* condition */) {
+				/* code */
+			} else if (/* condition */) {
+				/* code */
+			} else {
+				/* code */
+			}
+
+			if (/* condition */) {
+				if (/* condition */) {
+					/* code */
+				} else if (/* condition */) {
+					/* code */
+				} else {
+					/* code */
+				}
+			} else {
+				/* code */
+			}
 
 			// Postcondición: El elemento borrado no debe existir.
+			#ifndef NDEBUG
+				assert(buscar(this -> _actual -> getInfo()));
+			#endif
 
 			return false;
 		}
@@ -330,36 +371,40 @@ namespace ed {
 
 		// Busca un elemento en el árbol y actualiza el cursor de “_actual” y “_padre” si lo encuentra.
 		bool buscar(const G &x) {
-			this -> _actual = this -> _raiz;
-			this -> _padre = NULL;
-			bool encontrado = false;
+			// Si el árbol está vacío, no se puede buscar.
+			if (this -> estaVacio()) {return false;}
+			else {
+				this -> _actual = this -> _raiz;
+				this -> _padre = NULL;
+				bool encontrado = false;
 
-			// Mientras se encuentren elementos y no se encuentre el elemento buscado...
-			while (/*(this -> _actual != NULL)*/ (existeActual()) && (not encontrado)) {
-				// Si el elemento buscado es menor que el del nodo actual, se busca por la izquierda.
-				if (x < actual()) {
-					this -> _padre = this -> _actual;
-					if (this -> _actual -> getIzquierdo()) {this -> _actual = this -> _actual -> getIzquierdo();}
-					else {this -> _actual = this -> _raiz;}
+				// Mientras se encuentren elementos y no se encuentre el elemento buscado...
+				while (/*(this -> _actual != NULL)*/ (existeActual()) && (not (encontrado))) {
+					// Si el elemento buscado es menor que el del nodo actual, se busca por la izquierda.
+					if (x < actual()) {
+						this -> _padre = this -> _actual;
+						if (this -> _actual -> getIzquierdo()) {this -> _actual = this -> _actual -> getIzquierdo();}
+						else {this -> _actual = this -> _raiz;}
+					}
+
+					// Si el elemento buscado es mayor que el del nodo actual, se busca por la derecha.
+					else if (x > actual()) {
+						this -> _padre = this -> _actual;
+						if (this -> _actual -> getDerecho()) {this -> _actual = this -> _actual -> getDerecho();}
+						else {this -> _actual = this -> _raiz;}
+					}
+
+					// En caso de no ser ni menor ni mayor, es igual, es decir, se ha encontrado.
+					else {encontrado = true;}
 				}
 
-				// Si el elemento buscado es mayor que el del nodo actual, se busca por la derecha.
-				else if (x > actual()) {
-					this -> _padre = this -> _actual;
-					if (this -> _actual -> getDerecho()) {this -> _actual = this -> _actual -> getDerecho();}
-					else {this -> _actual = this -> _raiz;}
-				}
-
-				// En caso de no ser ni menor ni mayor, es igual, es decir, se ha encontrado.
-				else {encontrado = true;}
-			}
-
-			// Postcondición: “_actual” debe apuntar al nodo encontrado, si lo encuentra.
-			#ifndef NDEBUG
+				// Postcondición: “_actual” debe apuntar al nodo encontrado, si lo encuentra.
+				#ifndef NDEBUG
 				if (encontrado) {assert(actual() == x);}
-			#endif
+				#endif
 
-			return encontrado;
+				return encontrado;
+			}
 		}
 
 		// Comprueba si el árbol está vacío.
@@ -373,7 +418,7 @@ namespace ed {
 		G raiz() const {
 			// Precondición: El árbol no puede estar vacío.
 			#ifndef NDEBUG
-				assert(not this -> estaVacio());
+				assert(not (this -> estaVacio()));
 			#endif
 
 			this -> _raiz -> getInfo();
@@ -383,10 +428,10 @@ namespace ed {
 		bool existeActual() const {
 			// Precondición: El árbol no puede estar vacío.
 			#ifndef NDEBUG
-				assert(not this -> estaVacio());
+				assert(not (this -> estaVacio()));
 			#endif
 
-			if (not this -> _actual -> esHoja()) {return true;}
+			if (not (this -> _actual == NULL)) {return true;}
 
 			return false;
 		}
