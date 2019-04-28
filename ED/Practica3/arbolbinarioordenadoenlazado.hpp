@@ -460,7 +460,7 @@ namespace ed {
 				// Se comienza la búsqueda desde la raíz.
 				this -> _actual = this -> _raiz;
 				this -> _padre = NULL;
-
+				
 				// Mientras se encuentren elementos y no se encuentre el elemento buscado...
 				while (this -> _actual != NULL) {
 					// Si el elemento buscado es menor que el del nodo actual, se busca por la izquierda.
@@ -482,18 +482,20 @@ namespace ed {
 					}
 
 					// En caso de no ser ni menor ni mayor, es igual, es decir, se ha encontrado.
-					else {return true;}
+					else {
+						// Postcondición: “_actual” debe apuntar al nodo encontrado, si lo encuentra.
+						#ifndef NDEBUG
+						assert(this -> actual() == x);
+						#endif
+
+						return true;
+					}
 				}
 
 				// Si no se encuentra el elemento, se vuelve al comienzo.
 				this -> _actual = this -> _raiz;
 				this -> _padre = NULL;
 
-				// Postcondición: “_actual” debe apuntar al nodo encontrado, si lo encuentra.
-				#ifndef NDEBUG
-					assert(this -> actual() == x);
-				#endif
-				
 				return false;
 			}
 		}
