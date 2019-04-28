@@ -52,6 +52,8 @@ namespace ed {
 				#endif
 			}
 
+////////////////////////////////////////////////////////////////////////////////
+
 			// Constructor con otro nodo.
 			NodoArbolBinario (const NodoArbolBinario &n) {
 				NodoArbolBinario nuevoNodo = new NodoArbolBinario;
@@ -76,21 +78,29 @@ namespace ed {
 				return this -> _info;
 			}
 
+////////////////////////////////////////////////////////////////////////////////
+
 			// Devuelve el puntero al hijo izquierdo.
 			NodoArbolBinario *getIzquierdo() const {
 				return this -> _izquierdo;
 			}
+
+////////////////////////////////////////////////////////////////////////////////
 
 			// Devuelve el puntero al hijo derecho.
 			NodoArbolBinario *getDerecho() const {
 				return this -> _derecho;
 			}
 
+////////////////////////////////////////////////////////////////////////////////
+
 			// Comprueba que el nodo no tenga hijos.
 			bool esHoja() const {
 				if ((this -> getIzquierdo() == NULL) && (this -> getDerecho() == NULL)) {return true;}
 				else {return false;}
 			}
+
+////////////////////////////////////////////////////////////////////////////////
 
 			// Aplica el operador “op” y delega sobre los hijos para realizar el recorrido en preorden.
 			void recorridoPreOrden (OperadorNodo<G> &operador) const {
@@ -99,12 +109,16 @@ namespace ed {
 				if(getDerecho() != NULL) {getDerecho() -> recorridoPreOrden(operador);}
 			}
 
+////////////////////////////////////////////////////////////////////////////////
+
 			// Aplica el operador “op” y delega sobre los hijos para realizar el recorrido en inorden.
 			void recorridoPostOrden (OperadorNodo<G> &operador) const {
 				if(getIzquierdo() != NULL) {getIzquierdo() -> recorridoPostOrden(operador);}
 				if(getDerecho() != NULL) {getDerecho() -> recorridoPostOrden(operador);}
 				operador.aplicar(getInfo());
 			}
+
+////////////////////////////////////////////////////////////////////////////////
 
 			// Aplica el operador “op” y delega sobre los hijos para realizar el recorrido en postorden.
 			void recorridoInOrden (OperadorNodo<G> &operador) const {
@@ -124,15 +138,21 @@ namespace ed {
 				this -> _info = info;
 			}
 
+////////////////////////////////////////////////////////////////////////////////
+
 			// Establece el puntero al hijo izquierdo del nodo actual.
 			void setIzquierdo(NodoArbolBinario *n) {
 				this -> _izquierdo = n;
 			}
 
+////////////////////////////////////////////////////////////////////////////////
+
 			// Establece el puntero al hijo derecho del nodo actual.
 			void setDerecho(NodoArbolBinario *n) {
 				this -> _derecho = n;
 			}
+
+////////////////////////////////////////////////////////////////////////////////
 
 			// Operador de asignación. Operador que copia el nodo "n" en el nodo actual.
 			NodoArbolBinario & operator=(const NodoArbolBinario &n) {
@@ -189,6 +209,8 @@ namespace ed {
 			#endif
 		}
 
+////////////////////////////////////////////////////////////////////////////////
+
 		// Crea un nuevo árbol a partir de otro.
 		ArbolBinarioOrdenadoEnlazado (const ArbolBinarioOrdenadoEnlazado<G> &a) {
 			ArbolBinarioOrdenadoEnlazado nuevoArbol = new ArbolBinarioOrdenadoEnlazado;
@@ -201,6 +223,8 @@ namespace ed {
 				assert(this -> padre		== a._padre);
 			#endif
 		}
+
+////////////////////////////////////////////////////////////////////////////////
 
 		// Destructor.
 		~ArbolBinarioOrdenadoEnlazado () {
@@ -247,7 +271,7 @@ namespace ed {
 			bool insertado = false;
 
 			// Si el árbol se encuentra vacío, creamos un nodo raíz con el elemento.
-			if (this -> estaVacio()) {this -> _raiz = new NodoArbolBinario(x);}
+			if (this -> estaVacio() == true) {this -> _raiz = new NodoArbolBinario(x);}
 			else {
 				// Se comienza desde la raíz.
 				this -> _padre = NULL;
@@ -299,7 +323,7 @@ namespace ed {
 		void borrarArbol() {
 			// Precondición: El árbol no puede estar vacío.
 			#ifndef NDEBUG
-				assert(not (this -> estaVacio()));
+				assert(this -> estaVacio() == false);
 			#endif
 
 			this -> _raiz 	= NULL;
@@ -308,7 +332,7 @@ namespace ed {
 
 			// Postcondición: El árbol debe estar vacío.
 			#ifndef NDEBUG
-				assert(this -> estaVacio());
+				assert(this -> estaVacio() == true);
 			#endif
 		}
 
@@ -415,7 +439,7 @@ namespace ed {
 			this -> _raiz -> recorridoPostOrden(operador);
 		}
 
-		////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 
 		// Realiza el recorrido inorden del árbol aplicando el operador “op”.
 		void recorridoInOrden (OperadorNodo<G> &operador) const {
@@ -431,7 +455,7 @@ namespace ed {
 		// Busca un elemento en el árbol y actualiza el cursor de “_actual” y “_padre” si lo encuentra.
 		bool buscar(const G &x) {
 			// Si el árbol está vacío, no se puede buscar.
-			if (this -> estaVacio()) {return false;}
+			if (this -> estaVacio() == true) {return false;}
 			else {
 				// Se comienza la búsqueda desde la raíz.
 				this -> _actual = this -> _raiz;
@@ -485,7 +509,7 @@ namespace ed {
 		G raiz() const {
 			// Precondición: El árbol no puede estar vacío.
 			#ifndef NDEBUG
-				assert(not (this -> estaVacio()));
+				assert(this -> estaVacio() == false);
 			#endif
 
 			this -> _raiz -> getInfo();
@@ -497,7 +521,7 @@ namespace ed {
 		bool existeActual() const {
 			// Precondición: El árbol no puede estar vacío.
 			#ifndef NDEBUG
-				assert(not (this -> estaVacio()));
+				assert(this -> estaVacio() == false);
 			#endif
 
 			if (this -> _actual != NULL) {return true;}
