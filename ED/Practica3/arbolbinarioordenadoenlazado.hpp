@@ -88,31 +88,29 @@ namespace ed {
 
 			// Comprueba que el nodo no tenga hijos.
 			bool esHoja() const {
-				if (this -> getIzquierdo()) {return true;}
-				if (this -> getDerecho()) {return true;}
-
-				return false;
+				if ((this -> getIzquierdo() == NULL) && (this -> getDerecho() == NULL)) {return true;}
+				else {return false;}
 			}
 
 			// Aplica el operador “op” y delega sobre los hijos para realizar el recorrido en preorden.
 			void recorridoPreOrden (OperadorNodo<G> &operador) const {
 				operador.aplicar(getInfo());
-				if(getIzquierdo()) {getIzquierdo() -> recorridoPreOrden(operador);}
-				if(getDerecho()) {getDerecho() -> recorridoPreOrden(operador);}
+				if(getIzquierdo() != NULL) {getIzquierdo() -> recorridoPreOrden(operador);}
+				if(getDerecho() != NULL) {getDerecho() -> recorridoPreOrden(operador);}
 			}
 
 			// Aplica el operador “op” y delega sobre los hijos para realizar el recorrido en inorden.
 			void recorridoPostOrden (OperadorNodo<G> &operador) const {
-				if(getIzquierdo()) {getIzquierdo() -> recorridoPostOrden(operador);}
-				if(getDerecho()) {getDerecho() -> recorridoPostOrden(operador);}
+				if(getIzquierdo() != NULL) {getIzquierdo() -> recorridoPostOrden(operador);}
+				if(getDerecho() != NULL) {getDerecho() -> recorridoPostOrden(operador);}
 				operador.aplicar(getInfo());
 			}
 
 			// Aplica el operador “op” y delega sobre los hijos para realizar el recorrido en postorden.
 			void recorridoInOrden (OperadorNodo<G> &operador) const {
-				if(getIzquierdo()) {getIzquierdo() -> recorridoInOrden(operador);}
+				if(getIzquierdo() != NULL) {getIzquierdo() -> recorridoInOrden(operador);}
 				operador.aplicar(getInfo());
-				if(getDerecho()) {getDerecho() -> recorridoInOrden(operador);}
+				if(getDerecho() != NULL) {getDerecho() -> recorridoInOrden(operador);}
 			}
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -128,12 +126,12 @@ namespace ed {
 
 			// Establece el puntero al hijo izquierdo del nodo actual.
 			void setIzquierdo(NodoArbolBinario *n) {
-				this -> _izquierdo = n -> getIzquierdo();
+				this -> _izquierdo = n;
 			}
 
 			// Establece el puntero al hijo derecho del nodo actual.
 			void setDerecho(NodoArbolBinario *n) {
-				this -> _derecho = n -> getDerecho();
+				this -> _derecho = n;
 			}
 
 			// Operador de asignación. Operador que copia el nodo "n" en el nodo actual.
@@ -141,19 +139,19 @@ namespace ed {
 				// Precondición: El nodo “n” debe ser diferente del nodo actual.
 				#ifndef NDEBUG
 					assert(this -> getInfo()			!= n.getInfo());
-					assert(this -> getIzquierdo() != n -> getIzquierdo());
-					assert(this -> getDerecho()		!= n -> getDerecho());
+					assert(this -> getIzquierdo() != n.getIzquierdo());
+					assert(this -> getDerecho()		!= n.getDerecho());
 				#endif
 
-				this.getInfo() = n.getInfo();
-				this -> getIzquierdo() = n -> getIzquierdo();
-				this -> getDerecho() = n -> getDerecho();
+				setInfo(n.getInfo());
+				setIzquierdo(n.getIzquierdo());
+				setDerecho(n.getDerecho());
 
 				// Postcondición: El nodo actual debe ser igual al nodo “n”.
 				#ifndef NDEBUG
 					assert(this -> getInfo()			== n.getInfo());
-					assert(this -> getIzquierdo() == n -> getIzquierdo());
-					assert(this -> getDerecho()		== n -> getDerecho());
+					assert(this -> getIzquierdo() == n.getIzquierdo());
+					assert(this -> getDerecho()		== n.getDerecho());
 				#endif
 			}
 
@@ -198,9 +196,9 @@ namespace ed {
 
 			// El árbol creado es igual al árbol "a".
 			#ifndef NDEBUG
-				assert(this -> _raiz		== a -> _raiz);
-				assert(this -> _actual	== a -> _actual);
-				assert(this -> padre		== a -> _padre);
+				assert(this -> _raiz		== a._raiz);
+				assert(this -> _actual	== a._actual);
+				assert(this -> padre		== a._padre);
 			#endif
 		}
 
@@ -208,7 +206,7 @@ namespace ed {
 		~ArbolBinarioOrdenadoEnlazado () {
 			if (not (this -> estaVacio()))
 			this -> borrarArbol();
-			cout << "Destructor Usado \n";
+			cout << "\tDestructor Usado.\n\n";
 		}
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -221,20 +219,20 @@ namespace ed {
 		ArbolBinarioOrdenadoEnlazado &operator=(const ArbolBinarioOrdenadoEnlazado &a) {
 			// Precondición: El árbol “a” debe ser diferente del árbol actual.
 			#ifndef NDEBUG
-				assert(this -> _raiz		!= a -> _raiz);
-				assert(this -> _actual	!= a -> _actual);
-				assert(this -> _padre		!= a -> _padre);
+				assert(this -> _raiz		!= a._raiz);
+				assert(this -> _actual	!= a._actual);
+				assert(this -> _padre		!= a._padre);
 			#endif
 
-			this -> _raiz		= a -> _raiz;
-			this -> _actual	= a -> _actual;
-			this -> _padre	= a -> _padre;
+			this -> _raiz		= a._raiz;
+			this -> _actual	= a._actual;
+			this -> _padre	= a._padre;
 
 			// Postcondición: El árbol actual debe ser igual al árbol “a”.
 			#ifndef NDEBUG
-				assert(this -> _raiz		== a -> _raiz);
-				assert(this -> _actual	== a -> _actual);
-				assert(this -> _padre		== a -> _padre);
+				assert(this -> _raiz		== a._raiz);
+				assert(this -> _actual	== a._actual);
+				assert(this -> _padre		== a._padre);
 			#endif
 		}
 
@@ -251,47 +249,51 @@ namespace ed {
 			// Si el árbol se encuentra vacío, creamos un nodo raíz con el elemento.
 			if (this -> estaVacio()) {this -> _raiz = new NodoArbolBinario(x);}
 			else {
-				// Creamos un nodo temporal = raíz, para no modificar la raíz.
-				NodoArbolBinario *tmp;
-				tmp = this -> _raiz;
+				// Se comienza desde la raíz.
+				this -> _padre = NULL;
+				this -> _actual = this -> _raiz;
 
 				while (not (insertado)) {
-					// Si el valor a insertar es menor al valor del nodo actual...
-					if (x < tmp -> getInfo()) {
-						// Y si el nodo actual tiene hijo izquierdo, se baja al hijo.
-						if (tmp -> getIzquierdo()) {tmp = tmp -> getIzquierdo();}
+					// Si el valor a insertar es mayor al valor del nodo actual...
+					if (x > this -> actual()) {
+						// Y si el nodo actual tiene hijo derecho, se baja al hijo.
+						if (this -> _actual -> getDerecho()) {
+							this -> _padre = this -> _actual;
+							this -> _actual = this -> _actual -> getDerecho();
+						}
 
-						// En caso de no tener hijo izquierdo, se inserta un nuevo nodo.
+						// En caso de no tener hijo derecho, se inserta un nuevo nodo con el elemento.
 						else {
-							NodoArbolBinario *nuevoNodo;
-							nuevoNodo -> setInfo(x);
-							tmp -> setIzquierdo(nuevoNodo);
+							_actual -> setDerecho(new NodoArbolBinario(x));
 							insertado = true;
 						}
 					}
 
-					// En caso contrario, el valor a insertar es mayor al valor del nodo actual...
+					// En caso contrario, el valor a insertar es menor al valor del nodo actual...
 					else {
-						// Y si el nodo actual tiene hijo derecho, se baja al hijo.
-						if (tmp -> getDerecho()) {tmp = tmp -> getDerecho();}
+						// Y si el nodo actual tiene hijo izquierdo, se baja al hijo.
+						if (this -> _actual -> getIzquierdo()) {
+							this -> _padre = this -> _actual;
+							this -> _actual = this -> _actual -> getIzquierdo();
+						}
 
-						// En caso de no tener hijo derecho, se inserta un nuevo nodo.
+						// En caso de no tener hijo, se inserta un nuevo nodo.
 						else {
-							NodoArbolBinario *nuevoNodo;
-							nuevoNodo -> setInfo(x);
-							tmp -> setDerecho(nuevoNodo);
+							this -> _actual -> setIzquierdo(new NodoArbolBinario(x));
 							insertado = true;
 						}
 					}
 				}
-
-				return insertado;
 			}
 
 			// Postcondición: El elemento debe estar en el árbol. El árbol debe estar ordenado.
-
+			#ifndef NDEBUG
+				assert(buscar(x));
+			#endif
 			return insertado;
 		}
+
+////////////////////////////////////////////////////////////////////////////////
 
 		// Elimina el árbol por completo.
 		void borrarArbol() {
@@ -310,6 +312,8 @@ namespace ed {
 			#endif
 		}
 
+////////////////////////////////////////////////////////////////////////////////
+
 		// Elimina el nodo apuntado por “_actual”.
 		bool borrar() {
 			// Precondición: “_actual” debe apuntar a algún nodo.
@@ -317,46 +321,101 @@ namespace ed {
 				assert(this -> existeActual());
 			#endif
 
-			bool intercambio = true;
-			if (/* condition */) {
-				/* code */
-			} else if (/* condition */) {
-				/* code */
-			} else if (/* condition */) {
-				/* code */
-			} else {
-				/* code */
+			// Caso 0: El nodo a borrar es un nodo hoja.
+			if (this -> _actual -> esHoja()) {
+				// Si el nodo actual es hijo izquierdo, se borra.
+				if (this -> _actual == this -> _padre -> getIzquierdo()) {
+					this -> _padre -> setIzquierdo(NULL);
+					return true;
+				}
+
+				// Si el nodo actual es hijo derecho, se borra.
+				else {
+					this -> _padre -> setDerecho(NULL);
+					return true;
+				}
 			}
 
-			if (/* condition */) {
-				if (/* condition */) {
-					/* code */
-				} else if (/* condition */) {
-					/* code */
-				} else {
-					/* code */
+			// Caso 1: El nodo a borrar sólo tiene hijo derecho, se sustituye por el hijo.
+			else if ((this -> _actual -> getIzquierdo() == NULL) && (this -> _actual -> getDerecho() != NULL)) {
+				// Si el nodo actual es hijo izquierdo del nodo padre, lo sustituimos por el hijo del nodo actual.
+				if (this -> _actual == this -> _padre -> getIzquierdo()) {
+					this -> _padre -> setIzquierdo(this -> _actual -> getDerecho());
+					return true;
 				}
-			} else {
-				/* code */
+
+				// Si el nodo actual es hijo derecho del nodo padre, lo sustituimos por el hijo del nodo actual.
+				else {
+					this -> _padre -> setDerecho(this -> _actual -> getDerecho());
+					return true;
+				}
 			}
+
+			// Caso 2: El nodo a borrar sólo tiene hijo izquierdo, se sustituye por el hijo.
+			else if ((this -> _actual -> getDerecho() == NULL) && (this -> _actual -> getIzquierdo() != NULL)) {
+				// Si el nodo actual es hijo izquierdo del nodo padre, lo sustituimos por el hijo del nodo actual.
+				if (this -> _actual == this -> _padre -> getIzquierdo()) {
+					this -> _padre -> setIzquierdo(this -> _actual -> getIzquierdo());
+					return true;
+				}
+
+				// Si el nodo actual es hijo derecho del nodo padre, lo sustituimos por el hijo del nodo actual.
+				else {
+					this -> _padre -> setDerecho(this -> _actual -> getIzquierdo());
+					return true;
+				}
+			}
+
+			// Caso 3: Tiene ambos hijos, por lo que se realiza un intercambio por el sucesor inmediato.
+			else {
+				// Creamos un nodo auxiliar igual al nodo que se desea borrar para el intercambio.
+				NodoArbolBinario * aux = this -> _actual;
+
+				// Movemos el cursor hasta el nodo sucesor inmediato (un movimiento a la derecha y el resto hacia la izquierda).
+				this -> _padre = this -> _actual;
+				this -> _actual = this -> _actual -> getDerecho();
+
+				while (this -> _actual -> getIzquierdo() != NULL) {
+					this -> _padre = this -> _actual;
+					this -> _actual = this -> _actual -> getIzquierdo();
+				}
+
+				// Intercambio de la información de los nodos.
+				G tmpInfo = aux -> getInfo();
+				aux -> setInfo(this -> _actual -> getInfo());
+				this -> _actual -> setInfo(tmpInfo);
+
+				// Una vez realizado el intercambio, se borra el nodo actual, que ahora es un nodo hoja.
+				borrar();
+			}
+
+			// Para terminar, se dejan los cursores inalterados.
+			this -> _padre = NULL;
+			this -> _actual = this -> _raiz;
 
 			// Postcondición: El elemento borrado no debe existir.
 			#ifndef NDEBUG
-				assert(buscar(this -> _actual -> getInfo()));
+			assert(buscar(this -> _actual -> getInfo()));
 			#endif
 
-			return false;
+			return true;
 		}
+
+////////////////////////////////////////////////////////////////////////////////
 
 		// Realiza el recorrido preorden del árbol aplicando el operador “op”.
 		void recorridoPreOrden (OperadorNodo<G> &operador) const {
 			this -> _raiz -> recorridoPreOrden(operador);
 		}
 
+////////////////////////////////////////////////////////////////////////////////
+
 		// Realiza el recorrido postorden del árbol aplicando el operador “op”.
 		void recorridoPostOrden (OperadorNodo<G> &operador) const {
 			this -> _raiz -> recorridoPostOrden(operador);
 		}
+
+		////////////////////////////////////////////////////////////////////////////////
 
 		// Realiza el recorrido inorden del árbol aplicando el operador “op”.
 		void recorridoInOrden (OperadorNodo<G> &operador) const {
@@ -374,23 +433,28 @@ namespace ed {
 			// Si el árbol está vacío, no se puede buscar.
 			if (this -> estaVacio()) {return false;}
 			else {
+				// Se comienza la búsqueda desde la raíz.
 				this -> _actual = this -> _raiz;
 				this -> _padre = NULL;
 				bool encontrado = false;
 
 				// Mientras se encuentren elementos y no se encuentre el elemento buscado...
-				while (/*(this -> _actual != NULL)*/ (existeActual()) && (not (encontrado))) {
+				while ((this -> _actual != NULL) && (! encontrado)) {
 					// Si el elemento buscado es menor que el del nodo actual, se busca por la izquierda.
 					if (x < actual()) {
 						this -> _padre = this -> _actual;
-						if (this -> _actual -> getIzquierdo()) {this -> _actual = this -> _actual -> getIzquierdo();}
+						// Si tiene hijo izquierdo, se baja por el hijo.
+						if (this -> _actual -> getIzquierdo() != NULL) {this -> _actual = this -> _actual -> getIzquierdo();}
+						// De lo contrario se vuelve a la raíz.
 						else {this -> _actual = this -> _raiz;}
 					}
 
 					// Si el elemento buscado es mayor que el del nodo actual, se busca por la derecha.
 					else if (x > actual()) {
 						this -> _padre = this -> _actual;
-						if (this -> _actual -> getDerecho()) {this -> _actual = this -> _actual -> getDerecho();}
+						// Si tiene hijo derecho, se baja por el hijo.
+						if (this -> _actual -> getDerecho() != NULL) {this -> _actual = this -> _actual -> getDerecho();}
+						// De lo contrario se vuelve a la raíz.
 						else {this -> _actual = this -> _raiz;}
 					}
 
@@ -407,12 +471,15 @@ namespace ed {
 			}
 		}
 
+////////////////////////////////////////////////////////////////////////////////
+
 		// Comprueba si el árbol está vacío.
 		bool estaVacio() const {
-			if ((this -> _raiz == NULL) && (this -> _actual == NULL) && (this -> _padre == NULL)) {return true;}
-
-			return false;
+			if (this -> _raiz == NULL) {return true;}
+			else {return false;}
 		}
+
+////////////////////////////////////////////////////////////////////////////////
 
 		// Obtiene el dato almacenado en la raíz.
 		G raiz() const {
@@ -424,6 +491,8 @@ namespace ed {
 			this -> _raiz -> getInfo();
 		}
 
+////////////////////////////////////////////////////////////////////////////////
+
 		// Comprueba si “_actual” está apuntando a algún nodo.
 		bool existeActual() const {
 			// Precondición: El árbol no puede estar vacío.
@@ -431,10 +500,11 @@ namespace ed {
 				assert(not (this -> estaVacio()));
 			#endif
 
-			if (not (this -> _actual == NULL)) {return true;}
-
-			return false;
+			if (this -> _actual != NULL) {return true;}
+			else {return false;}
 		}
+
+////////////////////////////////////////////////////////////////////////////////
 
 		// Devuelve el dato almacenado por el nodo “_actual”.
 		G actual() const {

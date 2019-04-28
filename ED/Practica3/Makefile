@@ -2,7 +2,7 @@ CPPFLAGS = -g -Wall -ansi
 
 all: main
 
-main: main.cpp persona.cpp persona.hpp arbolbinarioordenadoenlazado.hpp operadornodo.hpp generarpersona.cpp generarpersona.hpp
+main: main.cpp persona.cpp persona.hpp arbolbinarioordenadoenlazado.hpp operadornodo.hpp generarpersona.cpp generarpersona.hpp macros.hpp
 	g++  $(CPPFLAGS) main.cpp persona.cpp generarpersona.cpp -o main.exe
 	@echo
 	@echo " * main. Programa compilado. "
