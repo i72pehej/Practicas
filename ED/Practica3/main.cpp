@@ -52,17 +52,21 @@ int main() {
 		switch (opcion) {
       // Finaliza el programa.
 			case 0:
-				std::cout << BRED;
-				std::cout << "\t[0] Fin del programa.\n" << '\n';
+        std::cout << BICYAN;
+        std::cout << "\t[0] ";
+        std::cout << BIRED;
+        std::cout << "Fin del programa." << '\n';
         std::cout << "\n\tSaliendo del programa . . .\n" << '\n';
 				std::cout << RESET;
 			break;
 
       // Insertar un número de personas, dado por el usuario, en el árbol.
 			case 1:
-			  std::cout << BIBLUE;
-				std::cout << "\t[1] Test insertar." << '\n';
-				std::cout << RESET;
+        std::cout << BICYAN;
+        std::cout << "\t[1] ";
+        std::cout << BIGREEN;
+        std::cout << "Test insertar." << '\n';
+        std::cout << RESET;
 
         insertarPersonas(a);
 
@@ -70,9 +74,11 @@ int main() {
 
       // Comprobar si una persona está en el árbol dados sus datos.
 			case 2:
-			  std::cout << BIBLUE;
-				std::cout << "\t[2] Test buscar." << '\n';
-				std::cout << RESET;
+        std::cout << BICYAN;
+        std::cout << "\t[2] ";
+        std::cout << BIGREEN;
+        std::cout << "Test buscar." << '\n';
+        std::cout << RESET;
 
         buscarPersonas(a);
 
@@ -80,9 +86,11 @@ int main() {
 
       // Mostrar todos los elementos del árbol usando los recorridos Preorden, PostOrden, InOrden.
       case 3:
-			  std::cout << BIBLUE;
-				std::cout << "\t[3] Test recorridos." << '\n';
-				std::cout << RESET;
+        std::cout << BICYAN;
+        std::cout << "\t[3] ";
+        std::cout << BIGREEN;
+        std::cout << "Test recorridos." << '\n';
+        std::cout << RESET;
 
         mostrarArbol(a);
 
@@ -90,9 +98,11 @@ int main() {
 
       // Borrar una persona dados sus datos.
       case 4:
-			  std::cout << BIBLUE;
-				std::cout << "\t[4] Test borrar elemento." << '\n';
-				std::cout << RESET;
+        std::cout << BICYAN;
+        std::cout << "\t[4] ";
+        std::cout << BIGREEN;
+        std::cout << "Test borrar elemento." << '\n';
+        std::cout << RESET;
 
         borrarPersonas(a);
 
@@ -100,9 +110,11 @@ int main() {
 
       // Borrar el árbol completo.
       case 5:
-			  std::cout << BIBLUE;
-				std::cout << "\t[5] Test borrar árbol." << '\n';
-				std::cout << RESET;
+        std::cout << BICYAN;
+        std::cout << "\t[5] ";
+        std::cout << BIGREEN;
+        std::cout << "Test borrar árbol." << '\n';
+        std::cout << RESET;
 
         borrarTodo(a);
 
@@ -124,7 +136,7 @@ int main() {
 
 
       if (opcion != 0) {
-        std::cout << "\tPara mostrar el ";
+        std::cout << "\n\n\tPara mostrar el ";
         std::cout << BIGREEN ;
         std::cout << "menú, ";
         std::cout << RESET;
@@ -200,22 +212,33 @@ void mostrarMenu() {
 void insertarPersonas(ed::ArbolBinarioOrdenadoEnlazado<Persona> &a) {
   int nPersonas = 0;
 
-  std::cout << "\nIntroduza el número de personas que deasea insertar:" << '\n';
+  std::cout << BIYELLOW;
+  std::cout << "\nIntroduza el número de personas que deasea ";
+  std::cout << UYELLOW;
+  std::cout << "insertar";
+  std::cout << RESET;
+  std::cout << ": ";
   std::cin >> nPersonas;
+  std::cout << '\n';
 
   // Control de errores.
   while (nPersonas < 1) {
-    std::cout << "\nPor favor, introduzca un número válido." << '\n';
+    std::cout << BIYELLOW;
+    std::cout << "\nPor favor, introduzca un número válido";
+    std::cout << RESET;
+    std::cout << ": ";
     std::cin >> nPersonas;
+    std::cout << '\n';
   }
 
   // Se generan personas de forma "aleatoria", y se introducen en el árbol.
   for (int i = 0; i < nPersonas; i++) {
-    if (not (a.insertar(generarDatosPersonales()))) {
-      std::cout << "\nHa habido un error al insertar la persona nº <" << (i + 1) << ">." << '\n';
-    }
+    a.insertar(generarDatosPersonales());
+    std::cout << "\tPersona nº <" << (i + 1) << "> insertada correctamente." << '\n';
   }
+  std::cout << BIYELLOW;
   std::cout << "\nTodas las personas deseadas introducidas correctamente." << '\n';
+  std::cout << RESET;
 
   // Pausa
   std::cin.ignore();
@@ -227,12 +250,27 @@ void insertarPersonas(ed::ArbolBinarioOrdenadoEnlazado<Persona> &a) {
 void buscarPersonas(ed::ArbolBinarioOrdenadoEnlazado<Persona> &a) {
   Persona persona;
 
-  std::cout << "\nIntroduza la persona que desea buscar." << '\n';
-  std::cout << "\n<NOMBRE> <APELLIDOS> <DNI>\n" << '\n';
+  std::cout << BIYELLOW;
+  std::cout << "\nIntroduza la persona que desea ";
+  std::cout << UYELLOW;
+  std::cout << "buscar";
+  std::cout << RESET;
+  std::cout << ": " << "\n\n";
   std::cin >> persona;
+  std::cout << '\n';
 
-  if (a.buscar(persona)) {std::cout << "\nLa persona buscada se encuentra en el árbol.\n" << '\n';}
-  else {std::cout << "\nLa persona que busca no se encuentra en el árbol.\n" << '\n';}
+  // Control de errores.
+  if (a.buscar(persona) == false) {
+    std::cout << BIYELLOW;
+    std::cout << "La persona que busca no se encuentra en el árbol." << '\n';
+    std::cout << RESET;
+  }
+
+  else {
+    std::cout << BIYELLOW;
+    std::cout << "La persona buscada se encuentra en el árbol." << '\n';
+    std::cout << RESET;
+  }
 
   // Pausa
   std::cin.ignore();
@@ -242,16 +280,29 @@ void buscarPersonas(ed::ArbolBinarioOrdenadoEnlazado<Persona> &a) {
 
 // Mostrar todos los elementos del árbol usando los recorridos Preorden, PostOrden, InOrden.
 void mostrarArbol(ed::ArbolBinarioOrdenadoEnlazado<Persona> &a) {
-  EscribirNodo<Persona> operador;
+  if (a.estaVacio()) {
+    std::cout << BIYELLOW;
+    std::cout << "\nNo existe información para mostrar." << '\n';
+    std::cout << RESET;
+  }
+  else {
+    EscribirNodo<Persona> operador;
 
-  std::cout << "\n\tRecorrido Pre-orden.\n" << '\n';
-  a.recorridoPreOrden(operador);
+    std::cout << BIYELLOW;
+    std::cout << "\n\tRecorrido Pre-orden.\n" << '\n';
+    std::cout << RESET;
+    a.recorridoPreOrden(operador);
 
-  std::cout << "\n\tRecorrido In-orden.\n" << '\n';
-  a.recorridoInOrden(operador);
+    std::cout << BIYELLOW;
+    std::cout << "\n\tRecorrido In-orden.\n" << '\n';
+    std::cout << RESET;
+    a.recorridoInOrden(operador);
 
-  std::cout << "\n\tRecorrido Post-orden.\n" << '\n';
-  a.recorridoPostOrden(operador);
+    std::cout << BIYELLOW;
+    std::cout << "\n\tRecorrido Post-orden.\n" << '\n';
+    std::cout << RESET;
+    a.recorridoPostOrden(operador);
+  }
 
   // Pausa
   std::cin.ignore();
@@ -263,18 +314,29 @@ void mostrarArbol(ed::ArbolBinarioOrdenadoEnlazado<Persona> &a) {
 void borrarPersonas(ed::ArbolBinarioOrdenadoEnlazado<Persona> &a) {
   Persona persona;
 
-  std::cout << "\nIntroduza la persona que desea borrar." << '\n';
-  std::cout << "\n<NOMBRE> <APELLIDOS> <DNI>\n" << '\n';
+  std::cout << BIYELLOW;
+  std::cout << "\nIntroduza la persona que desea ";
+  std::cout << UYELLOW;
+  std::cout << "borrar";
+  std::cout << RESET;
+  std::cout << ": " << "\n\n";
   std::cin >> persona;
+  std::cout << '\n';
 
   if (a.buscar(persona)) {
-    std::cout << "\nLa persona buscada se encuentra en el árbol.\n" << '\n';
-    std::cout << "\nBorrando persona . . .\n" << '\n';
+    std::cout << BIYELLOW;
+    std::cout << "\nLa persona buscada se encuentra en el árbol." << '\n';
+    std::cout << BIRED;
+    std::cout << "\nBorrando persona . . ." << '\n';
+    std::cout << RESET;
     a.borrar();
   }
   else {
-    std::cout << "\nLa persona que desea borrar no se encuentra en el árbol.\n" << '\n';
-    std::cout << "\nImposible borrar.\n" << '\n';
+    std::cout << BIYELLOW;
+    std::cout << "\nLa persona que desea borrar no se encuentra en el árbol." << '\n';
+    std::cout << BIRED;
+    std::cout << "\nImposible borrar. . ." << '\n';
+    std::cout << RESET;
   }
 
   // Pausa
@@ -293,38 +355,52 @@ void borrarTodo(ed::ArbolBinarioOrdenadoEnlazado<Persona> &a) {
   std::cout << "¿Desea continuar?\n" << '\n';
   std::cout << RESET;
   std::cout << BIRED;
-  std::cout << "[0] Cancelar." << '\n';
+  std::cout << "\t[0] Cancelar." << '\n';
   std::cout << BIGREEN;
-  std::cout << "[1] Aceptar." << '\n';
+  std::cout << "\t[1] Aceptar." << '\n';
   std::cout << BIYELLOW;
   std::cout << "\nOpción: ";
   std::cout << RESET;
   std::cin  >> confirmacion;
 
-  if (confirmacion == 0) {
-    std::cout << "\nCancelando borrado . . .\n" << '\n';
-  }
-  else if (confirmacion == 1) {
-    std::cout << "\nBorrando árbol completo . . .\n" << '\n';
-    a.borrarArbol();
-    std::cout << "\nÁrbol borrado con";
-    std::cout << BIGREEN;
-    std::cout << "éxito.\n" << '\n';
+  // Control de errores.
+  if ((confirmacion != 0) && (confirmacion != 1)) {
+    std::cout << "\nPor favor, seleccione una ";
+    std::cout << UCYAN;
+    std::cout << "opción válida." << '\n';
     std::cout << RESET;
+    std::cout << BIYELLOW;
+    std::cout << "\nOpción: ";
+    std::cout << RESET;
+    std::cin  >> confirmacion;
   }
-  else {
-    // Control de errores.
-    while ((confirmacion != 0) && (confirmacion != 1)) {
-      std::cout << "\nPor favor, seleccione una ";
-      std::cout << UCYAN;
-      std::cout << "opción válida." << '\n';
-      std::cout << RESET;
+
+  if (confirmacion == 0) {
+    std::cout << "\nCancelando borrado . . ." << '\n';
+  }
+
+  if (confirmacion == 1) {
+    std::cout << BIRED;
+    std::cout << "\nBorrando árbol completo . . ." << '\n';
+    std::cout << RESET;
+
+    if (a.estaVacio() == true) {
       std::cout << BIYELLOW;
-      std::cout << "\nOpción: ";
+      std::cout << "\nNo hay árbol que borrar." << '\n';
+      std::cout << BIRED;
+      std::cout << "\nAbortando . . ." << '\n';
       std::cout << RESET;
-      std::cin  >> confirmacion;
+    }
+
+    else {
+      a.borrarArbol();
+      std::cout << "\nÁrbol borrado con ";
+      std::cout << BIGREEN;
+      std::cout << "éxito." << '\n';
+      std::cout << RESET;
     }
   }
+
   std::cin.ignore();
 }
 
