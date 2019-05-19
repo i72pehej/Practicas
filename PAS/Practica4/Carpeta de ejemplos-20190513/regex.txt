@@ -1,0 +1,17 @@
+- Lista de páginas wiki:
+
+ArchLinux: https://wiki.archlinux.org/
+Gentoo: https://wiki.gentoo.org/wiki/Main_Page
+CentOS: http://wiki.centos.org/
+Debian: https://wiki.debian.org/
+Ubuntu: https://wiki.ubuntu.com/
+
+- Fechas de lanzamiento:
+
+Arch Linux: 11-03-2002
+Gentoo: 31/03/2002
+CentOs: 14-05-2004 03:32:38
+Debian: 16/08/1993
+Ubuntu: 20/10/2004
+
+Desde Linux RegularExp.

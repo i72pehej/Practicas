@@ -10,9 +10,10 @@
 using namespace std;
 using namespace ed;
 
-int main()
-{
-	Grafo<string, int> *g;
+int main() {
+	// Grafo grafoAux para que "g" no apunte a un ligar aleatorio.
+	Grafo<string,int> grafoAux = Grafo<string, int>();
+	Grafo<string, int> *g = &grafoAux;
 	int opcion;
 	bool grafoIntroducido = false;
 
@@ -20,35 +21,37 @@ int main()
 		opcion = menu();
 		switch (opcion) {
 			case 1: // Cargar grafo desde fichero
-			if ( grafoIntroducido )
-			(*g).borrarGrafo(); // Si hay un grafo introducido se borra.
-
-			grafoIntroducido = cargarGrafo(g);
-
-			if (grafoIntroducido) {
-				cout << "Grafo cargado correctamente \n";
-				//Prueba de la asignación y del destructor
-				{
-					Grafo<string, int> g1 = *g;
+				if (grafoIntroducido) {
+					// Si hay un grafo introducido se borra.
+					g -> borrarGrafo();
 				}
-			}
-			else
-			cout << "Grafo no cargado \n";
 
-			getchar();
-			getchar();
+				// Comprobación de la carga del grafo.
+				grafoIntroducido = cargarGrafo(g);
+				if (grafoIntroducido) {
+					std::cout << "\n\nGrafo cargado correctamente.\n";
+					g -> mostrarVector();
+					g -> mostrarMatriz();
+					// Prueba de la asignación y del destructor.
+					{
+						Grafo<string, int> g1 = *g;
+					}
+				}
+				else {std::cout << "\nERROR. Grafo no cargado.\n";}
+
+				getchar();
+				getchar();
 			break;
 
-			case 2: //Algoritmo de Floyd
-			if ( grafoIntroducido )
-				algoritmoFloyd(*g);
-			else
-				cout << "Primero tiene que introducir un grafo\n";
-			getchar();
-			getchar();
+			case 2: // Algoritmo de Floyd
+				if (grafoIntroducido) {algoritmoFloyd(*g);}
+				else {std::cout << "\nPrimero tiene que introducir un grafo\n";}
+
+				getchar();
+				getchar();
 			break;
 		}
-	} while (opcion!=0);
+	} while (opcion != 0);
 
 	return 0;
 }
