@@ -1,0 +1,63 @@
+Ej 3º)
+
+arg1: series.txt
+archivos ocultos= ls -a -> Bucle por los archivos y contar caracteres
+for x in $(ls -a $HOME | grep '\.'); do
+  numchar = $(echo "$x" | wc -m)
+  echo "$x $numchar"
+done | sort -k2 -n | grep -E -o '\.* ' //// awk "{print $1}"
+
+Líneas vacías:
+grep -v '^+$' > ficheronombreadad
+
+Listado procesos:
+ps xu -> Los últimos son Time Command, por ahí el PID. Quedarme con las columnas con el SED.
+-------------------------------------------------------------------------------
+
+Ej 4º)
+
+arg1: IP.txt
+arg2: segundos
+ping -c 1 -w $2 IP
+for x in $(cat $1); do
+  ans=$(ping -c 1 -w $1 $x)
+  cosillas que hay que hacer... SED
+  echo "la IP $x respondió en $askld segundos"
+done | sort -k6
+-------------------------------------------------------------------------------
+
+Ej5º)
+
+/proc/cpuinfo
+/proc/momts
+/proc/partitions
+
+sacar el archivo, mirar las columnas y ordenarlas por la que me interese.
+
+SED -> sed -r -n '3,$ s/.....' -> Necesita direccionamiento porque no consideras las lineas de titulos y espacio etc etc etc
+-------------------------------------------------------------------------------
+
+Ej6º)
+
+etc/password
+etc/group
+
+comprobar que ejecutan comandos de bash /bin/bash . . .
+
+oldIFS=$IFS
+IFS=':'
+
+while read -a fila; do
+  grupo -> lo sacas de SED en etc/group basandote en el GID
+  logged -> los sacas del comando WHO debe coincidir con el que está en fila 0. WHO | Grep -c
+  echo -e "\n=========================" \
+           "\nNombre: ${Fila[n]}" \
+           "\nUID: $..."
+            ...
+              ...
+                ...
+                  ...
+
+done < etc/password
+
+IFS=oldIFS
