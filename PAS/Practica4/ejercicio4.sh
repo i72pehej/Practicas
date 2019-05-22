@@ -6,9 +6,21 @@
 # investigar sobre el comando ping para configurarlo de forma que se mande un solo ping. Si la
 # ma´quina a la que env´ıa el ping no esta´ activa, el comando ping devolvera´ un co´digo de error
 # distinto de cero al sistema operativo.
-ping -c 1 -w $2 IP
+
 for x in $(cat $1); do
-  ans=$(ping -c 1 -w $1 $x)
-  cosillas que hay que hacer... SED
+  ans=$(ping -c 1 -W $1 $x)
+  # -c: Número de bloques a enviar. En nuestro caso 1 para hacer el ping.
+  # -W: Tempo que espera para la recepción de una respuesta.
+
+  # Comprobación del resultado devuelto por el ping.
+  if [ $ans -eq 0 ]; then
+    sed 's//'
+  else echo "ERROR."
+  fi
+
+
+
+
+  
   echo "la IP $x respondió en $askld segundos"
 done | sort -k6

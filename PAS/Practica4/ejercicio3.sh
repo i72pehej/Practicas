@@ -8,13 +8,38 @@
 # el fichero exista.
 # Liste por pantalla todos los procesos que tu´ usuario esta´ ejecutando en ese momento. Para
 # cada proceso debera´s mostrar PID, hora en que se lanzo´ y nombre del fichero ejecutable.
-for x in $(ls -a $HOME | grep '\.'); do
-  numchar = $(echo "$x" | wc -m)
-  echo "$x $numchar"
-done | sort -k2 -n | grep -E -o '\.* ' //// awk "{print $1}"
+# Recorremos el archivo HOME y seleccionamos los que comiencen por ".".
 
-# Sin líneas vacías:
-# grep -v '^+$' > ficheronombreadad
-#
-# Listado procesos:
-# ps xu -> Los últimos son Time Command, por ahí el PID. Quedarme con las columnas con el SED.
+for x in $(ls -a $HOME | grep '^\.'); do
+  # Guardamos en numchar el número de caracteres del archivo.
+  numchar=$(echo "$x" | wc -m)
+
+  # Salida con formato <nombre archivo> <número de caracteres>.
+  echo "$x $numchar"
+
+# Ordenamos la salida por el número de caracteres y seleccionamos únicamente el nombre de los archivos.
+done | sort -k2 -n | grep -E -o '^\.+.* '
+
+# ==========================================================
+
+# Control de errores.
+if [ -f "$1" -a $# -eq 1 ]; then
+  echo -e "\nEl fichero a procesar es: $1."
+  echo -e "\nCreando el fichero copia . . ."
+
+  # Seleccionamos lo opuesto a líneas vacías y lo introducimos en un fichero concreto.
+  grep -v '^$' $1 > /home/i72pehej/PracticasV2/PAS/Practica4/$1.sinLineasVacias
+
+  echo -e "\nEl fichero sin líneas vaías se ha guardado en <$1.sinLineasVacias>\n"
+else
+  echo -e "\nERROR. Se necesita añadir un fichero válido.\n"
+fi
+
+# ==========================================================
+
+echo -e "\nListado de procesos ejecutados por el usuario $USER:\n"
+
+# Borramos la primera línea de la salida.
+ps xu | sed '1d'
+
+ps -u $USER -o pid,comm | grep '[0-9]\{1,\}' | sed 's/\([0-9]\{1,\}\)\(.*\)/PID: \"\1\" Ejecutable: \"\2\"/p'
