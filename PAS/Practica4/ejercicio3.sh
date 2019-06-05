@@ -20,7 +20,7 @@ for x in $(ls -a $HOME | grep '^\.'); do
 # Ordenamos la salida por el número de caracteres y seleccionamos únicamente el nombre de los archivos.
 done | sort -k2 -n | grep -E -o '^\.+.* '
 
-# ==========================================================
+echo -e "\n==========================================================\n"
 
 # Control de errores.
 if [ -f "$1" -a $# -eq 1 ]; then
@@ -35,11 +35,9 @@ else
   echo -e "\nERROR. Se necesita añadir un fichero válido.\n"
 fi
 
-# ==========================================================
+echo -e "\n==========================================================\n"
 
-echo -e "\nListado de procesos ejecutados por el usuario $USER:\n"
-
-# Borramos la primera línea de la salida.
-ps xu | sed '1d'
-
-ps -u $USER -o pid,comm | grep '[0-9]\{1,\}' | sed 's/\([0-9]\{1,\}\)\(.*\)/PID: \"\1\" Ejecutable: \"\2\"/p'
+# Filtramos la salida de los procesos en las columnas que deseamos.
+# Eliminamos la primera fila, con los nombres de las columnas.
+# Con el sed seleccionamos lo que queremos sustituir y lo modificamos.
+ps -u $USER -o pid,start,cmd | sed '1d' | sed -r 's/([0-9]{1,}) ([0-9]{2}:[0-9]{2}:[0-9]{2}) (.+)/PID: "\1" Hora: "\2" Ejecutable: "\3"/'

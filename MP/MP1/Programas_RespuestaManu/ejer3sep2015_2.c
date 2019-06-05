@@ -21,13 +21,12 @@ void rellena(struct fraccion *v, int tam){
 }
 
 void imprime(struct fraccion *v, int tam){
-	tam--;
 	if(tam==0){
 		printf("%d/%d\n",v[tam].numerador, v[tam].denominador);
 	}
 	else{
-			printf("%d/%d\n",v[tam].numerador, v[tam].denominador);
-			imprime(v,tam);
+		printf("%d/%d\n",v[tam].numerador, v[tam].denominador);
+		imprime(v,tam--);
 	}
 }
 int mayor(float a, float b){
@@ -52,7 +51,7 @@ void ordena(struct fraccion *v, int tam, int (*p)(float a, float b)){
 	for (int i = 0; i < tam; ++i)
 	{
 		for (int j = 0; j < tam-1-i; ++j)
-		{	
+		{
 			a=(v[j].numerador/v[j].denominador);
 			b=(v[j+1].numerador/v[j+1].denominador);
 			printf("%lf\n",a );
@@ -67,7 +66,7 @@ void ordena(struct fraccion *v, int tam, int (*p)(float a, float b)){
 }
 
 int main(int argc, char  *argv[])
-{	
+{
 	struct fraccion *v;
 	int orden;
 	orden=atoi(argv[1]);

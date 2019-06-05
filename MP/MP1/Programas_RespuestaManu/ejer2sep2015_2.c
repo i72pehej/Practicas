@@ -24,11 +24,11 @@ void filtrar(char nombre[50], int pedido,char nombre2[50], char nombre3[50]){
 	}
 	while(fread(&aux,sizeof(struct producto),1,f)==1){
 		if(aux.precio<=pedido){
-			fprintf(f2, "%s\n%d\n%f %d\n",aux.nombre,aux.cod,aux.precio,aux.unidades);
+			fprintf(f1, "%s\n%d\n%f %d\n",aux.nombre,aux.cod,aux.precio,aux.unidades);
 		}
 		else{
 			fprintf(f2, "%s\n%d\n%f %d\n",aux.nombre,aux.cod,aux.precio,aux.unidades);
-		}		
+		}
 	}
 	fclose(f);
 	fclose(f1);
