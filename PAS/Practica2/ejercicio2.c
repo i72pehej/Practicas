@@ -60,9 +60,9 @@ int main() {
 
   // Delimitador para strtok() y string devuelto.
   const char lim[2] = ";";
-  char* token;
+  char *token;
 
-	// Descriptores de las dos tuberías.
+	// Descriptores de las dos tuberías (fileDes[0] para LECTURA, fileDes[1] para ESCRITURA).
 	int fileDes[2];  // Hacia el HIJO.
   int fileDes2[2]; // Hacia el PADRE.
 
@@ -88,15 +88,16 @@ int main() {
 			exit(EXIT_FAILURE);
     break;
 
-    // HIJO.
+    // HIJO. Lee desde la tubería.
     case 0:
+      // No se va a escribir (fileDes[1]), cerramos esa puerta.
       if (close(fileDes[1]) == -1) {
         perror("\n[HIJO]: Error al cerrar el extremo de la tubería 1.\n");
         exit(EXIT_FAILURE);
       }
-      else {printf("\n[HIJO]: Tubería 1 cerrada.\n");}
+      else {printf("\n[HIJO]: Tubería 1 cerrada para escrituras.\n");}
 
-      // Leer usando READ. Es una llamada bloqueante.
+      // Leer (fileDes[0]) usando READ. Es una llamada bloqueante.
       nbytes = read(fileDes[0], buf, BSIZE);
       if (nbytes < 0) {
         perror("\n[HIJO]: Error al leer de la tubería 1.\n");
@@ -150,6 +151,8 @@ int main() {
 
       exit(EXIT_SUCCESS);
     break;
+
+////////////////////////////////////////////////////////////////////////////////
 
     // PADRE
 		default:

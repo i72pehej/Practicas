@@ -3,7 +3,7 @@
 #include <string.h>
 #include <sys/stat.h>
 #include <sys/types.h>
-#include <mqueue.h>
+#include <mqueue.h> // PARA COMPILAR ES NECESARIO UTILIZAR "-lrt".
 #include <time.h>
 #include <signal.h>
 #include <unistd.h>
@@ -52,7 +52,7 @@ int main(int argc, char **argv)
 	char buffer[MAX_SIZE];
 
 	// Buffer para mensajes
-   char msgbuf[100];
+  char msgbuf[100];
 
 	// Nombre para las colas. Al concatenar el login seran unicas en el sistema.
 	sprintf(clientQueue, "%s-%s", CLIENT_QUEUE, getenv("USER"));
@@ -67,7 +67,7 @@ int main(int argc, char **argv)
       printf("No puedo asociar la señal SIGTERM al manejador!\n");
 			// Fuera del programa ps -a --> kill SIGTERM (22012)
 
-	// Abrir la cola del servidor
+	// Abrir la cola del servidor. (MODOS: O_CREAT, O_WRONLY, O_RDONLY, O_RDWR).
 	mq_server = mq_open(serverQueue, O_WRONLY);
 	if( mq_server == (mqd_t)-1)
 	{
@@ -115,15 +115,15 @@ int main(int argc, char **argv)
 			exit(EXIT_FAILURE);
 		}
 
-		if(strncmp(buffer, MSG_STOP, strlen(MSG_STOP))==0)
-			must_stop=1;
+		if(strncmp(buffer, MSG_STOP, strlen(MSG_STOP)) == 0)
+			must_stop = 1;
 		else
 		{
 			// Número de bytes leidos
 			ssize_t bytes_read;
 			// Recibir el mensaje
 			bytes_read = mq_receive(mq_client, buffer, MAX_SIZE, NULL);
-			// Comprar que la recepción es correcto (bytes leidos no son negativos)
+			// Comprobar que la recepción es correcto (bytes leidos no son negativos)
 			if(bytes_read < 0)
 			{
 				perror("Error al recibir el mensaje");
@@ -131,17 +131,18 @@ int main(int argc, char **argv)
 			}
 
 			// Cerrar la cadena
-			//buffer[bytes_read] = '\0';
+			/*buffer[bytes_read] = '\0';*/
 
 			printf("Recibido el mensaje: %s\n", buffer);
 			//Si recibo un exit del servidor es que ha habido fallo en el marching.
-			if(strncmp(buffer, MSG_STOP, strlen(MSG_STOP))==0)
-				must_stop=1;
+			if(strncmp(buffer, MSG_STOP, strlen(MSG_STOP)) == 0)
+				must_stop = 1;
 		}
 		// Iterar hasta escribir el código de salida
-	}while (!must_stop);
+	} while (!must_stop);
 
 	finPrograma(-1);
+
 	exit(EXIT_SUCCESS);
 }
 
@@ -150,9 +151,10 @@ int main(int argc, char **argv)
 
 void finPrograma(int value)
 {
-   char msgbuf[100];
+  char msgbuf[100];
 
-	if(mq_client!=-1)
+  // Comprobar que la cola del cliente está activa.
+	if(mq_client != -1)
 	{
 		// Cerrar la cola del servidor
 		if(mq_close(mq_client) == (mqd_t)-1)
@@ -162,14 +164,14 @@ void finPrograma(int value)
 		}
 	}
 
-	if(mq_server!=-1)
+	if(mq_server != -1)
 	{
 		// Buffer para intercambiar mensajes
 		char buffer[MAX_SIZE];
 
-		//Finalizar el programa (exit). Se lo enviamos al servidor
-		//sprintf(buffer,"%s",MSG_STOP);
-		strcpy(buffer,MSG_STOP);
+		// Finalizar el programa (exit). Se lo enviamos al servidor
+		// sprintf(buffer,"%s",MSG_STOP);
+		strcpy(buffer, MSG_STOP);
 
 		// Enviar y comprobar si el mensaje se manda
 		if(mq_send(mq_server, buffer, MAX_SIZE, 0) != 0)

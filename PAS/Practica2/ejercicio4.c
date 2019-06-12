@@ -26,8 +26,7 @@ char queue_name[100]; //Inicializa el nombre de la cola a NULL
 NO DECLARARLO COMO char*, SALE VIOLACION DE SEGMENTO :*/
 
 
-void finPrograma(int value); /* Cabecera de la función, esta se define al
-final del código*/
+void finPrograma(int value); /* Cabecera de la función, esta se define al final del código*/
 
 
 
@@ -49,7 +48,6 @@ int main(int argc, char** argv)
   /*---------------------------------------------------
                 DECLARACIÓN DE VARIABLES
     ---------------------------------------------------*/
-
 
   //Estructura de las opciones del programa
   static struct option long_options[] =
@@ -77,7 +75,6 @@ int main(int argc, char** argv)
   struct mq_attr attr; //Atributos de la cola, usados en la creación
 
   /* La estructura struct mq_attr tiene los siguientes campos:
-
   struct mq_attr
   {
                long mq_flags;       //Flags: 0 or O_NONBLOCK
@@ -90,17 +87,17 @@ int main(int argc, char** argv)
   char buffer[MAX_SIZE];
 
   /* Variables para la expresion regular */
-  char* regexValue = NULL; //Variable que recoge el argumento de -r
+  char *regexValue = NULL; //Variable que recoge el argumento de -r
   regex_t regex; /*Aquí alojaremos el valor de regexValue para cuando
   necesitemos hacer comparaciones*/
 	int reti; //Usamos esta variable para control de errores, no es necesaria
   char msgbuf[100]; /* Copia de seguridad que utiliza el padre para
   guardar el mensaje que le manda el hijo, solo es por SEGURIDAD */
 
-
   /*---------------------------------------------------
               FIN DE DECLARACIÓN DE VARIABLES
     ---------------------------------------------------*/
+
 
   // Inicializar los atributos de la cola
   attr.mq_maxmsg = 10;        // Maximo número de mensajes
@@ -113,7 +110,7 @@ int main(int argc, char** argv)
   /* Bucle while que cuenta con un switch case.
   Se usa para recoger el valor de la expresión regular.
   Es un copypaste del ejercicio 3*/
-  while ((c = getopt_long (argc, argv, "hr:",long_options, &option_index))!=-1)
+  while ((c = getopt_long (argc, argv, "hr:", long_options, &option_index)) != -1)
   {
     switch (c)
     {
@@ -147,7 +144,7 @@ int main(int argc, char** argv)
   }
 
   /*Control de error por si se invoca sin argumentos*/
-  if(regexValue==NULL)
+  if(regexValue == NULL)
   {
      imprimir_uso();
      exit(EXIT_SUCCESS);
@@ -155,13 +152,13 @@ int main(int argc, char** argv)
 
   /* Compilar la expresión regular */
 	reti = regcomp(&regex, regexValue, 0);
-  if(reti!=0)
+  if(reti != 0)
   {
 		fprintf(stderr, "No pude compilar la expresión regular\n");
 		exit(EXIT_FAILURE);
 	}
 
-  printf("Valor de regexvalue en servidor:%s\n",regexValue);
+  printf("Valor de regexValue en servidor: %s\n",regexValue);
 
   /* Termina la recogida del valor de la expresión regular, en resumen,
   hemos usado el bucle y el switch case para guardar en regexValue el
@@ -174,6 +171,8 @@ int main(int argc, char** argv)
   y a partir de ahora usaremos esa variable cuando queramos referirnos a
   la expresión regular*/
 
+
+
   /*A partir de aquí establecemos el nombre de la cola, creamos el proceso
   hijo y hacemos lo que nos pide el ejercicio*/
 
@@ -181,7 +180,6 @@ int main(int argc, char** argv)
   sprintf(queue_name, "%s-%s", QUEUE_NAME, getenv("USER"));
 
   pid = fork();
-
   switch(pid)
   {
     //CASO ERROR
@@ -191,7 +189,6 @@ int main(int argc, char** argv)
 
     //CASO HIJO
     case 0:
-
       queue = mq_open(queue_name, O_RDWR);
 
       do
@@ -236,8 +233,8 @@ int main(int argc, char** argv)
     		}
 
         /* Se usa la función strncmp para comprobar si se ha introducido un exit*/
-    		if(strncmp(buffer, MSG_STOP, strlen(MSG_STOP))==0)
-    			must_stop=1;
+    		if(strncmp(buffer, MSG_STOP, strlen(MSG_STOP)) == 0)
+    			must_stop = 1;
 
         else
       	{
@@ -262,8 +259,8 @@ int main(int argc, char** argv)
       		printf("[HIJO]: Recibido el mensaje: %s\n", buffer);
 
       		//Si recibo un exit del servidor es que ha habido fallo en el marching.
-      		if(strncmp(buffer, MSG_STOP, strlen(MSG_STOP))==0)
-      			must_stop=1;
+      		if(strncmp(buffer, MSG_STOP, strlen(MSG_STOP)) == 0)
+      			must_stop = 1;
       	}
 
       // Iterar hasta escribir el código de salida
@@ -328,7 +325,7 @@ int main(int argc, char** argv)
         mensaje del hijo*/
 
         // Comprobar el fin del bucle si se lee exit
-  		  if (strncmp(buffer, MSG_STOP, strlen(MSG_STOP))==0)
+  		  if (strncmp(buffer, MSG_STOP, strlen(MSG_STOP)) == 0)
   			 must_stop = 1;
 
         else
@@ -344,7 +341,7 @@ int main(int argc, char** argv)
           reti = regexec(&regex, buffer, 0, NULL, 0);
 
           //Hago una copia por si hay error de matching mostralo.
-          sprintf(msgbuf,"%s", buffer);
+          sprintf(msgbuf, "%s", buffer);
 
           // Puede servirnos, UNA VEZ COMPROBADA LA EXPRESION, por si al hacer pruebas hemos cerrado nuestro
           // cliente y servidor, y se han quedado caracteres en los bufferes de entrada/salida estandar
@@ -352,11 +349,11 @@ int main(int argc, char** argv)
           memset(buffer, 0, MAX_SIZE);     // Poner a 0 el buffer
 
           /* Usamos reti para ver si empareja o no empareja */
-          if(reti==0)
-            strcpy(buffer,"Empareja");
+          if(reti == 0)
+            strcpy(buffer, "Empareja");
 
-          else if(reti==REG_NOMATCH) //REG_NOMATCH indica que NO se ha encontrado.
-            strcpy(buffer,"No Empareja");
+          else if(reti == REG_NOMATCH) //REG_NOMATCH indica que NO se ha encontrado.
+            strcpy(buffer, "No Empareja");
 
           /* Control de errores por si la función regexec devuelve algo
           inesperado */
@@ -367,7 +364,7 @@ int main(int argc, char** argv)
 
             //Finalizar el programa si falla el matching (exit). Se lo enviamos al cliente
             //sprintf(buffer,"%s",MSG_STOP);
-            strcpy(buffer,MSG_STOP);
+            strcpy(buffer, MSG_STOP);
           }
 
           // Enviar y comprobar si el mensaje se manda
@@ -380,10 +377,9 @@ int main(int argc, char** argv)
   	}while (!must_stop); // Iterar hasta que llegue el código de salida 'exit'
 
     //Espera a que termine
-
     /*Todo el código que sigue de aquí hasta el final del programa es código
     copiado del profesor, úsalo en el examen*/
-    while ( (pid_aux=wait(&status)) > 0 )
+    while ( (pid_aux = wait(&status)) > 0 )
     {
       if (WIFEXITED(status))
       {
@@ -403,7 +399,7 @@ int main(int argc, char** argv)
       }
     }
 
-    if (pid_aux==(pid_t)-1 && errno==ECHILD)
+    if (pid_aux == (pid_t)-1 && errno == ECHILD)
     {
       printf("Proceso Padre, valor de errno = %d, definido como %s, no hay más hijos que esperar!\n", errno, strerror(errno));
     }
@@ -432,14 +428,14 @@ void finPrograma(int value)
 {
    char msgbuf[100];
 
-	if(queue!=-1)
+	if(queue != -1)
 	{
 		// Buffer para intercambiar mensajes
 		char buffer[MAX_SIZE];
 
 		//Finalizar el programa si falla el matching (exit). Se lo enviamos al cliente
 		//sprintf(buffer,"%s",MSG_STOP);
-		strcpy(buffer,MSG_STOP);
+		strcpy(buffer, MSG_STOP);
 
 		// Enviar y comprobar si el mensaje se manda
 		if(mq_send(queue, buffer, MAX_SIZE, 0) != 0)
