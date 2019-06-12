@@ -314,6 +314,7 @@ namespace ed {
 			#ifndef NDEBUG
 				assert(buscar(x));
 			#endif
+
 			return insertado;
 		}
 
@@ -393,7 +394,7 @@ namespace ed {
 			// Caso 3: Tiene ambos hijos, por lo que se realiza un intercambio por el sucesor inmediato.
 			else {
 				// Creamos un nodo auxiliar igual al nodo que se desea borrar para el intercambio.
-				NodoArbolBinario * aux = this -> _actual;
+				NodoArbolBinario *aux = this -> _actual;
 
 				// Movemos el cursor hasta el nodo sucesor inmediato (un movimiento a la derecha y el resto hacia la izquierda).
 				this -> _padre = this -> _actual;
@@ -458,9 +459,9 @@ namespace ed {
 			if (this -> estaVacio() == true) {return false;}
 			else {
 				// Se comienza la búsqueda desde la raíz.
-				this -> _actual = this -> _raiz;
 				this -> _padre = NULL;
-				
+				this -> _actual = this -> _raiz;
+
 				// Mientras se encuentren elementos y no se encuentre el elemento buscado...
 				while (this -> _actual != NULL) {
 					// Si el elemento buscado es menor que el del nodo actual, se busca por la izquierda.
@@ -493,8 +494,8 @@ namespace ed {
 				}
 
 				// Si no se encuentra el elemento, se vuelve al comienzo.
-				this -> _actual = this -> _raiz;
 				this -> _padre = NULL;
+				this -> _actual = this -> _raiz;
 
 				return false;
 			}

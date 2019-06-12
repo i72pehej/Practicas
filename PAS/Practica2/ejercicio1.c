@@ -78,6 +78,7 @@ int main (int argc, char **argv) {
 				printf("\nOpción -u con valor '%s'\n", optarg);
 				u_value = optarg;
 
+				// Control de errores + asignación de valores + obtención de información.
 				if ((lgn = u_value /*getenv("USER")*/) == NULL || (pw = getpwnam(lgn)) == NULL) {
           fprintf(stderr, "\nError al obtener información de usuario.\n");
           exit(1);
@@ -128,7 +129,7 @@ int main (int argc, char **argv) {
         }
 
 				printf("\n");
-			 	// printf("\tNombre del grupo principal: %s\n", gr->gr_name);
+				/*printf("\tNombre del grupo principal: %s\n", gr->gr_name);*/
 				printf("\tID del grupo principal: %d\n", 		 gr->gr_gid);
 				printf("\n");
 
@@ -146,7 +147,7 @@ int main (int argc, char **argv) {
 
 				printf("\n");
 				printf("\tNombre del grupo principal: %s\n", gr->gr_name);
-				// printf("\tID del grupo principal: %s\n", 		 gr->gr_gid);
+				/* printf("\tID del grupo principal: %s\n", 		 gr->gr_gid);*/
 				printf("\n");
 
 			break;
@@ -181,6 +182,7 @@ int main (int argc, char **argv) {
           exit(1);
         }
 
+				// Como ya tengo la información del usuario, no tengo que volver a asignarla a "lgn".
 				if (/*(lgn = pw->pw_gid /*getenv("USER")) == NULL ||*/ (gr = getgrgid(pw->pw_gid)) == NULL) {
           fprintf(stderr, "\nError al obtener información del grupo.\n");
           exit(1);
@@ -263,7 +265,7 @@ int main (int argc, char **argv) {
 				printf("\n\t\tAbortando . . .\n\n");
 				abort ();
 		}
-		// printf("optind: %d, optarg: %s, optopt: %c\n", optind, optarg, optopt);
+		/* printf("optind: %d, optarg: %s, optopt: %c\n", optind, optarg, optopt);*/
 	}
 
 	/* Imprimir el resto de argumentos de la línea de comandos que no son opciones con "-" */
@@ -318,7 +320,7 @@ int main (int argc, char **argv) {
 		}
 	}
 
-	// printf ("\nu_value = %s, i_value = %s, g_value = %s, d_value = %s, s_value = %d.\n",u_value, i_value, g_value, d_value, s_value);
+	/* printf ("\nu_value = %s, i_value = %s, g_value = %s, d_value = %s, s_value = %d.\n",u_value, i_value, g_value, d_value, s_value);*/
 
 	exit (0);
 }

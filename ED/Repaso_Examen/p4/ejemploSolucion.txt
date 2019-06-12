@@ -1,0 +1,33 @@
+Soluciones de ejemplo - P4
+
+Ejemplo grafo Andalucía:
+
+Matriz de recorridos:
+
+  -1 6 3 -1 7 -1 -1 3
+  6 -1 7 7 -1 7 -1 -1
+  3 7 -1 -1 7 -1 -1 -1
+  -1 7 -1 -1 7 -1 -1 -1
+  7 -1 7 7 -1 7 7 -1
+  -1 7 -1 -1 7 -1 -1 2
+  -1 -1 -1 -1 7 -1 -1 -1
+  3 -1 -1 -1 -1 2 -1 -1
+
+Matriz de distancias:
+
+  0 484 332 166 516 228 219 422
+  484 0 263 381 219 367 265 125
+  332 263 0 166 232 104 187 138
+  166 381 166 0 350 99 129 256
+  516 219 232 350 0 336 313 94
+  228 367 104 99 336 0 209 242 
+  219 265 187 129 313 209 0 219
+  422 125 138 256 94 242 219 0
+
+Ejemplo de recorrido para un par de ciudades:
+
+Recordad que se debe solicitar por teclado el par de ciudades para el que se quiere obtener el recorrido.
+
+  Distancia entre Almeria y Huelva: 516
+
+  Camino: Almeria -> Granada -> Sevilla -> Huelva
