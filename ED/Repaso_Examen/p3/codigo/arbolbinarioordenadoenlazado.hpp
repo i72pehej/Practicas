@@ -134,8 +134,49 @@ namespace ed
 
 		bool insertar(const G &x)
 		{
-			// TODO
-			return false;
+			bool insertado = false;
+
+			// Caso 1: Árbol vacío.
+			if (this->estaVacio()) {this->_raiz = new NodoArbolBinario(x);}
+			// Caso 2: Árbol no vacío.
+			else {
+				// Comienzo desde la raíz.
+				this->_padre 	= NULL;
+				this->_actual = this->_raiz;
+
+				// Mientras que insertado = false.
+				while (!insertado) {
+					// Si x es mayor, tiene que ir a la derecha.
+					if (x > this->actual()) {
+						// Comprobamos que tenga hijo derecho y bajamos, de lo contrario se inserta.
+						if (this->_actual->getDerecho()) {
+							this->_padre 	= this->_actual;
+							this->_actual = this->_actual->getDerecho();
+						}
+						else {
+							this->_actual->setDerecho(new NodoArbolBinario(x));
+							// Insertado = true para salir del bucle.
+							insertado = true;
+						}
+					}
+
+					// Si x es menor, tiene que ir a la izquierda.
+					if (x < this->actual()) {
+						// Comprobamos que tenga hijo izquierdo y bajamos, de lo contrario se inserta.
+						if (this->_actual->getIzquierdo()) {
+							this->_padre 	= this->_actual;
+							this->_actual = this->_actual->getIzquierdo();
+						}
+						else {
+							this->_actual->setIzquierdo(new NodoArbolBinario(x));
+							// Insertado = true para salir del bucle.
+							insertado = true;
+						}
+					}
+				}
+			}
+
+			return (insertado);
 		}
 
 		void borrarArbol()
@@ -145,7 +186,16 @@ namespace ed
 
 		bool borrar()
 		{
-			// TODO
+			
+
+
+
+
+
+
+
+
+
 			return false;
 		}
 
@@ -166,7 +216,36 @@ namespace ed
 
 		bool buscar(const G& x) const
 		{
-			// TODO
+			// Si el árbol está vacío
+			if (this->estaVacio()) {return false;}
+			// De lo contrario, realizamos la búsqueda desde el inicio.
+			this->_padre = NULL;
+			this->_actual = this->_raiz;
+
+			// Mientras no se llegue al final del árbol, buscamos.
+			while (this->_actual != NULL) {
+				// Si el elemento buscado es menor, bajamos por la izquierda (si hay).
+				if (x < this->actual()) {
+					this->_padre = this->_actual;
+					this->_actual = this->_actual->getIzquierdo();
+				}
+
+				// Si el elemento buscado es mayor, bajamos por la derecha (si hay).
+				else if (x > this->actual()) {
+					this->_padre = this->_actual;
+					this->_actual = this->_actual->getDerecho();
+				}
+
+				// Si el elemento buscado no es ni menor ni mayor, es el que buscamos.
+				else {
+					return true;
+				}
+			}
+
+			// Dejamos los punteros inalterados.
+			this->_padre = NULL;
+			this->_actual = this->_raiz;
+
 			return false;
 		}
 

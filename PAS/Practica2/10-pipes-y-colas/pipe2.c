@@ -18,7 +18,7 @@ independiente. lo introducirá en la tubería, mientras que el proceso hijo lo l
 
 Ejemplo de salida esperada (tenga en cuenta que depende del planificador):
 jfcaballero@NEWTS:~$ ./a.out
-[PADRE]: Mi PID es 3612 y el PID de mi hijo es 3613
+[PADRE]: Mi PID es 3612 y el PID de mi hijo es 3613 
 [PADRE]: Escribo el número aleatorio 2028 en la tubería...
 [HIJO]: Mi PID es 3613 y mi PPID es 3612
 [PADRE]: Escribo el número aleatorio 2179 en la tubería...
@@ -38,7 +38,7 @@ jfcaballero@NEWTS:~$ ./a.out
 
 
 
-int main()
+int main() 
 {
 	// Para realizar el fork
 	pid_t rf;
@@ -59,7 +59,7 @@ int main()
 		printf("\nERROR al crear la tubería.\n");
 		exit(1);
 	}
-
+	
 	rf = fork();
 	switch (rf)
 	{
@@ -68,14 +68,14 @@ int main()
 			exit(EXIT_FAILURE);
 		case 0:
 			printf ("[HIJO]: Mi PID es %d y mi PPID es %d\n", getpid(), getppid());
-
+			
 			close(fileDes[1]);
-
+	
 			for(i=0; i<5; i++)
 			{
 				//Recibimos un mensaje a través de la cola
 				resultado = read( fileDes[0], &numeroAleatorio, sizeof(int));
-
+				
 				if(resultado != sizeof(int))
 				{
 					printf("\n[HIJO]: ERROR al leer de la tubería...\n");
@@ -83,7 +83,7 @@ int main()
 				}
 				// Imprimimos el campo que viene en la tubería
 				printf("[HIJO]: Leo el número aleatorio %d de la tubería.\n", numeroAleatorio);
-			}
+			}		
 			// Cerrar el extremo que he usado
 			printf("[HIJO]: Tubería cerrada ...\n");
 			close(fileDes[0]);
@@ -91,41 +91,41 @@ int main()
 
 		default:
 			printf ("[PADRE]: Mi PID es %d y el PID de mi hijo es %d \n", getpid(), rf);
-
+			
 			close(fileDes[0]);
-
+			
 			srand(time(NULL)); // Semilla de los números aleatorios establecida a la hora actual
-
+			
 			for(i=0; i<5; i++)
-			{
+			{			
 				// Rellenamos los campos del mensaje que vamos a enviar
 				numeroAleatorio = rand()%5000; //Número aleatorio entre 0 y 4999
-
+				
 				printf("[PADRE]: Escribo el número aleatorio %d en la tubería...\n", numeroAleatorio);
-
+				
 				// Mandamos el mensaje
 				resultado = write( fileDes[1], &numeroAleatorio, sizeof(int));
-
+				
 				if(resultado != sizeof(int))
 				{
 					printf("\n[PADRE]: ERROR al escribir en la tubería...\n");
 					exit(EXIT_FAILURE);
 				}
 			}
-
+			
 			// Cerrar el extremo que he usado
 			close(fileDes[1]);
 			printf("[PADRE]: Tubería cerrada...\n");
-
+			
 			/*Espera del padre a los hijos*/
-			while ( (flag=wait(&status)) > 0 )
+			while ( (flag=wait(&status)) > 0 ) 
 			{
 				if (WIFEXITED(status)) {
 					printf("[PADRE]: Hijo con PID %ld finalizado, status = %d\n", (long int)flag, WEXITSTATUS(status));
-				}
+				} 
 				else if (WIFSIGNALED(status)) {  //Para seniales como las de finalizar o matar
 					printf("[PADRE]:, Hijo con PID %ld finalizado al recibir la señal %d\n", (long int)flag, WTERMSIG(status));
-				}
+				} 
 			}
 			if (flag==(pid_t)-1 && errno==ECHILD)
 			{
@@ -135,7 +135,7 @@ int main()
 			{
 				printf("[PADRE]: Error en la invocacion de wait o la llamada ha sido interrumpida por una señal.\n");
 				exit(EXIT_FAILURE);
-			}
+			}		 
 	}
 	exit(EXIT_SUCCESS);
 }

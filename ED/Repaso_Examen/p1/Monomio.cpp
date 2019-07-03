@@ -149,8 +149,8 @@ void ed::Monomio::escribirMonomio() {
 
 	// Si el monomio tiene coeficiente y X sin grado, lo escribimos para después evaluar el grado.
 	else {
-		if (std::abs(getCoeficiente() - 1.0) < COTA_ERROR) {std::cout << "X" << '\n';}
-		else if (std::abs(getCoeficiente() - (-1.0)) < COTA_ERROR) {std::cout << "-X" << '\n';}
+		if (std::abs(getCoeficiente() - 1.0) < COTA_ERROR) {std::cout << "X";}
+		else if (std::abs(getCoeficiente() - (-1.0)) < COTA_ERROR) {std::cout << "-X";}
 		else {std::cout << getCoeficiente() << "X";}
 	}
 

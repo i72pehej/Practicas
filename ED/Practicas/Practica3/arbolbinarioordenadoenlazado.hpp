@@ -229,7 +229,7 @@ namespace ed {
 		// Destructor.
 		~ArbolBinarioOrdenadoEnlazado () {
 			if (not (this -> estaVacio()))
-			this -> borrarArbol();
+				this -> borrarArbol();
 			cout << "\tDestructor Usado.\n\n";
 		}
 
@@ -518,7 +518,7 @@ namespace ed {
 				assert(this -> estaVacio() == false);
 			#endif
 
-			this -> _raiz -> getInfo();
+			return (this -> _raiz -> getInfo());
 		}
 
 ////////////////////////////////////////////////////////////////////////////////

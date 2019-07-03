@@ -9,16 +9,47 @@
 
 #include "Polinomio.hpp"
 
+
+
+ed::Polinomio::Polinomio() {
+	ed::Monomio m(0.0, 0);
+	this -> getVector().push_back(m);
+}
+
+ed::Polinomio::Polinomio(ed::Polinomio const &p) {
+	this -> getVector() = p.getVector();
+}
+
+bool ed::Polinomio::existeGrado(int gradoB) const {
+	std::vector<ed::Monomio>::iterator m;
+
+	for (m = this -> getVector().begin(); m < this -> getVector().end(); m++) {
+		if (m -> getGrado() == gradoB) {return true;}
+	}
+
+	return false;
+}
+
+ed::Monomio ed::Polinomio::getMonomio(int gradoB) const {
+	ed::Monomio *nuevo = new ed::Monomio(0.0, 0);
+	std::vector<ed::Monomio>::iterator m;
+
+	if (existeGrado(gradoB)) {
+		for (m = this->getVector().begin(); m < this->getVector().end(); m++) {
+			if (m->getGrado() == gradoB) {nuevo = m;}
+		}
+	}
+
+	return *nuevo;
+}
+
+
 // Operadores de asignación
-
-// COMPLETAR
-
 
 /////////////////////////////////////////////////////////////
 
-ed::Polinomio & ed::Polinomio::operator=(ed::Polinomio const &p)
-{
-	// COMPLETAR
+ed::Polinomio & ed::Polinomio::operator=(ed::Polinomio const &p) {
+	if (*this != p) {this->getVector() = p.getVector();}
 
 	// Se devuelve el objeto actual
 	return *this;
@@ -27,7 +58,8 @@ ed::Polinomio & ed::Polinomio::operator=(ed::Polinomio const &p)
 
 ed::Polinomio & ed::Polinomio::operator=(ed::Monomio const &m)
 {
-	// COMPLETAR
+	this->getVector().clear();
+	this->getVector().push_back(m);
 
 	// Se devuelve el objeto actual
 	return *this;
@@ -36,7 +68,10 @@ ed::Polinomio & ed::Polinomio::operator=(ed::Monomio const &m)
 
 ed::Polinomio & ed::Polinomio::operator=(double const &x)
 {
-	// COMPLETAR
+	ed::Monomio *nuevo = new ed::Monomio(x, 0);
+
+	this->getVector().clear();
+	this->getVector().push_back(nuevo);
 
 	// Se devuelve el objeto actual
 	return *this;
@@ -44,27 +79,27 @@ ed::Polinomio & ed::Polinomio::operator=(double const &x)
 
 //////////////////////////////////////////////////////////////
 
-ed::Polinomio & ed::Polinomio::operator+=(ed::Polinomio const &p)
-{
-	// Se recorre el polinomio que se pasa como argumento.
-	for (size_t i = 0; i < p.getVector().size(); i++) {
-		// Si existe en nuestro polinomio un monomio con mismo grado al de alguno de los del otro polinomio...
-		if (this->existeGrado(p.getVector()[i].getGrado())) {
-			// Se recorre nuestro polinomio en busca del monomio con mismo grado.
-			for (size_t j = 0; j < this->getVector().size(); j++) {
-				// Cuando se encuentre el monomio con el mismo grado, se realiza la suma.
-				if (this->getVector()[j].getGrado() == p.getVector()[i].getGrado()) {
-					this->getVector()[j] = this->getVector()[j] + p.getVector()[i];
-				}
+//Operadores aritméticos y de asignación
+
+//Suma
+
+ed::Polinomio & ed::Polinomio::operator+=(ed::Polinomio const &p) {
+	std::vector<ed::Monomio>::iterator m1;	//Iterador para el polinomio pasado.
+	std::vector<ed::Monomio>::iterator m2;	//Iterador para el polinomio *this.
+
+	for (m1 = p.getVector().begin(); m1 < p.getVector().end(); m1++) {
+		if (this->existeGrado(m1->getGrado())) {
+			for (m2 = this->getVector().begin(); m2 < this->getVector().end(); m2++) {
+				if (m2->getGrado() == m1->getGrado()) {m2 += m1;}
 			}
 		}
-
-		// En caso de no existir ningún monomio con igual grado, se inserta y ordena.
-		else {this->getVector().push_back(p.getVector()[i]);}
+		else {
+			this->getVector().push_back(m1);
+		}
 	}
 
-	// Para terminar se ordena el vector resultante.
-	this->ordenaPolinomio();
+	// Se ordena el polinomio.
+	this->_ordenaPolinomio();
 
 	// Se devuelve el objeto actual
 	return *this;

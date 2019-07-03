@@ -12,25 +12,25 @@
 // Para controlar las pre y post condiciones mediante asertos
 #include <cassert>
 
-#define COTA_ERROR 1.0e-6  //!< Cota de error para la comparación números reales
+#define COTA_ERROR 1.0e-6  /*!< Cota de error para la comparación números reales*/
 
 // Se incluye la clase Monomio dentro del espacio de nombre de la asigantura: ed
 namespace ed
 {
-//!  Definición de la clase Monomio:  \f$ coeficiente \hspace{1ex} X^{grado} \f$
+/*!  Definición de la clase Monomio:  \f$ coeficiente \hspace{1ex} X^{grado} \f$*/
 class Monomio
 {
-	//! \name Atributos privados de la clase Monomio
+	/*! \name Atributos privados de la clase Monomio*/
 	private:
 		double coeficiente_;
 		int grado_;
 
-	//! \name Funciones o métodos públicos de la clase Monomio
+	/*! \name Funciones o métodos públicos de la clase Monomio*/
 	public:
 
 ////////////////////////////////////////////////////////////////////////////////
 
-		//! \name Constructores de la clase Monomio
+		/*! \name Constructores de la clase Monomio*/
 
 		Monomio(double coeficiente = 0.0, int grado = 0);
 
@@ -38,7 +38,7 @@ class Monomio
 
 ////////////////////////////////////////////////////////////////////////////////
 
-		//! \name Observadores: funciones de consulta de la clase Monomio
+		/*! \name Observadores: funciones de consulta de la clase Monomio*/
 
 		inline double getCoeficiente() {return coeficiente_;}
 
@@ -46,7 +46,7 @@ class Monomio
 
 ////////////////////////////////////////////////////////////////////////////////
 
-	//! \name Funciones de modificación de la clase Monomio
+	/*! \name Funciones de modificación de la clase Monomio*/
 
 	inline void setCoeficiente(double nuevoCoeficiente) {this->getCoeficiente() = nuevoCoeficiente;}
 
@@ -54,7 +54,7 @@ class Monomio
 
 ////////////////////////////////////////////////////////////////////////////////
 
-	//! \name Operadores de la clase Monomio
+	/*! \name Operadores de la clase Monomio*/
 
 	// Operadores de asignación
 
@@ -80,7 +80,7 @@ class Monomio
 
 ////////////////////////////////////////////////////////////////////////////////
 
-	//! \name Funciones lectura y escritura de la clase Monomio
+	/*! \name Funciones lectura y escritura de la clase Monomio*/
 
 		void leerMonomio();
 
@@ -88,7 +88,7 @@ class Monomio
 
 ////////////////////////////////////////////////////////////////////////////////
 
-	//! \name Funciones auxiliares de la clase Monomio
+	/*! \name Funciones auxiliares de la clase Monomio*/
 
 		double calculaValor(double numeroReal);
 
