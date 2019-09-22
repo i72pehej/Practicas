@@ -182,13 +182,13 @@ void quicksort(std::vector<int> &array, int start, int end) {
 
   // Función que comprueba que la ordenación se ha realizado correctamente
   bool estaOrdenado(const std::vector<int> &v) {
-    std::vector<int>::iterator it;
-
     #ifndef NDEBUG
-      for (it = v.begin(); it != v.end() - 1; it++) {
-        assert(*it < (*it + 1));
-      }
+      assert(*v < (*v + 1));
     #endif
+
+    if (*v < *v + 1) {
+      estaOrdenado(v);
+    }
 
     return true;
   }
