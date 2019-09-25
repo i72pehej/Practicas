@@ -1,0 +1,4 @@
+/home/i72pehej/Uni3ero/Vision/p1/CMakeFiles/edit_cache.dir
+/home/i72pehej/Uni3ero/Vision/p1/CMakeFiles/rebuild_cache.dir
+/home/i72pehej/Uni3ero/Vision/p1/CMakeFiles/pract1.dir
+/home/i72pehej/Uni3ero/Vision/p1/CMakeFiles/ej1.dir
