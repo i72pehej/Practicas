@@ -43,7 +43,10 @@ void on_mouse(int event, int x, int y, int flags, void *userdata) {
 
     break;
 
-    case cv::EVENT_MOUSEMOVE:
+    case cv::EVENT_LBUTTONUP:
+      static_cast<int*>(userdata)[0] = x;
+      static_cast<int*>(userdata)[1] = y;
+
     break;
   }
 
