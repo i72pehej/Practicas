@@ -18,12 +18,13 @@ Data Type: struct timespec
 #include <cassert>
 #include <ctime>
 #include <cstdio>
-#include <cstring> //Para usar memset
-#include <iostream>
-#include <stdint.h> // Para usar uint64_t
-#include <vector>  //para usar vectores
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <iostream>
+#include <cstring>  // Para usar memset
+#include <stdint.h> // Para usar uint64_t
+#include <vector>   // Para usar vectores
+#include <fstream>  // Para ficheros
 
 
 #define MAX 10000
@@ -104,12 +105,23 @@ Data Type: struct timespec
 ////////////////////////////////////////////////////////////////////////////////
 
   // Función para mostrar el vector por pantalla
-  void imprimeVector(std::vector<int> &vector, int size) {
-    std::cout << "\nVector:\n" << '\n';
+  void imprimeVector(std::vector<int> &vector) {
+    std::cout << "\nVector:" << '\n';
     for (std::vector<int>::iterator it = vector.begin(); it != vector.end(); it++) {
       std::cout <<" / "<< *it;
     }
-    std::cout << " /\n\n";
+    std::cout << " /\n";
+  }
+
+////////////////////////////////////////////////////////////////////////////////
+
+  // Función para mostrar el vector de tiempos por pantalla
+  void imprimeVectorTiempos(std::vector<double> &vector) {
+    std::cout << "\nVector de tiempos:" << '\n';
+    for (std::vector<double>::iterator it = vector.begin(); it != vector.end(); it++) {
+      std::cout <<" / "<< *it;
+    }
+    std::cout << " /\n";
   }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -182,16 +194,115 @@ void quicksort(std::vector<int> &array, int start, int end) {
 
   // Función que comprueba que la ordenación se ha realizado correctamente
   bool estaOrdenado(const std::vector<int> &v) {
-    #ifndef NDEBUG
-      assert(*v < (*v + 1));
-    #endif
+    for (size_t i = 0; i < (v.size() - 1); i++) {
+      // Comprobación de errores
+      #ifndef NDEBUG
+        assert(v[i]  <= (v[i + 1]));
+      #endif
 
-    if (*v < *v + 1) {
-      estaOrdenado(v);
+      // Comprobación de errores en caso de eliminar asertos.
+      if (v[i]  > (v[i + 1])) {return false;}
     }
 
     return true;
   }
+
+////////////////////////////////////////////////////////////////////////////////
+
+  // Se almacenan en un fichero de texto los valores de N y Tiempos correspondientes
+  void guardaEnFichero(double times, int nEle) {
+    // Abre el fichero para añadir al final
+    std::ofstream ficheroTiempos("tiempos.txt", std::ios::app);
+
+    if (ficheroTiempos.is_open()) {ficheroTiempos << times << "\t----\t" << nEle << '\n';}
+    else {std::cout << "\n\nERROR al abrir el fichero." << '\n';}
+
+    ficheroTiempos.close();
+  }
+
+////////////////////////////////////////////////////////////////////////////////
+  // Elimina cualquier fichero coincidente
+  void eliminaFichero() {
+    if (std::remove("tiempos.txt") == 0) {
+      std::cout << "Fichero <'tiempos.txt'> existente.\nEliminando . . ." << '\n';
+    }
+  }
+
+////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////
+
+  void realizarExperimento(std::vector<int> &vector, int minimo, int maximo, int incremento, int repeticiones) {
+    Clock time;
+    // Comienza a contar el contador
+    time.start();
+
+    float suma = 0;
+    float contador = 0;
+
+    std::vector<double> tiempos;
+
+    // Bucle para realizar las pruebas.
+    while (minimo <= maximo) {
+      // Reasignación del tamaño del vector.
+      vector.resize(minimo);
+      rellenaVector(vector);
+
+
+      std::cout << "---------------------------------------------------------" << "\n\n";
+      for (int i = 0; i < repeticiones; i++) {
+        // Reinicia el cronómetro
+        time.restart();
+
+        // Se ordena el vector.
+        quicksort(vector, 0, minimo - 1);
+
+        // Se detiene el cronómetro.
+        if (time.isStarted()) {
+          time.stop();
+          std::cout << "\tHan pasado " << time.elapsed() << " microsegundos.\n";
+
+          // Suma acumulada de los tiempos.
+          suma += time.elapsed();
+          contador++;
+        }
+      }
+
+      // Valores de las variables de la media
+      std::cout << "\nSuma = " << suma << "\nN = " << contador << "\nElementos = " << minimo << '\n';
+      std::cout << "\nLa media de los tiempos es: " << suma / contador << " microsegundos\n\n";
+
+      // Guardado de los valores en un vector
+      tiempos.push_back(suma / contador);
+      imprimeVectorTiempos(tiempos);
+
+      // Reinicio de las variables para calcular la media
+      suma = 0;
+      contador = 0;
+
+      // Se visualiza el vector por pantalla.
+      imprimeVector(vector);
+
+      // Comprueba que el vector esté ordenado
+      if (estaOrdenado(vector) == false) {std::cout << "\n\tEl vector NO está ordenado." << '\n';}
+      else {std::cout << "\n\nEl vector está ordenado." << "\n\n";}
+
+      // Almacenar numero de elementos y tiempo medio en un fichero de texto
+      guardaEnFichero(tiempos.back(), minimo);
+
+      // Incremento del tamaño del vector.
+      minimo += incremento;
+    }
+  }
+
+
+
+
+
+
+
 
 
 
@@ -199,43 +310,82 @@ void quicksort(std::vector<int> &array, int start, int end) {
 int main() {
   system("clear");
 
-  Clock time;
-  // srand(time(0));
+  int min;  // Número mínimo de elementos del vector.
+  int max;  // Número máximo de elementos del vector.
+  int incremento; // Número por el que se incrementará el tamaño del vector.
+  int repeticiones; // Número de repeticiones por cada tamaño del vector.
+  // int tam;  // Tamaño del vector.
 
-  // Comienza a contar el contador
-  time.start();
+  // int tam;  // Tamaño del vector. Introducido por el usuario.
+  // std::cout << "Introduzca la capacidad del vector: ";
+  // std::cin >> tam;
+  // std::cout << '\n';
 
-  int tam;  // Tamaño del vector. Introducido por el usuario.
 
-
-  std::cout << "Introduzca la capacidad del vector: ";
-  std::cin >> tam;
+  std::cout << "Introduzca el mínimo número de elementos del vector: ";
+  std::cin >> min;
   std::cout << '\n';
 
-  std::vector<int> v (tam); // Vector a ordenar.
-  rellenaVector(v);
+  std::cout << "Introduzca el número máximo de elementos del vector: ";
+  std::cin >> max;
+  std::cout << '\n';
 
-  // Se visualiza el vector por pantalla.
-  imprimeVector(v, tam);
+  while (min > max) {
+    std::cout << "ERROR.\n" << '\n';
+    std::cout << "Introduzca el número máximo de elementos del vector: ";
+    std::cin >> max;
+    std::cout << '\n';
+  }
 
-  // Se ordena el vector.
-  quicksort(v, 0, tam - 1);
+  std::cout << "Introduzca el incremento: ";
+  std::cin >> incremento;
+  std::cout << '\n';
 
-  // Se visualiza el vector por pantalla.
-  imprimeVector(v, tam);
+  std::cout << "Introduzca las repeticiones: ";
+  std::cin >> repeticiones;
+  std::cout << '\n';
+
+  std::vector<int> v; // Vector a ordenar.
+
+  // Se elimina el fichero de trabajo para tenerlo limpio
+  eliminaFichero();
+
+  // Se realizan las pruebas
+  realizarExperimento(v, min, max, incremento, repeticiones);
+
+  // std::cout << "\nSIN ORDENAR" << '\n';
+  // // Se visualiza el vector por pantalla.
+  // imprimeVector(v, tam);
+  //
+  // // Comprueba que el vector esté ordenado
+  // if (estaOrdenado(v) == false) {std::cout << "\n\nEl vector NO está ordenado." << '\n';}
+  // else {std::cout << "\n\nEl vector está ordenado." << '\n';}
+  //
+  // // Se ordena el vector.
+  // quicksort(v, 0, tam - 1);
+  //
+  // std::cout << "\nORDENADO" << '\n';
+  // // Se visualiza el vector por pantalla.
+  // imprimeVector(v, tam);
+
+  // // Comprueba que el vector esté ordenado
+  // if (estaOrdenado(v) == false) {std::cout << "\n\tEl vector NO está ordenado." << '\n';}
+  // else {std::cout << "\n\tEl vector está ordenado." << '\n';}
+
+
+
 
 
 
 	for(unsigned int i = 0; i <= 1000000000; i++) {
 
-
-
 	}
 
 
-	if (time.isStarted()) {
-		time.stop();
-		std::cout << "Han pasado " << time.elapsed() << " microsegundos.\n\n";
-	}
+	// if (time.isStarted()) {
+	// 	time.stop();
+	// 	std::cout << "\n\tHan pasado " << time.elapsed() << " microsegundos.\n\n";
+	// }
+
 	return 0;
 }

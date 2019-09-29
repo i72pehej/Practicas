@@ -28,7 +28,7 @@ void CallBackFunc(int event, int x, int y, int flags, void* userdata)
 int main(int argc, char** argv)
 {
      // Read image from file
-     Mat img = imread("MyPic.JPG");
+     Mat img = imread("ciclista_original.jpg");
 
      //if fail to read the image
      if ( img.empty() )

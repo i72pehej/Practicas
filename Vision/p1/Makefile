@@ -124,17 +124,17 @@ pract1/fast:
 .PHONY : pract1/fast
 
 #=============================================================================
-# Target rules for targets named ej1
+# Target rules for targets named ejemplo
 
 # Build rule for target.
-ej1: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 ej1
-.PHONY : ej1
+ejemplo: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 ejemplo
+.PHONY : ejemplo
 
 # fast build rule for target.
-ej1/fast:
-	$(MAKE) -f CMakeFiles/ej1.dir/build.make CMakeFiles/ej1.dir/build
-.PHONY : ej1/fast
+ejemplo/fast:
+	$(MAKE) -f CMakeFiles/ejemplo.dir/build.make CMakeFiles/ejemplo.dir/build
+.PHONY : ejemplo/fast
 
 ejemplo.o: ejemplo.cc.o
 
@@ -142,7 +142,7 @@ ejemplo.o: ejemplo.cc.o
 
 # target to build an object file
 ejemplo.cc.o:
-	$(MAKE) -f CMakeFiles/ej1.dir/build.make CMakeFiles/ej1.dir/ejemplo.cc.o
+	$(MAKE) -f CMakeFiles/ejemplo.dir/build.make CMakeFiles/ejemplo.dir/ejemplo.cc.o
 .PHONY : ejemplo.cc.o
 
 ejemplo.i: ejemplo.cc.i
@@ -151,7 +151,7 @@ ejemplo.i: ejemplo.cc.i
 
 # target to preprocess a source file
 ejemplo.cc.i:
-	$(MAKE) -f CMakeFiles/ej1.dir/build.make CMakeFiles/ej1.dir/ejemplo.cc.i
+	$(MAKE) -f CMakeFiles/ejemplo.dir/build.make CMakeFiles/ejemplo.dir/ejemplo.cc.i
 .PHONY : ejemplo.cc.i
 
 ejemplo.s: ejemplo.cc.s
@@ -160,7 +160,7 @@ ejemplo.s: ejemplo.cc.s
 
 # target to generate assembly for a file
 ejemplo.cc.s:
-	$(MAKE) -f CMakeFiles/ej1.dir/build.make CMakeFiles/ej1.dir/ejemplo.cc.s
+	$(MAKE) -f CMakeFiles/ejemplo.dir/build.make CMakeFiles/ejemplo.dir/ejemplo.cc.s
 .PHONY : ejemplo.cc.s
 
 pract1.o: pract1.cc.o
@@ -199,7 +199,7 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... pract1"
-	@echo "... ej1"
+	@echo "... ejemplo"
 	@echo "... ejemplo.o"
 	@echo "... ejemplo.i"
 	@echo "... ejemplo.s"

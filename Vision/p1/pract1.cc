@@ -11,12 +11,14 @@
 
 #include <iostream>
 #include <exception>
+#include <vector>
 
 //Includes para OpenCV, Descomentar según los módulo utilizados.
 #include <opencv2/core/core.hpp>
 #include <opencv2/core/utility.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
+#include <opencv2/core/matx.hpp>
 //#include <opencv2/calib3d/calib3d.hpp>
 
 const cv::String keys =
@@ -30,25 +32,32 @@ const cv::String keys =
   // "{@repeat        |1     | number               }"
   ;
 
-
+// typedef Vec<uchar, 3> Vec3b;
 
 ////////////////////////////////////////////////////////////////////////////////
 
 // Gestión del mouse
 void on_mouse(int event, int x, int y, int flags, void *userdata) {
-  switch (event) {
-    case cv::EVENT_LBUTTONDOWN:
-      static_cast<int*>(userdata)[0] = x;
-      static_cast<int*>(userdata)[1] = y;
 
-    break;
+  cv::Point aux;
 
-    case cv::EVENT_LBUTTONUP:
-      static_cast<int*>(userdata)[0] = x;
-      static_cast<int*>(userdata)[1] = y;
+    if (event == cv::EVENT_LBUTTONDOWN) {
+      aux.x = x;
+      aux.y = y;
+      static_cast<cv::Point*>(userdata)[0] = aux;
 
-    break;
-  }
+      std::cout << "x1: " << x << ", y1: " << y << '\n';
+    }
+
+    else if (event == cv::EVENT_LBUTTONUP) {
+      aux.x = x;
+      aux.y = y;
+      static_cast<cv::Point*>(userdata)[1] = aux;
+
+      std::cout << "x2: " << x << ", y2: " << y << '\n';
+    }
+
+
 
 
 
@@ -64,14 +73,14 @@ void on_mouse(int event, int x, int y, int flags, void *userdata) {
 int main (int argc, char* const* argv) {
   int retCode = EXIT_SUCCESS;
 
-  // Puntos para el rectangulo
-  cv::Point p1(0, 0);
-  cv::Point p2(0, 0);
-
-  // Tipo rectangulo directamente, para pasarlo como argumento a la función rectangle().
-  cv::Rect rectangulo;
-  // ?¿?¿?¿??¿¿???¿?¿?¿
-  rectangulo = cv::Rect(x, y, ancho, alto);
+  // // Puntos para el rectangulo
+  // cv::Point p1(0, 0);
+  // cv::Point p2(0, 0);
+  //
+  // // Tipo rectangulo directamente, para pasarlo como argumento a la función rectangle().
+  // cv::Rect rectangulo;
+  // // ?¿?¿?¿??¿¿???¿?¿?¿
+  // rectangulo = cv::Rect(x, y, ancho, alto);
 
 
   try {
@@ -83,14 +92,6 @@ int main (int argc, char* const* argv) {
       parser.printErrors();
       return 0;
     }
-
-    /*Ahora toca que tu rellenes con lo que hay que hacer ...*/
-
-
-
-
-
-
 
     //Carga la imagen desde archivo.
     //En funcion de como se compilo opencv podra
@@ -106,14 +107,49 @@ int main (int argc, char* const* argv) {
     //Creo la ventana grafica para viscv::polylines (InputOutputArray img, InputArrayOfArrays pts, bool isClosed, const Scalar &color, int thickness=1, int lineType=LINE_8, int shift=0)ualizar la imagen.
     //El nombre de la ventana sirve como 'handle' para gestionarla despues.
     //Lee la documentacon de namedWindow para mas detalles.
-    cv::namedWindow("IMG");
-
-    //Visualizo la imagen cargada en la ventana.
-    cv::imshow("IMG", img);
+    cv::namedWindow("IMAGEN");
 
     //Conectamos a la ventana un callback para gestionar el raton.
-    int coords[2] = {-1, -1};
-    cv::setMouseCallback("IMG", on_mouse, coords);
+    cv::Point rectangulo[2];
+    cv::setMouseCallback("IMAGEN", on_mouse, rectangulo/*NULL*/);
+
+    //Visualizo la imagen cargada en la ventana.
+    cv::imshow("IMAGEN", img);
+
+
+    for (size_t i = 0; i < img.rows; i++) {
+      for (size_t j = 0; j < img.cols; j++) {
+        cv::Vec3b pixel = img.at<cv::Vec3b>(i, j);
+
+          uchar B = pixel[0];
+          uchar G = pixel[1];
+          uchar R = pixel[2];
+
+          // gray.at<uchar>(i, j) = (B + G + R) / 3;
+
+
+
+        // if (img) {
+        //   /* code */
+        // }
+
+
+      }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     //Para que se actualice la interfaz grafica es necesario llamar a
     //waitKey. Además esta función nos permite interactuar con el teclado.
@@ -122,8 +158,8 @@ int main (int argc, char* const* argv) {
 
 
 
-    // Dibuja un rectángulo relleno o vacío.
-    img = cv.rectangle(img, pt1, pt2, color[, thickness[, lineType[, shift]]]	)
+    // // Dibuja un rectángulo relleno o vacío.
+    // img = cv.rectangle(img, pt1, pt2, color[, thickness[, lineType[, shift]]]	)
 
     // // Dibuja líneas para crear el polígono.
     // cv::polylines (InputOutputArray img, InputArrayOfArrays pts, bool isClosed, const Scalar &color, int thickness=1, int lineType=LINE_8, int shift=0)
