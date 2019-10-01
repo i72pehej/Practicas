@@ -25,7 +25,10 @@ Data Type: struct timespec
 #include <stdint.h> // Para usar uint64_t
 #include <vector>   // Para usar vectores
 #include <fstream>  // Para ficheros
+#include <cmath>    // Para log10()
+#include <string>   // Para string y stod
 
+#include "sistemaEcuaciones.cpp"
 
 #define MAX 10000
 
@@ -126,69 +129,70 @@ Data Type: struct timespec
 
 ////////////////////////////////////////////////////////////////////////////////
 
-// Funcion para relenar el vector con valores aleaorios de 0 a 9999
-void rellenaVector(std::vector<int> &vec) {
-  // Se rellena el vector
-  for (std::vector<int>::iterator i = vec.begin(); i != vec.end(); i++) {
-    *i = rand() % MAX;
+  // Funcion para relenar el vector con valores aleaorios de 0 a 9999
+  void rellenaVector(std::vector<int> &vec) {
+    // Se rellena el vector
+    for (std::vector<int>::iterator i = vec.begin(); i != vec.end(); i++) {
+      *i = rand() % MAX;
+    }
   }
-}
 
 ////////////////////////////////////////////////////////////////////////////////
-
 
 ////////////////////////////////////////////////////////////////////////////////
                               // QUICKSORT
 ////////////////////////////////////////////////////////////////////////////////
 
-// Función para dividir el array y hacer los intercambios
-int divide(std::vector<int> &array, int start, int end) {
-  int left;
-  int right;
-  int pivot;
-  int temp;
+  // Función para dividir el array y hacer los intercambios
+  int divide(std::vector<int> &array, int start, int end) {
+    int left;
+    int right;
+    int pivot;
+    int temp;
 
-  pivot = array[start];
-  left = start;
-  right = end;
+    pivot = array[start];
+    left = start;
+    right = end;
 
-  // Mientras no se cruzen los índices
-  while (left < right) {
-    while (array[right] > pivot) {right--;}
+    // Mientras no se cruzen los índices
+    while (left < right) {
+      while (array[right] > pivot) {right--;}
 
-    while ((left < right) && (array[left] <= pivot)) {left++;}
+      while ((left < right) && (array[left] <= pivot)) {left++;}
 
-    // Si todavía no se cruzan los indices seguimos intercambiando
-    if (left < right) {
-      temp = array[left];
-      array[left] = array[right];
-      array[right] = temp;
+      // Si todavía no se cruzan los indices seguimos intercambiando
+      if (left < right) {
+        temp = array[left];
+        array[left] = array[right];
+        array[right] = temp;
+      }
+    }
+
+    // Los índices ya se han cruzado, ponemos el pivot en el lugar que le corresponde
+    temp = array[right];
+    array[right] = array[start];
+    array[start] = temp;
+
+    // La nueva posición del pivot
+    return right;
+  }
+
+////////////////////////////////////////////////////////////////////////////////
+
+  // Función recursiva para hacer el ordenamiento
+  void quicksort(std::vector<int> &array, int start, int end) {
+    int pivot;
+
+    if (start < end) {
+      pivot = divide(array, start, end);
+
+      // Ordeno la lista de los menores
+      quicksort(array, start, pivot - 1);
+
+      // Ordeno la lista de los mayores
+      quicksort(array, pivot + 1, end);
     }
   }
-
-  // Los índices ya se han cruzado, ponemos el pivot en el lugar que le corresponde
-  temp = array[right];
-  array[right] = array[start];
-  array[start] = temp;
-
-  // La nueva posición del pivot
-  return right;
-}
-
-// Función recursiva para hacer el ordenamiento
-void quicksort(std::vector<int> &array, int start, int end) {
-  int pivot;
-
-  if (start < end) {
-    pivot = divide(array, start, end);
-
-    // Ordeno la lista de los menores
-    quicksort(array, start, pivot - 1);
-
-    // Ordeno la lista de los mayores
-    quicksort(array, pivot + 1, end);
-  }
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -212,28 +216,161 @@ void quicksort(std::vector<int> &array, int start, int end) {
   // Se almacenan en un fichero de texto los valores de N y Tiempos correspondientes
   void guardaEnFichero(double times, int nEle) {
     // Abre el fichero para añadir al final
-    std::ofstream ficheroTiempos("tiempos.txt", std::ios::app);
+    std::fstream ficheroTiempos("tiempos.txt", std::ios::app);
 
-    if (ficheroTiempos.is_open()) {ficheroTiempos << times << "\t----\t" << nEle << '\n';}
-    else {std::cout << "\n\nERROR al abrir el fichero." << '\n';}
+    if (ficheroTiempos.is_open()) {ficheroTiempos << nEle << " " << times << '\n';}
+    else {std::cout << "\n\n\nERROR al abrir el fichero." << '\n';}
 
     ficheroTiempos.close();
   }
 
 ////////////////////////////////////////////////////////////////////////////////
+
   // Elimina cualquier fichero coincidente
   void eliminaFichero() {
     if (std::remove("tiempos.txt") == 0) {
-      std::cout << "Fichero <'tiempos.txt'> existente.\nEliminando . . ." << '\n';
+      std::cout << "\nFichero <'tiempos.txt'> existente.\nEliminando . . .\n" << '\n';
     }
   }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-////////////////////////////////////////////////////////////////////////////////
+  // Función para realizar los sumatorios de los tamaños de las pruebas
+  void sumatorioX(std::vector< std::vector<double> > &A, const std::vector<double> v) {
+    A.clear();  // Se limpia la matriz.
+    int sumaA;  // Sumatorio
+
+    // Recorre la matriz para ir colocando los sumatorios en sus posiciones
+    for (size_t i = 0; i < A.size(); i++) {
+      for (size_t j = 0; j < A.size(); j++) {
+        sumaA = 0; // Reiniciamos el valor.
+
+        for (size_t k = 0; k < v.size(); k++) {
+          sumaA += pow(v.at(k), i + j);  // Sumatorio de los valores de tamaño de cada posición de A.
+        }
+        A[i][j] = sumaA;  // Se asigna el valor a su posicion
+      }
+    }
+  }
 
 ////////////////////////////////////////////////////////////////////////////////
 
+  // Función para realizar los sumatorios de los tiempos de las pruebas
+  void sumatorioY(std::vector< std::vector<double> > &B, const std::vector<double> v, const std::vector<double> treal) {
+    B.clear();  // Se limpia la matriz.
+    int sumaB;  // Sumatorio
+
+    for (size_t i = 0; i < B.size(); i++) {
+      sumaB = 0; // Reiniciamos el valor.
+
+      for (size_t k = 0; k < v.size(); k++) {
+        sumaB += (treal.at(k) * pow(v.at(k), i));  // Sumatorio de los valores de tiempos de cada posición de B.
+      }
+      B[i][0] = sumaB;  // Se asigna el valor a su posicion
+    }
+  }
+
+////////////////////////////////////////////////////////////////////////////////
+
+  // Funcion para imprimir una matriz por pantalla
+  void imprimeMatriz(std::vector< std::vector<double> > &matrix) {
+    for (size_t i = 0; i < matrix.size(); i++) {
+      for (size_t j = 0; j < matrix.size(); j++) {
+        std::cout << "| " << matrix[i].at(j) << " |"; // De cada fila todas las columnas.
+      }
+      std::cout << '\n';
+    }
+  }
+
+////////////////////////////////////////////////////////////////////////////////
+
+  // Funcion para ajustar la curva de Tiempos
+  void ajusteNlogN(const std::vector<double> &n, const std::vector<double> &tiemposReales, double &a0, double &a1) {
+    std::vector< std::vector<double> > A(2, std::vector<double>(2)); // Matriz nxn de coeficientes
+    std::vector< std::vector<double> > B(2, std::vector<double>(1)); // Matriz nx1 de terminos independientes
+    std::vector< std::vector<double> > X(2, std::vector<double>(2)); // Matriz 2x2 de soluciones
+    std::vector<double> nlogs;  // Vector para almacenar "n*log(n)", para después el sumatorio
+
+    // std::vector< std::vector<double> > A;
+    // std::vector< std::vector<double> > B;
+    // std::vector< std::vector<double> > X;
+    // std::vector<double> nlogs;  // Vector para almacenar "n*log(n)", para después el sumatorio
+    //
+    // A = std::vector< std::vector<double> > (2, std::vector<double>(2)); // Matriz nxn de coeficientes
+    // B = std::vector< std::vector<double> > (2, std::vector<double>(1)); // Matriz nx1 de terminos independientes
+    // X = std::vector< std::vector<double> > (2, std::vector<double>(2)); // Matriz 2x2 de soluciones
+
+
+    for (size_t i = 0; i < n.size(); i++) {
+      nlogs.push_back(n.at(i) * log10(n.at(i)));
+    }
+
+    // std::cout << "\nVector de NLogN:" << '\n';
+    // imprimeVectorTiempos(nlogs);
+
+    sumatorioX(A, nlogs);
+    std::cout << "\nMatriz de sumatorios de tamaños:" << '\n';
+    imprimeMatriz(A);
+
+    sumatorioY(B, nlogs, tiemposReales);
+    std::cout << "\nMatriz de términos independientes:" << '\n';
+    imprimeMatriz(B);
+
+    // Resolucion del ajuste para hallar las incógnitas "a0" y "a1"
+    resolverSistemaEcuaciones(A, B, 2, X);
+    std::cout << "\nMatriz de soluciones:" << '\n';
+    imprimeMatriz(X);
+
+  }
+
+////////////////////////////////////////////////////////////////////////////////
+
+  // Funcion de obtencion de los tiempos estimados mediante ajuste
+  void calcularTiemposEstimadosNlogN(const std::vector<double> &n, const std::vector<double> &tiemposReales, const double &a0, const double &a1, std::vector<double> &tiemposEstimados) {
+
+  }
+
+////////////////////////////////////////////////////////////////////////////////
+
+  // Funcion para calcular el coeficiente de determinacion
+  double calcularCoeficienteDeterminacion(const std::vector<double> &tiemposReales, const std::vector<double> &tiemposEstimados) {
+
+    return 0;
+  }
+
+////////////////////////////////////////////////////////////////////////////////
+
+  // Funcion que calcula el tiempo estimado a partir de un tamaño dado
+  double calcularTiempoEstimadoNlogN(const double &n, const double &a0, const double &a1) {
+
+
+    return 0;
+  }
+
+////////////////////////////////////////////////////////////////////////////////
+
+  // Funcion para extraer nº de elementos y tiempos del fichero
+  void extraerTiempos(std::vector<double> &n, std::vector<double> &tiemposReales) {
+    std::ifstream ficheroTiempos;
+    string tam, tim;
+
+    ficheroTiempos.open("tiempos.txt", std::ifstream::in);
+
+    if (ficheroTiempos.is_open()) {
+      while (getline(ficheroTiempos, tam, ' ')) { // Lectura del tamaño
+        n.push_back(std::stod(tam));
+
+        getline(ficheroTiempos, tim); // Lectura del tiempo
+        tiemposReales.push_back(std::stod(tim));
+      }
+    }
+    else {std::cout << "\n\n\nERROR. No se pudo abrir el fichero." << '\n';}
+  }
+
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
+  // Funcion que realiza las pruebas
   void realizarExperimento(std::vector<int> &vector, int minimo, int maximo, int incremento, int repeticiones) {
     Clock time;
     // Comienza a contar el contador
@@ -314,12 +451,6 @@ int main() {
   int max;  // Número máximo de elementos del vector.
   int incremento; // Número por el que se incrementará el tamaño del vector.
   int repeticiones; // Número de repeticiones por cada tamaño del vector.
-  // int tam;  // Tamaño del vector.
-
-  // int tam;  // Tamaño del vector. Introducido por el usuario.
-  // std::cout << "Introduzca la capacidad del vector: ";
-  // std::cin >> tam;
-  // std::cout << '\n';
 
 
   std::cout << "Introduzca el mínimo número de elementos del vector: ";
@@ -345,6 +476,7 @@ int main() {
   std::cin >> repeticiones;
   std::cout << '\n';
 
+
   std::vector<int> v; // Vector a ordenar.
 
   // Se elimina el fichero de trabajo para tenerlo limpio
@@ -353,25 +485,16 @@ int main() {
   // Se realizan las pruebas
   realizarExperimento(v, min, max, incremento, repeticiones);
 
-  // std::cout << "\nSIN ORDENAR" << '\n';
-  // // Se visualiza el vector por pantalla.
-  // imprimeVector(v, tam);
-  //
-  // // Comprueba que el vector esté ordenado
-  // if (estaOrdenado(v) == false) {std::cout << "\n\nEl vector NO está ordenado." << '\n';}
-  // else {std::cout << "\n\nEl vector está ordenado." << '\n';}
-  //
-  // // Se ordena el vector.
-  // quicksort(v, 0, tam - 1);
-  //
-  // std::cout << "\nORDENADO" << '\n';
-  // // Se visualiza el vector por pantalla.
-  // imprimeVector(v, tam);
 
-  // // Comprueba que el vector esté ordenado
-  // if (estaOrdenado(v) == false) {std::cout << "\n\tEl vector NO está ordenado." << '\n';}
-  // else {std::cout << "\n\tEl vector está ordenado." << '\n';}
+  std::vector<double> n;  // Vector de tamaños de las pruebas
+  std::vector<double> tiemposReales;  // Vector de tiempos de las pruebas
 
+  extraerTiempos(n, tiemposReales);
+
+  double a0, a1;  // Variables para guardar el resultado del sistema, incognitas del ajuste
+
+  // Ajuste de la curva tipo: t(n)=a0+a1*n*log(n).
+  ajusteNlogN(n, tiemposReales, a0, a1);
 
 
 
